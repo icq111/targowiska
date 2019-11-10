@@ -26,6 +26,6 @@ public class WelcomeController {
 //		model.addAttribute("users", userRepository.findAll());
 //		model.addAttribute("message", name);
 //
-//		return "welcome"; // view
+//		return "welcome"; // view comment
 //	}
 }

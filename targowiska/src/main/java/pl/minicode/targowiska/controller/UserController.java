@@ -22,18 +22,18 @@ public class UserController {
 	@GetMapping("/admin/userslist")
 	public String showUsersListForm(Model model) {
 		model.addAttribute("users", userRepository.findAll());
-		return "admin/users"; // view
+		return "admin-users-list"; // view
 	}
 
 	@GetMapping("/admin/newuser")
 	public String showSignUpForm(User user) {
-		return "admin/add-user";
+		return "admin-add-user";
 	}
 
 	@PostMapping("/admin/adduser")
 	public String addUser(@Valid User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "admin/add-user";
+			return "admin-add-user";
 		}
 
 		userRepository.save(user);

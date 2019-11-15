@@ -18,6 +18,12 @@ public class WelcomeController {
 		
 		return "welcome"; // view
 	}
+	
+	@GetMapping("/admin-panel")
+	public String showAdminPanelForm(Model model) {
+		
+		return "admin_panel"; // view
+	}
 
 //	// /hello?name=kotlin
 //	@GetMapping("/hello")

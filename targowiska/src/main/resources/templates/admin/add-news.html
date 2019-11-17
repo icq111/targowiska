@@ -21,14 +21,14 @@
         <h1>Dodaj aktualności</h1>
         <form action="#" th:action="@{/admin/addnews}" th:object="${news}" method="post">
             <label for="name">Title</label> 
-            <input type="text" th:field="*{title}" id="title" placeholder="Title"> 
+            <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="Title"> 
             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span> 
             <br>
             <label for="email">Short desc</label> 
-            <input type="text" th:field="*{shortDescription}" id="shortDescription" placeholder="Short description"> 
+            <input type="text" class="form-control" th:field="*{shortDescription}" id="shortDescription" placeholder="Short description"> 
             <span th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"></span>
             <br> 
-            <input type="submit"	value="Dodaj">
+            <input type="submit" class="btn btn-primary" value="Dodaj">
 		</form>
 	</div>
 

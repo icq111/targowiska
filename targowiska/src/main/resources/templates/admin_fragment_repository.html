@@ -31,16 +31,16 @@
 
 <body>
 	<!-- menu boczne normalne -->
-    <div th:fragment="side-menu" class="col-sm-3 sidenav hidden-xs">
+    <div th:fragment="side-menu(menuItemToActivate)" class="col-sm-3 sidenav hidden-xs">
       <h2>Logo</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li class="menuItem active" onclick="changeSelection(this)"><a href="/admin/panel"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="/admin/newslist"><span class="glyphicon glyphicon-new-window"></span> Aktualności</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#pricing"> <span class="glyphicon glyphicon-usd"></span> Cennik</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#internals"> <span class="glyphicon glyphicon-import"></span> Ogłoszenia wewnętrzne</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#externals"><span class="glyphicon glyphicon-export"></span> Ogłoszenia zewnętrzne</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="/admin/userslist"><span class="glyphicon glyphicon-user"></span> Pracownicy</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#users"><span class="glyphicon glyphicon-sunglasses"></span> Użytkownicy</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/panel' ? 'active':''}" class="menuItem"><a href="/admin/panel"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/newslist' ? 'active':''}" class="menuItem"><a href="/admin/newslist"><span class="glyphicon glyphicon-new-window"></span> Aktualności</a></li>
+        <li class="menuItem"><a href="#pricing"> <span class="glyphicon glyphicon-usd"></span> Cennik</a></li>
+        <li class="menuItem"><a href="#internals"> <span class="glyphicon glyphicon-import"></span> Ogłoszenia wewnętrzne</a></li>
+        <li class="menuItem"><a href="#externals"><span class="glyphicon glyphicon-export"></span> Ogłoszenia zewnętrzne</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/userslist' ? 'active':''}" class="menuItem"><a href="/admin/userslist"><span class="glyphicon glyphicon-user"></span> Pracownicy</a></li>
+        <li class="menuItem"><a href="#users"><span class="glyphicon glyphicon-sunglasses"></span> Użytkownicy</a></li>
       </ul><br>
     </div>
     

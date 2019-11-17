@@ -22,12 +22,12 @@ public class NewsController {
 	public String showNewsListForm(Model model) {
 
 		model.addAttribute("newsList", newsRepository.findAll());
-		return "admin/news"; // view
+		return "admin-news-list"; // view
 	}
 	
 	@GetMapping("/admin/signup")
 	public String showAddNewNewsForm(News news) {
-		return "admin/add-news";
+		return "admin-add-news";
 	}
 	
 	@PostMapping("/admin/addnews")

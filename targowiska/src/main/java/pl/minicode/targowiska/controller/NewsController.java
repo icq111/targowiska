@@ -33,7 +33,7 @@ public class NewsController {
 	@PostMapping("/admin/addnews")
 	public String addNews(@Valid News news, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "admin/add-news";
+			return "admin-add-news";
 		}
 
 		newsRepository.save(news);

@@ -29,15 +29,7 @@
 				<div class="w3-row w3-center w3-container">				
 					<div class="w3-third w3-container" th:each="news : ${newsList}">
 						<div class="w3-container w3-padding-24">
-							<div class="w3-display-container w3-hover-opacity">
-								<img src="../image/news.jpg" class="w3-image" alt="">
-								<div class="w3-display-middle w3-display-hover">
-									<a
-										onclick="document.getElementById('id01').style.display='block'"
-										class="w3-button w3-circle w3-green"><b><i
-											class="fa fa-plus"></i></b></a>
-								</div>
-							</div>
+
 							<div class="w3-container w3-margin-top">
 								<span><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span>
 							</div>
@@ -58,8 +50,18 @@
 					</div>
 
 				</div>
-			</div>
-		</div>
+
+
+							<div th:if="${newsList.totalPages > 0}" class="pagination"
+								th:each="pageNumber : ${pageNumbers}">
+								<a
+									th:href="@{/admin/newslist(size=${newsList.size}, page=${pageNumber})}"
+									th:text=${pageNumber}
+									th:class="${pageNumber==newsList.number + 1} ? active"></a>
+
+
+							</div>
+						</div>
 	</div>
 
 			</div>

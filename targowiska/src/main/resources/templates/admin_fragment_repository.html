@@ -42,7 +42,9 @@
         <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/userslist' ? 'active':''}" class="menuItem"><a href="/admin/userslist"><span class="glyphicon glyphicon-user"></span> Pracownicy</a></li>
         <li class="menuItem"><a href="#users"><span class="glyphicon glyphicon-sunglasses"></span> Użytkownicy</a></li>
       </ul><br><br><br><br><br><br><br>
-          <p>Witaj:</p><p sec:authentication="name"></p>
+			
+			<p> Witaj <b sec:authentication="name"></b> </p>
+
     </div>
     
     

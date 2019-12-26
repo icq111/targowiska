@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.minicode.targowiska.domain.Offer;
-import pl.minicode.targowiska.service.OfferService;
+import pl.minicode.targowiska.service.impl.OfferService;
 
 @Controller
 public class OfferController {

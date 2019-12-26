@@ -10,9 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.templateresolver.ITemplateResolver;
-
 @EnableWebSecurity
 public class SecturityConfiguration extends WebSecurityConfigurerAdapter {
 

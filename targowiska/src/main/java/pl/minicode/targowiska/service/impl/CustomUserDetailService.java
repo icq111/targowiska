@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service;
+package pl.minicode.targowiska.service.impl;
 
 import java.util.Optional;
 

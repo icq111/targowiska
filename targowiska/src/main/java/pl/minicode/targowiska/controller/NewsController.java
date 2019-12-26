@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.minicode.targowiska.domain.News;
-import pl.minicode.targowiska.domain.Offer;
 import pl.minicode.targowiska.repository.NewsRepository;
 import pl.minicode.targowiska.utils.PaginationUtils;
 
@@ -28,19 +27,11 @@ public class NewsController {
 	@Autowired
 	private NewsRepository newsRepository;
 
-//	@GetMapping("/admin/newslist")
-//	public String showNewsListForm(Model model) {
-//
-//		model.addAttribute("newsList", newsRepository.findAll());
-//		return "admin-news-list"; // view
-//	}
-
 	@GetMapping("/admin/newslist")
 	public String showNewsListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
-//		model.addAttribute("newsList", newsRepository.findAll());
 
 		Page<News> newsList = newsRepository.findAll(PageRequest.of(currentPage - 1, pageSize));
 
@@ -67,7 +58,6 @@ public class NewsController {
 		}
 
 		newsRepository.save(news);
-		model.addAttribute("newsList", newsRepository.findAll());
 		return "redirect:newslist";
 	}
 }

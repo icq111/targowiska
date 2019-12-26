@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+</head>
+
+<body>
+
+    <nav th:replace="admin_fragment_repository.html :: small-side-menu"></nav>
+
+    <div class="container-fluid">
+        <div class="row content">
+            <div th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></div>
+            <br>
+
+            <div class="col-sm-9">
+                <p class="w3-padding-64">
+                    <a href="/admin/newinternaloffer">
+                        <button type="button" class="btn btn-primary btn-lg">Dodaj ogłoszenie</button>
+                    </a>
+                </p>
+                <div th:switch="${internalOffersList}">
+                    <h2 th:case="null">No news yet!</h2>
+                    <div th:case="*">
+                        <div class="w3-container w3-padding-64" id="welcome">
+                            <h1>Ogłoszenia wewnętrzne</h1>
+                            <div th:each="internalOffer : ${internalOffersList}">
+
+                                <span th:text="${#dates.format(internalOffer.insertStamp, 'dd-MM-yyyy HH:mm')}"><i class="fa fa-calendar"></i></span>
+
+                                <h4>
+									<b th:text="${internalOffer.offerName}"></b>
+								</h4>
+                               
+                                <br>
+                                <span th:text="${internalOffer.offerLongDescription}"></span>
+								<br>
+                                <span th:text="${internalOffer.status.toDisplay()}"></span>
+								<hr>
+								<br>
+                            </div>
+                            <div th:if="${internalOffersList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+                                <a th:href="@{/admin/internalofferslist(size=${internalOffersList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==internalOffersList.number + 1} ? active"></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

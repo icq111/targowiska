@@ -3,77 +3,94 @@
 
 
 <head th:fragment="admin-head-data">
- <meta charset="utf-8">
-<title>Bootstrap Example</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  	<!--Custom styles-->
-	<link rel="stylesheet" type="text/css" href="loginstyles.css">
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 550px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-        
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-  </style>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	html,
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		font-family: "Raleway", sans-serif
+	}
+	.content-main-div{
+		margin-left:300px;
+		margin-top:43px;
+	}
+</style>
 </head>
 
 
 <body>
-	<!-- menu boczne normalne -->
-    <div th:fragment="side-menu(menuItemToActivate)" class="col-sm-3 sidenav hidden-xs">
-      <h2>Logo</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/panel' ? 'active':''}" class="menuItem"><a href="/admin/panel"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/newslist' ? 'active':''}" class="menuItem"><a href="/admin/newslist"><span class="glyphicon glyphicon-new-window"></span> Aktualności</a></li>
-        <li class="menuItem"><a href="#pricing"> <span class="glyphicon glyphicon-usd"></span> Cennik</a></li>
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/internalofferslist' ? 'active':''}" class="menuItem"><a href="/admin/internalofferslist"><span class="glyphicon glyphicon-new-window"></span> Ogłoszenia wewnętrzne</a></li>
-        <li class="menuItem"><a href="#externals"><span class="glyphicon glyphicon-export"></span> Ogłoszenia zewnętrzne</a></li>
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/userslist' ? 'active':''}" class="menuItem"><a href="/admin/userslist"><span class="glyphicon glyphicon-user"></span> Pracownicy</a></li>
-        <li class="menuItem"><a href="#users"><span class="glyphicon glyphicon-sunglasses"></span> Użytkownicy</a></li>
-      </ul><br><br><br><br><br><br><br>
-			
-			<p> Witaj <b sec:authentication="name"></b> </p>
+    <!-- Top container -->
+	<div th:fragment="top-container-fragment" class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+			onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+		<span class="w3-bar-item w3-right">Logo</span>
+	</div>
+    
+    	<!-- Sidebar/menu -->
+	<nav th:fragment="side-menu(menuItemToActivate)" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+		<div class="w3-container w3-row">
+			<span>Welcome, <strong sec:authentication="name"></strong></span><br>
 
-    </div>
+		</div>
+		<hr>
+		<div class="w3-container">
+			<h5>Dashboard</h5>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+				onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/panel' ? 'w3-blue':''}" href="/admin/panel" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/newslist' ? 'w3-blue':''}" href="/admin/newslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  News</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/internalofferslist' ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Pracownicy</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+			<a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Wyloguj</a><br><br>
+		</div>
+	</nav>
+
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div th:fragment="overlay-menu-effect-fragment" class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+		title="close side menu" id="myOverlay"></div>
     
     
-  	<!-- menu na urzadzenia mobilne -->  
- <nav th:fragment="small-side-menu" class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-       
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="menuItem active" onclick="changeSelection(this)"><a href="#section1">Dashboard</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#news">Aktualności</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#pricing">Cennik</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#internals">Ogłoszenia wewnętrzne</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#externals">Ogłoszenia zewnętrzne</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#employees">Pracownicy</a></li>
-        <li class="menuItem" onclick="changeSelection(this)"><a href="#users">Użytkownicy</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
     
+    <script th:fragment="js-script-fragment">
+		// Get the Sidebar
+		var mySidebar = document.getElementById("mySidebar");
+
+		// Get the DIV with overlay effect
+		var overlayBg = document.getElementById("myOverlay");
+
+		// Toggle between showing and hiding the sidebar, and add overlay effect
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+				overlayBg.style.display = "none";
+			} else {
+				mySidebar.style.display = 'block';
+				overlayBg.style.display = "block";
+			}
+		}
+
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+			overlayBg.style.display = "none";
+		}
+	</script>
 	
 </body>
 </html>

@@ -8,49 +8,47 @@
 </head>
 
 <body>
+    <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+    <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+    <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
 
-    <nav th:replace="admin_fragment_repository.html :: small-side-menu"></nav>
+    <!-- !PAGE CONTENT! -->
+    <div class="content-main-div w3-main">
+        <!-- Header -->
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> Aktualności</b></h5>
+        </header>
 
-    <div class="container-fluid">
-        <div class="row content">
-            <div th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Aktualności')"></div>
-            <br>
+        <a class="w3-margin-left" href="/admin/signup">
+            <button class="w3-button w3-green">Dodaj aktualności</button>
+        </a>
 
-            <div class="col-sm-9">
-                <p class="w3-padding-64">
-                    <a href="/admin/signup">
-                        <button type="button" class="btn btn-primary btn-lg">Dodaj aktualności</button>
-                    </a>
-                </p>
-                <div th:switch="${newsList}">
-                    <h2 th:case="null">No news yet!</h2>
-                    <div th:case="*">
-                        <div class="w3-container w3-padding-64" id="welcome">
-                            <h1>Aktualności</h1>
-                            <div th:each="news : ${newsList}">
+        <div th:switch="${newsList}">
+            <h2 th:case="null">No news yet!</h2>
+            <div class="w3-margin-left w3-padding-32" th:case="*">
 
-                                <span th:text="${#dates.format(news.insertStamp, 'dd-MM-yyyy HH:mm')}"><i class="fa fa-calendar"></i></span>
+                <div th:each="news : ${newsList}">
 
-                                <h4>
-									<b th:text="${news.title}"></b>
-								</h4>
-                                <i><span th:text="${news.shortDescription}"></span></i>
-                                <br>
-                                <span th:text="${news.longDescription}"></span>
-								<hr>
-								<br>
-                            </div>
-                            <div th:if="${newsList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-                                <a th:href="@{/admin/newslist(size=${newsList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==newsList.number + 1} ? active"></a>
+                    <span th:text="${#dates.format(news.insertStamp, 'dd-MM-yyyy HH:mm')}"></span>
 
-                            </div>
-                        </div>
-                    </div>
+                    <h4><b th:text="${news.title}"></b></h4>
+                    <i><span th:text="${news.shortDescription}"></span></i>
+                    <br>
+                    <span th:text="${news.longDescription}"></span>
+                    <hr>
+                </div>
+                <div th:if="${newsList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+                    <a th:href="@{/admin/newslist(size=${newsList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==newsList.number + 1} ? active"></a>
 
                 </div>
+                
+                
             </div>
+
         </div>
     </div>
+
+    <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
 </body>
 
 </html>

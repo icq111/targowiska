@@ -46,19 +46,19 @@ public class OfferController {
 		return "admin-offers-internal-list"; // view
 	}
 	
-	@GetMapping("/admin/newinternaloffer")
+	@GetMapping("/admin/internalofferslist/newinternaloffer")
 	public String showAddNewInternalOfferForm(Offer offer) {
 		return "admin-add-internal-offer";
 	}
 
-	@PostMapping("/admin/addinternaloffer")
+	@PostMapping("/admin/internalofferslist/addinternaloffer")
 	public String addInternalOffer(@Valid Offer offer, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "admin-add-internal-offer";
 		}
 
 		offerService.saveInternalOffer(offer);
-		return "redirect:internalofferslist";
+		return "redirect:/admin/internalofferslist";
 	}
 	
 }

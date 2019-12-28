@@ -46,18 +46,18 @@ public class NewsController {
 		return "admin-news-list"; // view
 	}
 
-	@GetMapping("/admin/signup")
+	@GetMapping("/admin/newslist/signup")
 	public String showAddNewNewsForm(News news) {
 		return "admin-add-news";
 	}
 
-	@PostMapping("/admin/addnews")
+	@PostMapping("/admin/newslist/addnews")
 	public String addNews(@Valid News news, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "admin-add-news";
 		}
 
 		newsRepository.save(news);
-		return "redirect:newslist";
+		return "redirect:/admin/newslist";
 	}
 }

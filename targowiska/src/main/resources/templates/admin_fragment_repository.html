@@ -36,7 +36,7 @@
 	</div>
     
     	<!-- Sidebar/menu -->
-	<nav th:fragment="side-menu(menuItemToActivate)" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+	<nav th:fragment="side-menu(menuItemToActivate)" class="w3-sidebar w3-collapse w3-white" style="z-index:3;width:300px;" id="mySidebar"><br>
 		<div class="w3-container w3-row">
 			<span>Welcome, <strong sec:authentication="name"></strong></span><br>
 
@@ -48,9 +48,9 @@
 		<div class="w3-bar-block">
 			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
 				onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/panel' ? 'w3-blue':''}" href="/admin/panel" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
-			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/newslist' ? 'w3-blue':''}" href="/admin/newslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  News</a>
-			<a th:classappend="${#httpServletRequest.getRequestURI() == '/admin/internalofferslist' ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/panel') ? 'w3-blue':''}" href="/admin/panel" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/newslist') ? 'w3-blue':''}" href="/admin/newslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Aktualności</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/internalofferslist') ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Pracownicy</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>

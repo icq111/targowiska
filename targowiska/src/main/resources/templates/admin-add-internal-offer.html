@@ -18,7 +18,7 @@
             <h5><b><i class="fa fa-dashboard"></i> Nowa oferta wew.</b></h5>
         </header>
         <div class="w3-padding">
-        <form  class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/addinternaloffer}" th:object="${offer}" method="post">
+        <form  class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/internalofferslist/addinternaloffer}" th:object="${offer}" method="post">
             <label for="offerName">Offer name</label>
             <input class="w3-input w3-border" type="text" th:field="*{offerName}" id="offerName" placeholder="Offer name">
             <span th:if="${#fields.hasErrors('offerName')}" th:errors="*{offerName}"></span>

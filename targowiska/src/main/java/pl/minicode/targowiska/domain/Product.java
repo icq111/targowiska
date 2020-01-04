@@ -1,20 +1,13 @@
 package pl.minicode.targowiska.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,17 +36,9 @@ public class Product {
     @CreatedDate
     private Date insertStamp;
     
-    private BigDecimal productPrice;
-    
-    //procentowa zmiana ceny od ostatniego notowania
-    private BigDecimal productPriceDifference;
-    
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date productPriceUpdateStamp;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
-	private List<ProductPriceHistory> productPriceHistories;
+    private Date updateStamp;
 
 	public long getId() {
 		return id;
@@ -95,45 +80,17 @@ public class Product {
 		this.insertStamp = insertStamp;
 	}
 
-	public BigDecimal getProductPrice() {
-		return productPrice;
+	public Date getUpdateStamp() {
+		return updateStamp;
 	}
 
-	public void setProductPrice(BigDecimal productPrice) {
-		this.productPrice = productPrice;
-	}
-
-	public BigDecimal getProductPriceDifference() {
-		return productPriceDifference;
-	}
-
-	public void setProductPriceDifference(BigDecimal productPriceDifference) {
-		this.productPriceDifference = productPriceDifference;
-	}
-
-	public Date getProductPriceUpdateStamp() {
-		return productPriceUpdateStamp;
-	}
-
-	public void setProductPriceUpdateStamp(Date productPriceUpdateStamp) {
-		this.productPriceUpdateStamp = productPriceUpdateStamp;
-	}
-
-	public List<ProductPriceHistory> getProductPriceHistories() {
-		return productPriceHistories;
-	}
-
-	public void setProductPriceHistories(List<ProductPriceHistory> productPriceHistories) {
-		this.productPriceHistories = productPriceHistories;
+	public void setUpdateStamp(Date updateStamp) {
+		this.updateStamp = updateStamp;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", productType="
-				+ productType + ", insertStamp=" + insertStamp + ", productPrice=" + productPrice
-				+ ", productPriceDifference=" + productPriceDifference + ", productPriceUpdateStamp="
-				+ productPriceUpdateStamp + "]";
+				+ productType + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + "]";
 	}
-	
-	
 }

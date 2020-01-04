@@ -23,7 +23,7 @@ import pl.minicode.targowiska.type.OfferType;
 import pl.minicode.targowiska.type.Status;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditingEntityListener.class)
 public class Offer {
 
 	@Id
@@ -37,8 +37,8 @@ public class Offer {
     private String offerShortDescription;
     
     @NotBlank(message = "Offer Description is mandatory")
-    @Column(columnDefinition="CLOB NOT NULL") 
-    @Lob 
+    @Column(columnDefinition="TEXT NOT NULL") 
+    //@Lob 
     private String offerLongDescription;
     
     @Temporal(TemporalType.TIMESTAMP)

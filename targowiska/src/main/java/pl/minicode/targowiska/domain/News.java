@@ -32,8 +32,8 @@ public class News {
     private String shortDescription;
     
     @NotBlank(message = "Long Description is mandatory")
-    @Column(columnDefinition="CLOB NOT NULL") 
-    @Lob 
+    @Column(columnDefinition="TEXT NOT NULL") 
+    //@Lob 
     private String longDescription;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -43,6 +43,8 @@ public class News {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updateStamp;
+    
+    private String imageName;
 
 	public long getId() {
 		return id;
@@ -90,6 +92,14 @@ public class News {
 
 	public void setUpdateStamp(Date updateStamp) {
 		this.updateStamp = updateStamp;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	@Override

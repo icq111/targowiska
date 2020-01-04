@@ -52,7 +52,7 @@
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/newslist') ? 'w3-blue':''}" href="/admin/newslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Aktualności</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/internalofferslist') ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Pracownicy</a>
-			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" href="/admin/productlist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Towary</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>

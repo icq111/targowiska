@@ -16,31 +16,31 @@
     <div class="content-main-div w3-main">
         <!-- Header -->
         <header class="w3-container" style="padding-top:22px">
-            <h5><b><i class="fa fa-dashboard"></i> Aktualności</b></h5>
+            <h5><b><i class="fa fa-dashboard"></i> Towary</b></h5>
         </header>
 
         <a class="w3-margin-left" href="/admin/newslist/signup">
-            <button class="w3-button w3-green">Dodaj aktualności</button>
+            <button class="w3-button w3-green">Dodaj towar</button>
         </a>
 
-        <div th:switch="${newsList}">
+        <div th:switch="${productList}">
             <h2 th:case="null">No news yet!</h2>
             <div class="w3-margin-left w3-padding-32" th:case="*">
 
-                <div th:each="news : ${newsList}">
+                <div th:each="product : ${productList}">
 
-                    <span th:text="${#dates.format(news.insertStamp, 'dd-MM-yyyy HH:mm')}"></span>
+                    <span th:text="${#dates.format(product.insertStamp, 'dd-MM-yyyy HH:mm')}"></span>
 
-                    <h4><b th:text="${news.title}"></b></h4>
-                    <i><span th:text="${news.shortDescription}"></span></i>
+                    <h4><b th:text="${product.productName}"></b></h4>
+                    <i><span th:text="${product.status}"></span></i>
                     <br>
-                    <span th:text="${news.longDescription}"></span>
+                    <span th:text="${product.productType}"></span>
                                         <br>
-                    <span th:text="${news.imageName}"></span>
+     
                     <hr>
                 </div>
-                <div th:if="${newsList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-                    <a th:href="@{/admin/newslist(size=${newsList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==newsList.number + 1} ? active"></a>
+                <div th:if="${productList.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+                    <a th:href="@{/admin/productlist(size=${productList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==productList.number + 1} ? active"></a>
 
                 </div>
                 

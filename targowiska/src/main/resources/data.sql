@@ -1,0 +1,1 @@
+insert into employee values (1,true, 'www','admin','admin','pass','ROLE_ADMIN', 'admin');

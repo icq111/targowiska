@@ -1,4 +1,4 @@
-package plminicode.targowiska;
+package pl.minicode.targowiska;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

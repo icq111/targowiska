@@ -16,9 +16,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.domain.News;
 import pl.minicode.targowiska.repository.NewsRepository;
+import pl.minicode.targowiska.service.impl.FileSystemStorageService;
+import pl.minicode.targowiska.utils.CustomUtils;
 import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
@@ -26,6 +29,9 @@ public class NewsController {
 
 	@Autowired
 	private NewsRepository newsRepository;
+	
+	@Autowired
+	private FileSystemStorageService fileSystemStorageService;
 
 	@GetMapping("/admin/newslist")
 	public String showNewsListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -52,11 +58,18 @@ public class NewsController {
 	}
 
 	@PostMapping("/admin/newslist/addnews")
-	public String addNews(@Valid News news, BindingResult result, Model model) {
+	public String addNews(@Valid News news, @RequestParam("file") MultipartFile file, BindingResult result, Model model) {
+		boolean doSaveFile = file != null;
+		
 		if (result.hasErrors()) {
 			return "admin-add-news";
 		}
-
+		
+		if(doSaveFile) {
+			String generatedFileName = CustomUtils.getGeneratedFileName(file);
+			news.setImageName(generatedFileName);			
+			fileSystemStorageService.store(file, generatedFileName);			
+		}
 		newsRepository.save(news);
 		return "redirect:/admin/newslist";
 	}

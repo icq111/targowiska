@@ -18,7 +18,7 @@
             <h5><b><i class="fa fa-dashboard"></i> Nowy news</b></h5>
         </header>
                 <div class="w3-padding">
-                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/newslist/addnews}" th:object="${news}" method="post">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/newslist/addnews}" th:object="${news}" method="post">
                         <label for="name">Title</label>
                         <input class="w3-input w3-border" type="text"th:field="*{title}" id="title" placeholder="Title">
                         <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
@@ -32,6 +32,9 @@
                             <textarea class="w3-input w3-border" th:field="*{longDescription}" id="longDescription" rows="6" placeholder="Description"></textarea>
                             <span th:if="${#fields.hasErrors('longDescription')}" th:errors="*{longDescription}"></span>
                         </div>
+						<label for="image">Image</label>
+ 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
+
 
                         <input class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">
                     </form>

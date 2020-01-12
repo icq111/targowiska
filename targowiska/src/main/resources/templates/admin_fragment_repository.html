@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="/css/main.css" rel="stylesheet">
 <style>
 	html,
 	body,
@@ -53,7 +54,7 @@
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/internalofferslist') ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Pracownicy</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" href="/admin/productlist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Towary</a>
-			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" href="/admin/productpricelist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  Cennik</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
 			<a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Wyloguj</a><br><br>

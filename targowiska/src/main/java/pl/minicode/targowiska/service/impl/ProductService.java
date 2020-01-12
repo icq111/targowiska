@@ -1,6 +1,11 @@
 package pl.minicode.targowiska.service.impl;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -10,12 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import pl.minicode.targowiska.domain.Product;
+import pl.minicode.targowiska.domain.dto.ProductsDto;
 import pl.minicode.targowiska.repository.ProductRepository;
 import pl.minicode.targowiska.service.IProductService;
 import pl.minicode.targowiska.type.Status;
 
 @Service
 public class ProductService implements IProductService {
+	
+	private static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -56,7 +64,36 @@ public class ProductService implements IProductService {
 		return new EntityNotFoundException("PRODUCT: Not found entity with given id:" + id);
 	}
 
+	@Override
+	public void updateProductPrices(ProductsDto productsDto) {
+		List<Product> formUpdatedProducts = productsDto.getProducts();
+		List<Product> databaseProducts = findAll();
 
+		Map<Long, Product> idProductMap = new HashMap<>();
+		for (Product formProduct : formUpdatedProducts) {
+			idProductMap.put(formProduct.getId(), formProduct);
+		}
 
-	
+		for (Product dbProduct : databaseProducts) {
+			if (idProductMap.containsKey(dbProduct.getId())) {
+				Product formUpdateProduct = idProductMap.get(dbProduct.getId());
+				updateSingleProductPrice(formUpdateProduct, dbProduct);
+			}
+		}
+
+	}
+
+	private void updateSingleProductPrice(Product formProduct, Product dbProduct) {
+		BigDecimal priceBeforeUpdate = dbProduct.getProductPrice() == null ? BigDecimal.ONE : dbProduct.getProductPrice();
+		BigDecimal priceAfterUpdate = formProduct.getProductPrice() == null ? BigDecimal.ONE : formProduct.getProductPrice();
+		dbProduct.setOldProductPrice(priceBeforeUpdate);
+		dbProduct.setProductPrice(priceAfterUpdate);
+		
+		BigDecimal pricesDifference = (ONE_HUNDRED.multiply(priceAfterUpdate)).divide(priceBeforeUpdate, 2, RoundingMode.HALF_UP);
+		pricesDifference = pricesDifference.subtract(ONE_HUNDRED);
+		dbProduct.setProductPriceDifference(pricesDifference);
+
+		update(dbProduct);
+	}
+
 }

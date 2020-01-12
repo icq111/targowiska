@@ -19,13 +19,14 @@
             <h5><b><i class="fa fa-dashboard"></i> Towary</b></h5>
         </header>
 
-        <a class="w3-margin-left" href="/admin/newslist/signup">
+        <a class="w3-margin-left" href="/admin/productlist/newproduct">
             <button class="w3-button w3-green">Dodaj towar</button>
         </a>
 
-        <div th:switch="${productList}">
-            <h2 th:case="null">No news yet!</h2>
-            <div class="w3-margin-left w3-padding-32" th:case="*">
+        <div th:switch="${productList.getContent().size()}">
+            <h2 th:case="'0'">No product yet!</h2>
+
+            <div th:case="*" class="w3-margin-left w3-padding-32">
 
                 <div th:each="product : ${productList}">
 

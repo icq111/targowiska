@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+</head>
+
+<body>
+    <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+    <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+    <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="content-main-div w3-main">
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> Cennik > Nowy cennik</b></h5>
+        </header>
+        <div class="w3-padding">
+            <form action="#" class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" th:action="@{/admin/productpricelist/save}" th:object="${productsDto}" method="post">
+
+                <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                    <thead>
+                        <tr>
+                            <th> Towar</th>
+                            <th> Typ</th>
+                            <th> Status</th>
+                            <th> Aktualna cena (zł)</th>
+                            <th> Nowa cena (zł)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product, itemStat : *{products}">
+                            <td th:field="*{products[__${itemStat.index}__].productName}" th:text="${product.getProductName()}"></td>
+                            <td th:field="*{products[__${itemStat.index}__].productType}" th:text="${product.getProductType()}"></td>
+                            <td th:field="*{products[__${itemStat.index}__].status}" th:text="${product.getStatus()}"></td>
+                            <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
+
+                            <td>
+                                <input th:name="|products[${itemStat.index}]|" th:field="*{products[__${itemStat.index}__].productPrice}" th:value="${product.getProductPrice()}" type="number" step="0.01" />
+                            </td>
+							<input type="hidden" th:field="*{products[__${itemStat.index}__].id}" />
+                            <input type="hidden" th:field="*{products[__${itemStat.index}__].productName}" />
+                            <input type="hidden" th:field="*{products[__${itemStat.index}__].productType}" />
+                            <input type="hidden" th:field="*{products[__${itemStat.index}__].status}" />
+                            <input type="hidden" th:field="*{products[__${itemStat.index}__].oldProductPrice}" />
+
+                        </tr>
+                    </tbody>
+                </table>
+                <input class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+
+</body>
+
+</html>

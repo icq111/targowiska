@@ -59,7 +59,7 @@ public class NewsController {
 
 	@PostMapping("/admin/newslist/addnews")
 	public String addNews(@Valid News news, @RequestParam("file") MultipartFile file, BindingResult result, Model model) {
-		boolean doSaveFile = file != null;
+		boolean doSaveFile = file.getSize() != 0;
 		
 		if (result.hasErrors()) {
 			return "admin-add-news";

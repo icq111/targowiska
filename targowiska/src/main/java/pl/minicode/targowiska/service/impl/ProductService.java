@@ -84,11 +84,13 @@ public class ProductService implements IProductService {
 	}
 
 	private void updateSingleProductPrice(Product formProduct, Product dbProduct) {
-		BigDecimal priceBeforeUpdate = dbProduct.getProductPrice() == null ? BigDecimal.ONE : dbProduct.getProductPrice();
-		BigDecimal priceAfterUpdate = formProduct.getProductPrice() == null ? BigDecimal.ONE : formProduct.getProductPrice();
+		BigDecimal priceBeforeUpdate = dbProduct.getProductPrice() == null ? BigDecimal.ZERO : dbProduct.getProductPrice();
+		BigDecimal priceAfterUpdate = formProduct.getProductPrice() == null ? BigDecimal.ZERO : formProduct.getProductPrice();
 		dbProduct.setOldProductPrice(priceBeforeUpdate);
 		dbProduct.setProductPrice(priceAfterUpdate);
-		
+		if(priceBeforeUpdate.compareTo(BigDecimal.ZERO) == 0) {
+			priceBeforeUpdate = BigDecimal.ONE;
+		}
 		BigDecimal pricesDifference = (ONE_HUNDRED.multiply(priceAfterUpdate)).divide(priceBeforeUpdate, 2, RoundingMode.HALF_UP);
 		pricesDifference = pricesDifference.subtract(ONE_HUNDRED);
 		dbProduct.setProductPriceDifference(pricesDifference);

@@ -1,6 +1,7 @@
 package pl.minicode.targowiska.controller;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,12 +32,16 @@ public class ProductPriceController {
 	@GetMapping("/admin/productpricelist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
+		Date priceListDate = new Date();
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
 		Page<Product> productPriceList = productService.findAll(PageRequest.of(currentPage - 1, pageSize));
-
+		if(!ListUtils.isEmpty(productPriceList.getContent())) {
+			priceListDate = productPriceList.getContent().iterator().next().getProductPriceUpdateStamp();
+		}
 		model.addAttribute("productPriceList", productPriceList);
+		model.addAttribute("priceListDate" , priceListDate);		
 
 		int totalPages = productPriceList.getTotalPages();
 		if (totalPages > 0) {

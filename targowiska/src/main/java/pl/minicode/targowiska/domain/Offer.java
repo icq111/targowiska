@@ -23,7 +23,7 @@ import pl.minicode.targowiska.type.OfferType;
 import pl.minicode.targowiska.type.Status;
 
 @Entity
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public class Offer {
 
 	@Id

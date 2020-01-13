@@ -52,7 +52,7 @@
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/panel') ? 'w3-blue':''}" href="/admin/panel" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/newslist') ? 'w3-blue':''}" href="/admin/newslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Aktualności</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/internalofferslist') ? 'w3-blue':''}" href="/admin/internalofferslist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Ogłoszenia wewnętrzne</a>
-			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Pracownicy</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/employee') ? 'w3-blue':''}" href="/admin/employee" class="w3-bar-item w3-button w3-padding"></i>  Pracownicy</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" href="/admin/productlist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Towary</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" href="/admin/productpricelist" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  Cennik</a>
 			<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>

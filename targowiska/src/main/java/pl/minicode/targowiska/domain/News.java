@@ -105,7 +105,10 @@ public class News {
 	@Override
 	public String toString() {
 		return "News [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", longDescription="
-				+ longDescription + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + "]";
+				+ longDescription + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", imageName="
+				+ imageName + "]";
 	}
+
+
 
 }

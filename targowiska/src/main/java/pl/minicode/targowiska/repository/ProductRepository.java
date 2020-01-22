@@ -15,4 +15,10 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
 	@Query("SELECT p FROM Product p WHERE p.productType = :type AND p.status = 'A' ")
 	public List<Product> findByProductType(@Param("type") ProductType type);
+	
+	
+	@Query(nativeQuery = true, value = "select * "
+			+ "from product p "
+			+ "where p.product_price is not null and p.status = 'ACTIVE' order by random() limit 3 ")
+	public List<Product> find3RandomProductPrices();
 }

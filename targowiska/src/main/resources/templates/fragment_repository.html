@@ -1,33 +1,94 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
-
-<head th:fragment="head-data">
-<meta charset="UTF-8" />
-<link th:href="@{/css/fragment_repository.css}" rel="stylesheet">
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head th:fragment="head-data-fragment">
+    <title>SZBTM Sandomierz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/google-font.css">
 </head>
-
 
 <body>
 
-	<h1>Wszystkie komponenty reużywalne Thymeleaf</h1>
-	<br><br>
-	<div th:fragment="header">
-		<h1>Add header components here</h1>
-	</div>
+    <!-- menu dla zwykłego wyswietlania strony na górze strony -->
+    <div th:fragment="normal-screen-navbar-fragment" class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <!-- <a href="#home"><img class="logoimg w3-margin-left" src="image/snd_small.png" class="w3-image"></a> -->
 
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+                <a href="aktualnosci.html" class="w3-bar-item w3-bottombar w3-border-orange w3-hover-orange w3-margin-right menu_item">Aktualności</a>
+                <a href="#about" class="w3-bar-item w3-bottombar w3-border-blue w3-hover-blue w3-margin-right menu_item"><i
+            class="fa fa-user"></i> O zakładzie</a>
+                <a href="oferta.html" class="w3-bar-item w3-bottombar w3-border-red w3-hover-red w3-margin-right menu_item"><i
+            class="fa fa-th"></i> Oferta</a>
+                <a href="cennik.html" class="w3-bar-item w3-bottombar w3-border-green w3-hover-green w3-margin-right menu_item"><i
+            class="fa fa-usd"></i> Cennik opłat</a>
+                <a href="#sales-plan" class="w3-bar-item w3-bottombar w3-border-amber w3-hover-amber w3-margin-right menu_item"><i
+            class="fa fa-envelope"></i> Notowania cen</a>
+                <div class="w3-dropdown-hover w3-bar-item w3-bottombar w3-border-khaki w3-hover-khaki w3-margin-right menu_item">
+                    <div class="w3-border-khaki">Ogłoszenia</div>
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-border-khaki">
+                        <a href="#" class="w3-bar-item w3-hover-light-green">Ogłoszenia wewnętrzne</a>
+                        <a href="#" class="w3-bar-item  w3-hover-light-green">Ogłoszenia zewnętrzne</a>
 
+                    </div>
+                </div>
+                <a href="#contact" class="w3-bar-item w3-bottombar w3-border-indigo w3-hover-indigo w3-margin-right menu_item"><i
+            class="fa fa-envelope"></i> Kontakt</a>
 
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
 
+    <!-- Menu dla małych wyświetlaczy na boku -->
+    <nav th:fragment="small-screen-navbar-fragment" class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close</a>
+        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+        <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+        <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+        <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+    </nav>
 
+    <!-- pojedynczy item cennika -->
+    <div th:fragment="product-price-fragment(dbProductObject)" class="w3-quarter w3-container product-item">
+        <div class="w3-panel w3-border w3-light-gray w3-padding-64">
+            <div class="w3-container">
+                <img src="image/Cherry-Download-PNG.png" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+            </div>
+        </div>
+        <div class="w3-container">
+            <h4 th:text="${dbProductObject.productName}">Nazwa</h4>
+            <span class="w3-text-green w3-margin-right"><b th:text="${dbProductObject.productPrice}">Cena zł</b><b>zł</b></span>
+            <span th:text="${dbProductObject.productPriceDifference}"/><span>% </span> <i class='fas fa-angle-up'></i> 
+        </div>
+    </div>
+    
+     <div th:fragment="news-item-fragment(dbNewsObject)" onclick="document.getElementById('${dbNewsObject.imageName}').style.display='block'"
+                  class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
+                  <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter">
+                    <img th:src="@{${'image/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
+                  </div>
+             <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird  w3-margin-left">
+                    <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
+                    <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span> <br>
+                 <span th:text="${dbNewsObject.shortDescription}">shortDescription
+                  </span>
+           </div>
 
-	<footer th:fragment="footer">
-		<div>Add footer components here</div>
-	</footer>
+       </div>
+
 </body>
+
 </html>

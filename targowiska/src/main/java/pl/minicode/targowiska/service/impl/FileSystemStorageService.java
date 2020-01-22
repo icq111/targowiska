@@ -52,6 +52,7 @@ public class FileSystemStorageService {
 
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, this.uploadLocation.resolve(generatedFileName), StandardCopyOption.REPLACE_EXISTING);
+
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to store file " + generatedFileName, e);

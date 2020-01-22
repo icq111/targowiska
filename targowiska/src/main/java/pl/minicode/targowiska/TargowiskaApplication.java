@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.util.unit.DataSize;
@@ -16,6 +17,7 @@ import pl.minicode.targowiska.properties.StorageProperties;
 
 @SpringBootApplication
 @EnableJpaAuditing
+@EnableCaching
 @EnableConfigurationProperties(StorageProperties.class)
 public class TargowiskaApplication {
 

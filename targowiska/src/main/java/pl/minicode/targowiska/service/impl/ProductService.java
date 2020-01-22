@@ -98,4 +98,9 @@ public class ProductService implements IProductService {
 		update(dbProduct);
 	}
 
+	@Override
+	public List<Product> find3RandomProductPrices() {
+		return productRepository.find3RandomProductPrices();
+	}
+
 }

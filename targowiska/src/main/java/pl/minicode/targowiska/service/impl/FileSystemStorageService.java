@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,13 +23,13 @@ import pl.minicode.targowiska.properties.StorageProperties;
 public class FileSystemStorageService {
 
 	@Autowired
-	StorageProperties properties;
+	private Environment applicationProperty;
 
 	private Path uploadLocation;
 
 	@PostConstruct
 	public void init() {
-		this.uploadLocation = Paths.get(properties.getLocation() + File.separator + "news") ;
+		this.uploadLocation = Paths.get(applicationProperty.getProperty("dynamic.images.base") + File.separator + "news") ;
 		try {
 			Files.createDirectories(uploadLocation);
 		} catch (IOException e) {

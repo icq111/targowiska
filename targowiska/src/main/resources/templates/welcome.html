@@ -309,45 +309,15 @@
             <h2 th:case="'0'">Brak newsów</h2>
             <div th:case="*">
 
-                <div th:each="news : ${newsList}">
-					<div th:insert="fragment_repository.html :: news-item-fragment(dbNewsObject = ${news})"/> 
-                    
+                <div th:each="news, iterStat : ${newsList}">
+					<div th:insert="fragment_repository.html :: news-item-fragment(dbNewsObject = ${news}, objectIndex = ${iterStat.index})"/> 
+                    <div th:replace="fragment_repository.html :: news-item-modal-fragment(dbNewsObject = ${news}, objectIndex = ${iterStat.index})"/> 
                 </div>                              
             </div>
         </div>
           
-          
-          
-          
-          
-          
-              <div class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
-                  <div class="w3-quarter">
-                      <img src="image/flowers.jpg" class="w3-image" alt="">
-                  </div>
-                  <div class="w3-twothird w3-margin-left">
-                      <h4><b>Zapraszamy na zakupy bardzo ważne i poważne w tym i tamtym</b></h4>
-                      <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span> <br>
-                      <span>Zapraszamy na zakupy świeżych warzyw i owoców, a także nowalijek oraz kwiatów rabatowych i
-                          balkonowych. Giełda owocowo - warzywna przy ul. Przemysłowej w Sandomierzu czynna non stop we wszystkie
-                          dni tygodnia.
-                        </span>
 
-                    </div>
-                </div>
 
-                <div class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
-                    <div class="w3-quarter">
-                        <img src="image/flowers.jpg" class="w3-image" alt="">
-                    </div>
-                    <div class="w3-twothird  w3-margin-left">
-                        <h4><b>Zapraszamy na zakupy bardzo ważne i poważne w tym i tamtym </b></h4>
-                        <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span> <br>
-                        <span>Zapraszamy na zakupy świeżych warzyw i owoców, a także nowalijek oraz kwiatów rabatowych i
-                            balkonowych. Giełda owocowo - warzywna przy ul. Przemysłowej
-                          </span>
-                      </div>
-                  </div>
 
                   <div class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
                       
@@ -416,82 +386,7 @@
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
         class="w3-hover-text-green">w3.css</a></p>
   </footer>
-
-  <script>
-    function myFunction(id, btnElement) {
-      var x = document.getElementById(id);
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        if (btnElement.classList.contains("w3-white")) {
-          btnElement.classList.remove("w3-white");
-          btnElement.className += " w3-green";
-        }
-      } else {
-        x.className = x.className.replace(" w3-show", "");
-        if (btnElement.classList.contains("w3-green")) {
-          btnElement.classList.remove("w3-green");
-          btnElement.className += " w3-white";
-        }
-      }
-    }
-
-
-    //slideshow
-    var myIndex = 0;
-    carousel();
-
-    function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      myIndex++;
-      if (myIndex > x.length) { myIndex = 1 }
-      x[myIndex - 1].style.display = "block";
-      setTimeout(carousel, 2500);
-    }
-
-    // Modal Image Gallery
-    function onClick(element) {
-      document.getElementById("img01").src = element.src;
-      document.getElementById("modal01").style.display = "block";
-      var captionText = document.getElementById("caption");
-      captionText.innerHTML = element.alt;
-    }
-
-
-    // Toggle between showing and hiding the sidebar when clicking the menu icon
-    var mySidebar = document.getElementById("mySidebar");
-
-    function w3_open() {
-      if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-      } else {
-        mySidebar.style.display = 'block';
-      }
-    }
-
-    // Close the sidebar with the close button
-    function w3_close() {
-      mySidebar.style.display = "none";
-    }
-
-    function myMap() {
-      myCenter = new google.maps.LatLng(50.681061, 21.758024);
-      var mapOptions = {
-        center: myCenter,
-        zoom: 17, scrollwheel: false, draggable: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-
-      var marker = new google.maps.Marker({
-        position: myCenter,
-      });
-      marker.setMap(map);
-    }
-  </script>
+<script type="text/javascript" th:replace="fragment_repository.html :: js-script-fragment"></script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyLaLusBXDDuYncjgZMOapl9WNbjtmkMc&callback=myMap"></script>
 </body>

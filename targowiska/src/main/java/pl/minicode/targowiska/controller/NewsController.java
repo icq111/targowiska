@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.minicode.targowiska.domain.News;
 import pl.minicode.targowiska.repository.NewsRepository;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
+import pl.minicode.targowiska.type.ImageType;
 import pl.minicode.targowiska.utils.CustomUtils;
 import pl.minicode.targowiska.utils.PaginationUtils;
 
@@ -68,7 +69,7 @@ public class NewsController {
 		if(doSaveFile) {
 			String generatedFileName = CustomUtils.getGeneratedFileName(file);
 			news.setImageName(generatedFileName);			
-			fileSystemStorageService.store(file, generatedFileName);			
+			fileSystemStorageService.store(file, generatedFileName, ImageType.NEWS);			
 		}
 		newsRepository.save(news);
 		return "redirect:/admin/newslist";

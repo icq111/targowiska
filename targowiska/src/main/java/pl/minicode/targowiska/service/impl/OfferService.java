@@ -40,4 +40,15 @@ public class OfferService {
 		}
 		offerRepository.save(offer);
 	}
+	
+	public void saveExternalOffer(@Valid Offer offer) {
+		if(offer.getOfferType() == null) {
+			offer.setOfferType(OfferType.EXTERNAL);
+		}
+		
+		if(offer.getStatus() == null) {
+			offer.setStatus(Status.INACTIVE);
+		}
+		offerRepository.save(offer);
+	}
 }

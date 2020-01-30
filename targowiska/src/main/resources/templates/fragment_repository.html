@@ -75,13 +75,14 @@
         </div>
     </div>
 
-    <div th:fragment="news-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}" onclick="openNewsModal(this.getAttribute('data-id'))" class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
+    <div th:fragment="news-item-fragment(dbNewsObject, objectIndex)" th:data-id="${objectIndex}" onclick="openNewsModal(this.getAttribute('data-id'))" class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
         <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter">
-            <img th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
+            <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="admin">
+            <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="user">
         </div>
         <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird  w3-margin-left">
             <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
-            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span>
+            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
             <br>
             <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
         </div>
@@ -92,119 +93,132 @@
             <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
         </div>
     </div>
-    
-                        <div th:fragment="news-item-modal-fragment(dbNewsObject, objectIndex)" th:id="${objectIndex}" class="w3-modal">
-                      <div class="w3-modal-content">
-                        <header class="w3-container w3-green">
-                          <span th:data-id ="${objectIndex}" onclick="document.getElementById(this.getAttribute('data-id')).style.display='none'"
-                            class="w3-button w3-display-topright">&times;</span>
-                          <h2 th:text="${dbNewsObject.title}" class="w3-left">Modal Title</h2>
-                        </header>
-                        <div class="w3-padding-16 w3-container">
-                          <div>
-                            <div class="w3-half">
-                              <img th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
-                            </div>
-                            <div class="w3-half">
-                              <span><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span> <br>
-                              <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
-                            </div>
-                    
-                    
-                          </div>
-                        </div>
-                        <div>
-                          <span th:text="${dbNewsObject.longDescription}">longDescription </span>
-                    
-                        </div>
-                        <footer class="w3-container  w3-green">
-                          <br>
-                        </footer>
-                      </div>
+
+    <div th:fragment="news-item-modal-fragment(dbNewsObject, objectIndex)" th:id="${objectIndex}" class="w3-modal">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-green">
+                <span th:data-id="${objectIndex}" onclick="document.getElementById(this.getAttribute('data-id')).style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2 th:text="${dbNewsObject.title}" class="w3-left">Modal Title</h2>
+            </header>
+            <div class="w3-padding-16 w3-container">
+                <div>
+                    <div th:if="${dbNewsObject.imageName} != null" class="w3-half">
+                        <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
+                        <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
                     </div>
+                    <div th:if="${dbNewsObject.imageName} != null" class="w3-half">
+                        <span><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+                        <br>
+                        <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+                    </div>
+                    <div th:unless="${dbNewsObject.imageName} != null">
+                        <span><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+                        <br>
+                        <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <span th:text="${dbNewsObject.longDescription}">longDescription </span>
+
+            </div>
+            <footer class="w3-container  w3-green">
+                <br>
+                <br>
+            </footer>
+        </div>
+    </div>
     
-    
-    
+       	<!-- zdjecia w admin panel --> 
+   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}" class="w3-quarter w3-container w3-padding">
+      <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+      <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+	<br>
+    </div>
+
     <script th:fragment="js-script-fragment">
-    function openNewsModal(id) {
-        var elem = document.getElementById(id);
-        elem.style.display = 'block';
-    }
-    
-    function myFunction(id, btnElement) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-          x.className += " w3-show";
-          if (btnElement.classList.contains("w3-white")) {
-            btnElement.classList.remove("w3-white");
-            btnElement.className += " w3-green";
-          }
-        } else {
-          x.className = x.className.replace(" w3-show", "");
-          if (btnElement.classList.contains("w3-green")) {
-            btnElement.classList.remove("w3-green");
-            btnElement.className += " w3-white";
-          }
+        function openNewsModal(id) {
+            var elem = document.getElementById(id);
+            elem.style.display = 'block';
         }
-      }
 
-
-      //slideshow
-      var myIndex = 0;
-      carousel();
-
-      function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-          x[i].style.display = "none";
+        function myFunction(id, btnElement) {
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+                if (btnElement.classList.contains("w3-white")) {
+                    btnElement.classList.remove("w3-white");
+                    btnElement.className += " w3-green";
+                }
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+                if (btnElement.classList.contains("w3-green")) {
+                    btnElement.classList.remove("w3-green");
+                    btnElement.className += " w3-white";
+                }
+            }
         }
-        myIndex++;
-        if (myIndex > x.length) { myIndex = 1 }
-        x[myIndex - 1].style.display = "block";
-        setTimeout(carousel, 2500);
-      }
 
-      // Modal Image Gallery
-      function onClick(element) {
-        document.getElementById("img01").src = element.src;
-        document.getElementById("modal01").style.display = "block";
-        var captionText = document.getElementById("caption");
-        captionText.innerHTML = element.alt;
-      }
+        //slideshow
+        var myIndex = 0;
+        carousel();
 
-
-      // Toggle between showing and hiding the sidebar when clicking the menu icon
-      var mySidebar = document.getElementById("mySidebar");
-
-      function w3_open() {
-        if (mySidebar.style.display === 'block') {
-          mySidebar.style.display = 'none';
-        } else {
-          mySidebar.style.display = 'block';
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
         }
-      }
 
-      // Close the sidebar with the close button
-      function w3_close() {
-        mySidebar.style.display = "none";
-      }
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
 
-      function myMap() {
-        myCenter = new google.maps.LatLng(50.681061, 21.758024);
-        var mapOptions = {
-          center: myCenter,
-          zoom: 17, scrollwheel: false, draggable: false,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
 
-        var marker = new google.maps.Marker({
-          position: myCenter,
-        });
-        marker.setMap(map);
-      }
-	</script>
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+
+        function myMap() {
+            myCenter = new google.maps.LatLng(50.681061, 21.758024);
+            var mapOptions = {
+                center: myCenter,
+                zoom: 17,
+                scrollwheel: false,
+                draggable: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+            });
+            marker.setMap(map);
+        }
+    </script>
 </body>
 
 </html>

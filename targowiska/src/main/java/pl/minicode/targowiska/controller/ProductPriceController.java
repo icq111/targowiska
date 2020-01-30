@@ -71,7 +71,7 @@ public class ProductPriceController {
 	}
 	
 	@PostMapping("/admin/productpricelist/save")
-	public String saveBooks(@ModelAttribute ProductsDto productsDto, Model model) {
+	public String savePriceList(@ModelAttribute ProductsDto productsDto, Model model) {
 		productService.updateProductPrices(productsDto);
 		return "redirect:/admin/productpricelist";
 	}

@@ -15,13 +15,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.minicode.targowiska.properties.StorageProperties;
+import pl.minicode.targowiska.service.IFileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
 
-
-
 @Service
-public class FileSystemStorageService {
+public class FileSystemStorageService implements IFileSystemStorageService {
 
 	@Autowired
 	private Environment applicationProperty;

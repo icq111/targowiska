@@ -242,3 +242,23 @@ margin-bottom: 0;
 	color: white;
 	border-radius: 2px;
 }
+
+#messages {
+display: block;
+width: 80%;
+margin: 5px auto;
+text-align: center;
+padding: 5px;
+border-radius: 5px;
+top:60px;
+position: absolute;
+}
+
+li.info {
+background: #7f7;
+}
+
+li.error {
+background: #d00;
+color: white;
+}

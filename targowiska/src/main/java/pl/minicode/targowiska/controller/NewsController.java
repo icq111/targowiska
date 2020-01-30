@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.ListUtils;
 
 import pl.minicode.targowiska.domain.News;
 import pl.minicode.targowiska.repository.NewsRepository;
+import pl.minicode.targowiska.service.INotificationService;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
 import pl.minicode.targowiska.utils.CustomUtils;
@@ -33,6 +35,9 @@ public class NewsController {
 	
 	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
+	
+	@Autowired
+    private INotificationService notifyService;
 
 	@GetMapping("/admin/newslist")
 	public String showNewsListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -40,8 +45,7 @@ public class NewsController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<News> newsList = newsRepository.findAll(PageRequest.of(currentPage - 1, pageSize));
-
+		Page<News> newsList = newsRepository.findAll(PageRequest.of(currentPage - 1, pageSize));		
 		model.addAttribute("newsList", newsList);
 
 		int totalPages = newsList.getTotalPages();
@@ -49,7 +53,10 @@ public class NewsController {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
-
+		if(ListUtils.isEmpty(newsList.getContent())) {
+			notifyService.addErrorMessage("No any news to show");
+			
+		}
 		return "admin-news-list"; // view
 	}
 

@@ -27,17 +27,10 @@
             <h2 th:case="'0'">No news yet!</h2>
             <div class="w3-margin-left w3-padding-32" th:case="*">
 
-                <div th:each="news : ${newsList}">
+                <div th:each="news, iterStat : ${newsList}">
 
-                    <span th:text="${#dates.format(news.insertStamp, 'dd-MM-yyyy HH:mm')}"></span>
-
-                    <h4><b th:text="${news.title}"></b></h4>
-                    <i><span th:text="${news.shortDescription}"></span></i>
-                    <br>
-                    <span th:text="${news.longDescription}"></span>
-                                        <br>
-                    <span th:text="${news.imageName}"></span>
-                    <hr>
+					<div th:insert="fragment_repository.html :: news-item-fragment(dbNewsObject = ${news}, objectIndex = ${iterStat.index})"/> 
+                    <div th:replace="fragment_repository.html :: news-item-modal-fragment(dbNewsObject = ${news}, objectIndex = ${iterStat.index})"/>
                 </div>
         <div class="w3-center">                
                 <div th:if="${newsList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">

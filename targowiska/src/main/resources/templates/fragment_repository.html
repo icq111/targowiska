@@ -131,7 +131,7 @@
     </div>
     
        	<!-- zdjecia w admin panel --> 
-   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}" class="w3-quarter w3-container w3-padding">
+   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}">
       <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
       <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
 	<br>

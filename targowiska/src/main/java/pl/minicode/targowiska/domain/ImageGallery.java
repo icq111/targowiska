@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.NonNull;
 
 import pl.minicode.targowiska.type.OfferType;
 import pl.minicode.targowiska.type.Status;
@@ -42,6 +43,11 @@ public class ImageGallery {
     
     @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @NonNull
+    private int width;
+    @NonNull
+    private int height;
 
 	public long getId() {
 		return id;
@@ -83,9 +89,25 @@ public class ImageGallery {
 		this.status = status;
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	@Override
 	public String toString() {
 		return "ImageGallery [id=" + id + ", imageName=" + imageName + ", insertStamp=" + insertStamp + ", updateStamp="
-				+ updateStamp + ", status=" + status + "]";
+				+ updateStamp + ", status=" + status + ", width=" + width + ", height=" + height + "]";
 	}
 }

@@ -1,5 +1,7 @@
 package pl.minicode.targowiska.service.impl;
 
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,12 +11,14 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import pl.minicode.targowiska.domain.dto.StoredFileInfo;
 import pl.minicode.targowiska.service.IFileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
 
@@ -36,8 +40,8 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 		}
 	}
 
-	public void store(MultipartFile file, String generatedFileName, ImageType imageType) {
-//		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+	public StoredFileInfo storeImage(MultipartFile file, String generatedFileName, ImageType imageType) {
+		StoredFileInfo storedFileInfo = null;
 		try {
 			if (file.isEmpty()) {
 				throw new RuntimeException("Failed to store empty file " + generatedFileName);
@@ -53,11 +57,22 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 				Path location = Paths.get(this.uploadLocation.toString() + File.separator + getStoragePlace(imageType));
 				Files.createDirectories(location);
 				Files.copy(inputStream, location.resolve(generatedFileName), StandardCopyOption.REPLACE_EXISTING);
-
+				storedFileInfo = getSroredFileInfo(location, generatedFileName);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to store file " + generatedFileName, e);
 		}
+		return storedFileInfo;
+	}
+	
+	private StoredFileInfo getSroredFileInfo(Path location, String fileName) throws IOException {
+		StoredFileInfo storedFileInfo = new StoredFileInfo();
+		File f = location.resolve(fileName).toFile();
+		BufferedImage bimg = ImageIO.read(f);
+		storedFileInfo.setFilePath(location);
+		storedFileInfo.setDimension(new Dimension(bimg.getWidth(), bimg.getHeight()));
+		storedFileInfo.setFileName(f.getName());
+		return storedFileInfo;
 	}
 	
 	private String getStoragePlace(ImageType type) {

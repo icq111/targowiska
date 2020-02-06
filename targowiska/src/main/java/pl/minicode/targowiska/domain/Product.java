@@ -55,6 +55,8 @@ public class Product {
     @LastModifiedDate
     private Date productPriceUpdateStamp;
     
+    private String imageName;
+    
 //	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
 //	private List<ProductPriceHistory> productPriceHistories;
 
@@ -138,11 +140,20 @@ public class Product {
 		this.productPriceUpdateStamp = productPriceUpdateStamp;
 	}
 
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", productType="
 				+ productType + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", oldProductPrice="
 				+ oldProductPrice + ", productPrice=" + productPrice + ", productPriceDifference="
-				+ productPriceDifference + ", productPriceUpdateStamp=" + productPriceUpdateStamp + "]";
+				+ productPriceDifference + ", productPriceUpdateStamp=" + productPriceUpdateStamp + ", imageName="
+				+ imageName + "]";
 	}
 }

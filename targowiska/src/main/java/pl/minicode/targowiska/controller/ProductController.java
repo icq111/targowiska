@@ -16,9 +16,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.domain.Product;
 import pl.minicode.targowiska.service.IProductService;
+import pl.minicode.targowiska.service.impl.FileSystemStorageService;
+import pl.minicode.targowiska.type.ImageType;
+import pl.minicode.targowiska.utils.CustomUtils;
 import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
@@ -26,6 +30,9 @@ public class ProductController {
 
 	@Autowired
 	private IProductService productService;
+	
+	@Autowired
+	private FileSystemStorageService fileSystemStorageService;
 
 	@GetMapping("/admin/productlist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -52,9 +59,17 @@ public class ProductController {
 	}
 
 	@PostMapping("/admin/productlist/addproduct")
-	public String addProduct(@Valid Product product, BindingResult result, Model model) {
+	public String addProduct(@Valid Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
+		boolean doSaveFile = file.getSize() != 0;
+		
 		if (result.hasErrors()) {
 			return "admin-add-product";
+		}
+		
+		if(doSaveFile) {
+			String generatedFileName = CustomUtils.getGeneratedFileName(file);
+			product.setImageName(generatedFileName);			
+			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
 		}
 
 		productService.save(product);

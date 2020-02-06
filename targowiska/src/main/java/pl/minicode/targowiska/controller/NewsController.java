@@ -76,7 +76,7 @@ public class NewsController {
 		if(doSaveFile) {
 			String generatedFileName = CustomUtils.getGeneratedFileName(file);
 			news.setImageName(generatedFileName);			
-			fileSystemStorageService.store(file, generatedFileName, ImageType.NEWS);			
+			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.NEWS);			
 		}
 		newsRepository.save(news);
 		return "redirect:/admin/newslist";

@@ -65,7 +65,8 @@
     <div th:fragment="product-price-fragment(dbProductObject)" class="w3-quarter w3-container product-item">
         <div class="w3-panel w3-border w3-light-gray w3-padding-64">
             <div class="w3-container">
-                <img src="image/Cherry-Download-PNG.png" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+                <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+                <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
             </div>
         </div>
         <div class="w3-container">

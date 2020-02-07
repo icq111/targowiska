@@ -22,7 +22,7 @@
         <a class="w3-margin-left" th:href="@{'/admin/gallery/create'}">
             <button class="w3-button w3-green">Dodaj zdjęcie</button>
         </a>
-
+ <div class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey">
              <div th:each="imageList : ${imagesGalleryList}" class="w3-row">
                 <div th:each="image, itemStat : *{imageList.imageGalleries}" class="w3-quarter w3-container w3-padding">
                 
@@ -32,7 +32,7 @@
                 </div>
 
 
-
+</div>
 
     </div>
 

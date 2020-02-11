@@ -54,7 +54,7 @@ public class NewsController {
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		if(ListUtils.isEmpty(newsList.getContent())) {
-			notifyService.addErrorMessage("No any news to show");
+			notifyService.addInfoMessage("No any news to show");
 			
 		}
 		return "admin-news-list"; // view

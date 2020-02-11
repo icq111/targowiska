@@ -11,6 +11,7 @@
     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+        <div th:replace="admin_fragment_repository.html :: notification-fragment"></div>
 
     <!-- !PAGE CONTENT! -->
     <div class="content-main-div w3-main">
@@ -32,6 +33,7 @@
                                 <th> Towar</th>
                                 <th> Typ</th>
                                 <th> Status</th>
+                                <th> Opcje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +41,18 @@
                                 <td th:text="${product.productName}"></td>
                                 <td th:text="${product.productType}"></td>
                                 <td th:text="${product.status}"></td>
+                                <td>
+                                        <a th:href="@{'/admin/productlist/productdetails/{id}'(id=${product.id})}">
+           <button title="Detale" class="w3-btn w3-green"><i class="fa fa-info"></i></button>
+        </a>
+                                
+                                <button title="Edycja" class="w3-btn w3-indigo"><i class='fa fa-edit'></i></button>
+                                
+                                                                        <a th:href="@{'/admin/productlist/delete/{id}'(id=${product.id})}">
+            <button title="Usuń" class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
+        </a>
+                               
+                                </td>
                             </tr>
                         </tbody>
                     </table>

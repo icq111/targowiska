@@ -14,11 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.domain.Product;
+import pl.minicode.targowiska.domain.dto.ProductsDto;
+import pl.minicode.targowiska.service.INotificationService;
 import pl.minicode.targowiska.service.IProductService;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
@@ -33,6 +37,9 @@ public class ProductController {
 	
 	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
+	
+	@Autowired
+    private INotificationService notifyService;
 
 	@GetMapping("/admin/productlist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -74,5 +81,22 @@ public class ProductController {
 
 		productService.save(product);
 		return "redirect:/admin/productlist";
+	}
+	
+	
+	@GetMapping("/admin/productlist/productdetails/{id}")
+	public String getProductDetails(@PathVariable("id") Long id, Model model) {
+		Product product = productService.findById(id);
+		 model.addAttribute("product", product);
+		return "redirect:/admin/productpricelist";
+	}
+	
+	@GetMapping("/admin/productlist/delete/{id}")
+	public String deleteProduct(@PathVariable("id") long id, Model model) {
+		Product product = productService.findById(id);
+	      
+		productService.delete(product);
+		notifyService.addInfoMessage("Product deleted successfully!!!");
+	   return "redirect:/admin/productlist";
 	}
 }

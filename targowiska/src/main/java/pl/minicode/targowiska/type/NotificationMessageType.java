@@ -1,5 +1,5 @@
 package pl.minicode.targowiska.type;
 
 public enum NotificationMessageType {
-	INFO, ERROR;
+	NOTIF_INFO, NOTIF_ERROR;
 }

@@ -74,5 +74,5 @@ public class ProductPriceController {
 	public String savePriceList(@ModelAttribute ProductsDto productsDto, Model model) {
 		productService.updateProductPrices(productsDto);
 		return "redirect:/admin/productpricelist";
-	}
+	}	
 }

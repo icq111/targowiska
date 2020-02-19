@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import pl.minicode.targowiska.domain.News;
 import pl.minicode.targowiska.repository.NewsRepository;
 import pl.minicode.targowiska.service.INewsService;
-import pl.minicode.targowiska.type.Status;
 
 @Service
 public class NewsService implements INewsService {

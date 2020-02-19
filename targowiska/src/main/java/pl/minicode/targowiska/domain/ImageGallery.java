@@ -2,7 +2,6 @@ package pl.minicode.targowiska.domain;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -19,7 +18,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.NonNull;
 
-import pl.minicode.targowiska.type.OfferType;
 import pl.minicode.targowiska.type.Status;
 
 @Entity

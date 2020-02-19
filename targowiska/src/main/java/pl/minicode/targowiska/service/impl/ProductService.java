@@ -72,7 +72,7 @@ public class ProductService implements IProductService {
 		for (Product formProduct : formUpdatedProducts) {
 			idProductMap.put(formProduct.getId(), formProduct);
 		}
-
+		
 		for (Product dbProduct : databaseProducts) {
 			if (idProductMap.containsKey(dbProduct.getId())) {
 				Product formUpdateProduct = idProductMap.get(dbProduct.getId());

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.util.unit.DataSize;
 
 @SpringBootApplication
-@EnableJpaAuditing	
+@EnableJpaAuditing
 public class TargowiskaApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

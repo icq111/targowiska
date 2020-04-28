@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.domain.dto.StoredFileInfo;
 import pl.minicode.targowiska.service.IFileSystemStorageService;
+import pl.minicode.targowiska.type.ImageLayout;
 import pl.minicode.targowiska.type.ImageType;
 
 @Service
@@ -71,6 +72,9 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 		BufferedImage bimg = ImageIO.read(f);
 		storedFileInfo.setFilePath(location);
 		storedFileInfo.setDimension(new Dimension(bimg.getWidth(), bimg.getHeight()));
+		
+		ImageLayout imageLayout = (bimg.getWidth() > bimg.getHeight()) ? ImageLayout.HORIZONTAL : ImageLayout.VERTICAL;
+		storedFileInfo.setImageLayout(imageLayout);
 		storedFileInfo.setFileName(f.getName());
 		return storedFileInfo;
 	}

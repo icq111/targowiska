@@ -55,7 +55,9 @@
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/internalofferslist') ? 'w3-blue':''}" th:href="@{'/admin/internalofferslist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cloud-download fa-fw"></i>  Ogłoszenia wewnętrzne</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/externalofferslist') ? 'w3-blue':''}" th:href="@{'/admin/externalofferslist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cloud-upload fa-fw"></i>  Ogłoszenia zewnętrzne</a>
             <!-- <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/employee') ? 'w3-blue':''}" th:href="@{'/admin/employee'}" class="w3-bar-item w3-button w3-padding"></i>  Pracownicy</a>  -->
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productcategorylist') ? 'w3-blue':''}" th:href="@{'/admin/productcategorylist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Kategorie towarów</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" th:href="@{'/admin/productlist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Towary</a>
+            
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" th:href="@{'/admin/productpricelist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-euro fa-fw"></i>  Cennik</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/gallery') ? 'w3-blue':''}" th:href="@{'/admin/gallery'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Galeria</a>
 

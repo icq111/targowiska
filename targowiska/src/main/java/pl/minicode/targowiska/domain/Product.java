@@ -3,6 +3,7 @@ package pl.minicode.targowiska.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -10,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -56,6 +59,10 @@ public class Product {
     private Date productPriceUpdateStamp;
     
     private String imageName;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_category_id", referencedColumnName = "id")
+    private ProductCategory productCategory;
     
 //	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
 //	private List<ProductPriceHistory> productPriceHistories;

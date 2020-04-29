@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.domain.Product;
+import pl.minicode.targowiska.domain.ProductCategory;
 import pl.minicode.targowiska.service.INotificationService;
+import pl.minicode.targowiska.service.IProductCategoryService;
 import pl.minicode.targowiska.service.IProductService;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
@@ -34,6 +36,9 @@ public class ProductController {
 	private IProductService productService;
 	
 	@Autowired
+	private IProductCategoryService productCategoryService;
+	
+	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
 	
 	@Autowired
@@ -45,7 +50,7 @@ public class ProductController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<Product> productList = productService.findAll(PageRequest.of(currentPage - 1, pageSize));
+		Page<Product> productList = productService.findAllByStatusActiveInactive(PageRequest.of(currentPage - 1, pageSize));
 
 		model.addAttribute("productList", productList);
 
@@ -59,7 +64,10 @@ public class ProductController {
 	}
 
 	@GetMapping("/admin/productlist/newproduct")
-	public String showAddNewProductForm(Product product) {
+	public String showAddNewProductForm(Model model, Product product) {
+		
+		List<ProductCategory> productCategories = productCategoryService.findAll();
+		model.addAttribute("productCategories", productCategories);
 		return "admin-add-product";
 	}
 

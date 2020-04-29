@@ -101,5 +101,9 @@ public class ProductService implements IProductService {
 	public List<Product> find3RandomProductPrices() {
 		return productRepository.find3RandomProductPrices();
 	}
+	
+	public Page<Product> findAllByStatusActiveInactive(Pageable pageable){
+		return productRepository.findAllByStatusActiveInactive(pageable);
+	}
 
 }

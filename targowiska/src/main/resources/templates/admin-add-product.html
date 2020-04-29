@@ -22,20 +22,23 @@
                         <label for="name">Name</label>
                         <input class="w3-input w3-border" type="text"th:field="*{productName}" id="productName" placeholder="Product name">
                         <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
-                        <br>
- 			
- 			 			<div>
-            <label for="productType">Typ</label>
-            <select class="w3-input w3-border" th:field="*{productType}" id="productType">
-                <option th:each="productType : ${T(pl.minicode.targowiska.type.ProductType).getGuiValues()}" th:value="${productType}" th:text="${productType.toDisplay()}"></option>
-            </select>
-            </div>
+                        
             <br>
  			<div class="w3-margin-bottom">
             <label for="status">Status</label>
             <select class="w3-input w3-border" th:field="*{status}" id="status">
                 <option th:each="status : ${T(pl.minicode.targowiska.type.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
             </select>
+            </div>
+             			<div class="w3-margin-bottom">
+            <label for="status">Kategoria</label>       
+                            <select class="w3-input w3-border" th:field="*{productCategory}" id="productCategory">
+                         <option th:each="productCategory : ${productCategories}"
+                            th:value="${productCategory.id}"
+                            th:utext="${productCategory.categoryName}"/>
+                  </select>
+            
+            
             </div>
             
             						<label for="image">Image</label>

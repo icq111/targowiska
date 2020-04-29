@@ -15,12 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import pl.minicode.targowiska.type.ProductType;
 import pl.minicode.targowiska.type.Status;
 
 @Entity
@@ -31,13 +31,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
+	@NotBlank(message = "Name is mandatory")
 	private String productName;
 	
     @Enumerated(EnumType.STRING)
     private Status status;
-    
-    @Enumerated(EnumType.STRING)
-    private ProductType productType;
     
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -89,14 +87,6 @@ public class Product {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public ProductType getProductType() {
-		return productType;
-	}
-
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
 	}
 
 	public Date getInsertStamp() {
@@ -155,12 +145,22 @@ public class Product {
 		this.imageName = imageName;
 	}
 
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", productType="
-				+ productType + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", oldProductPrice="
-				+ oldProductPrice + ", productPrice=" + productPrice + ", productPriceDifference="
-				+ productPriceDifference + ", productPriceUpdateStamp=" + productPriceUpdateStamp + ", imageName="
-				+ imageName + "]";
+		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", insertStamp="
+				+ insertStamp + ", updateStamp=" + updateStamp + ", oldProductPrice=" + oldProductPrice
+				+ ", productPrice=" + productPrice + ", productPriceDifference=" + productPriceDifference
+				+ ", productPriceUpdateStamp=" + productPriceUpdateStamp + ", imageName=" + imageName
+				+ ", productCategory=" + productCategory + "]";
 	}
+
+
 }

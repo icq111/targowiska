@@ -2,7 +2,7 @@ package pl.minicode.targowiska.type;
 
 public enum ImageType {
 
-	NEWS, OFFER, GALLERY, PRODUCT;
+	NEWS, OFFER, GALLERY, PRODUCT, PRODUCT_CATEGORY;
 
 	public boolean isNewsType() {
 		return this.equals(NEWS);

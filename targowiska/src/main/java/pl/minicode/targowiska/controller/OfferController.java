@@ -33,7 +33,7 @@ public class OfferController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<Offer> internalOffersList = offerService.findPaginatedOffers(PageRequest.of(currentPage - 1, pageSize));
+		Page<Offer> internalOffersList = offerService.findPaginatedInternalOffers(PageRequest.of(currentPage - 1, pageSize));
 
 		model.addAttribute("internalOffersList", internalOffersList);
 

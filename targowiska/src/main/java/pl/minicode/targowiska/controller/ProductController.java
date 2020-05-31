@@ -25,6 +25,7 @@ import pl.minicode.targowiska.service.INotificationService;
 import pl.minicode.targowiska.service.IProductCategoryService;
 import pl.minicode.targowiska.service.IProductService;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
+import pl.minicode.targowiska.service.validator.ProductValidatorService;
 import pl.minicode.targowiska.type.ImageType;
 import pl.minicode.targowiska.utils.CustomUtils;
 import pl.minicode.targowiska.utils.PaginationUtils;
@@ -43,6 +44,9 @@ public class ProductController {
 	
 	@Autowired
     private INotificationService notifyService;
+	
+	@Autowired
+	private ProductValidatorService validator;
 
 	@GetMapping("/admin/productlist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -59,6 +63,8 @@ public class ProductController {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
+		
+		model.addAttribute("isAddNewProductAllowed", validator.isAddNewProductAllowed());
 
 		return "admin-product-list"; // view
 	}

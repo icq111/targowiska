@@ -15,4 +15,6 @@ public interface IProductService extends IPageableCommonService<Product> {
 	List<Product> find3RandomProductPrices();
 	
 	Page<Product> findAllByStatusActiveInactive(Pageable pageable);
+	
+	Long countRows();
 }

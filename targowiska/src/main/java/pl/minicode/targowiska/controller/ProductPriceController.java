@@ -21,6 +21,7 @@ import org.thymeleaf.util.ListUtils;
 import pl.minicode.targowiska.domain.Product;
 import pl.minicode.targowiska.domain.dto.ProductsDto;
 import pl.minicode.targowiska.service.IProductService;
+import pl.minicode.targowiska.service.validator.ProductValidatorService;
 import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
@@ -28,6 +29,9 @@ public class ProductPriceController {
 	
 	@Autowired
 	IProductService productService;
+	
+	@Autowired
+	ProductValidatorService productValidatorService;
 
 	@GetMapping("/admin/productpricelist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -49,6 +53,8 @@ public class ProductPriceController {
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 
+		model.addAttribute("isAddProductPricesAllowed", productValidatorService.isAddProductPricesAllowed());
+		
 		return "admin-product-price-list"; // view
 	}
 	

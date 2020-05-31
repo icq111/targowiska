@@ -20,9 +20,19 @@
             <h5><b><i class="fa fa-dashboard"></i> Towary</b></h5>
         </header>
 
-        <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
+<span th:switch="${isAddNewProductAllowed}">
+<div th:case="true">
+  <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
             <button class="w3-button w3-green">Dodaj towar</button>
         </a>
+</div>
+<div th:case="false">
+  <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
+            <button class="w3-button w3-green" disabled>Dodaj towar</button>
+        </a>
+       <p> Nie można dodać - brak kategorii</p>
+</div>
+</span>
         <div th:switch="${productList.getContent().size()}">
             <h2 th:case="'0'"></h2>
             <div th:case="*" class="w3-margin-left w3-padding-32">

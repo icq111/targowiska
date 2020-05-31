@@ -106,4 +106,9 @@ public class ProductService implements IProductService {
 		return productRepository.findAllByStatusActiveInactive(pageable);
 	}
 
+	@Override
+	public Long countRows() {
+		return productRepository.count();
+	}
+
 }

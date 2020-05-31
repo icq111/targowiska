@@ -56,4 +56,9 @@ public class ProductCategoryService implements IProductCategoryService {
 		return new EntityNotFoundException("PRODUCT CATEGORY: Not found entity with given id:" + id);
 	}
 
+	@Override
+	public Long countRows() {
+		return productCategoryRepository.count();
+	}
+
 }

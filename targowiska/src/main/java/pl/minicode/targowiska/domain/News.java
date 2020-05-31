@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import pl.minicode.targowiska.type.Status;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -44,6 +48,9 @@ public class News {
     private Date updateStamp;
     
     private String imageName;
+    
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 	public long getId() {
 		return id;
@@ -101,13 +108,18 @@ public class News {
 		this.imageName = imageName;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "News [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", longDescription="
 				+ longDescription + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", imageName="
-				+ imageName + "]";
+				+ imageName + ", status=" + status + "]";
 	}
-
-
-
 }

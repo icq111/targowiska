@@ -60,6 +60,7 @@
             
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" th:href="@{'/admin/productpricelist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-euro fa-fw"></i>  Cennik</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/gallery') ? 'w3-blue':''}" th:href="@{'/admin/gallery'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Galeria</a>
+			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/rodo') ? 'w3-blue':''}" th:href="@{'/admin/rodo'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Rodo</a>
 
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Wyloguj</a>
             <br>

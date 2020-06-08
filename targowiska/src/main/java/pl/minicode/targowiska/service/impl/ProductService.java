@@ -72,7 +72,7 @@ public class ProductService implements IProductService {
 		for (Product formProduct : formUpdatedProducts) {
 			idProductMap.put(formProduct.getId(), formProduct);
 		}
-
+		
 		for (Product dbProduct : databaseProducts) {
 			if (idProductMap.containsKey(dbProduct.getId())) {
 				Product formUpdateProduct = idProductMap.get(dbProduct.getId());
@@ -100,6 +100,15 @@ public class ProductService implements IProductService {
 	@Override
 	public List<Product> find3RandomProductPrices() {
 		return productRepository.find3RandomProductPrices();
+	}
+	
+	public Page<Product> findAllByStatusActiveInactive(Pageable pageable){
+		return productRepository.findAllByStatusActiveInactive(pageable);
+	}
+
+	@Override
+	public Long countRows() {
+		return productRepository.count();
 	}
 
 }

@@ -19,12 +19,23 @@
             <h5><b><i class="fa fa-dashboard"></i> Cennik</b></h5>
         </header>
 
-        <a class="w3-margin-left" th:href="@{'/admin/productpricelist/create'}">
+
+<span th:switch="${isAddProductPricesAllowed}">
+<div th:case="true">
+ <a class="w3-margin-left" th:href="@{'/admin/productpricelist/create'}">
             <button class="w3-button w3-green">Dodaj cennik</button>
         </a>
+</div>
+<div th:case="false">
+ <a class="w3-margin-left" th:href="@{'/admin/productpricelist/create'}">
+            <button class="w3-button w3-green" disabled>Dodaj cennik</button>
+        </a>
+       <p> Nie można dodać - brak Produktów</p>
+</div>
+</span>
 
         <div th:switch="${productPriceList.getContent().size()}">
-            <h2 th:case="'0'">No price list yet!</h2>
+            <h2 th:case="'0'"></h2>
             <div th:case="*" class="w3-margin-left w3-padding-32">
                 <div class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey">
                 <div class="w3-center w3-padding-16">
@@ -43,7 +54,7 @@
                         <tbody>
                             <tr th:each="product : ${productPriceList}">
                                 <td th:text="${product.getProductName()}"></td>
-                                <td th:text="${product.getProductType()}"></td>
+                                <td th:text="${product.getProductCategory().getCategoryName()}"></td>
                                 <td th:text="${product.getStatus()}"></td>
                                 <td th:text="${#numbers.formatDecimal({product.getProductPriceDifference()},2, 2, 'COMMA')}"></td>
                                 <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>

@@ -33,7 +33,7 @@
                     <tbody>
                         <tr th:each="product, itemStat : *{products}">
                             <td th:field="*{products[__${itemStat.index}__].productName}" th:text="${product.getProductName()}"></td>
-                            <td th:field="*{products[__${itemStat.index}__].productType}" th:text="${product.getProductType()}"></td>
+                            <td th:field="*{products[__${itemStat.index}__].productCategory.categoryName}" th:text="${product.getProductCategory().getCategoryName()}"></td>
                             <td th:field="*{products[__${itemStat.index}__].status}" th:text="${product.getStatus()}"></td>
                             <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
 
@@ -42,7 +42,7 @@
                             </td>
 							<input type="hidden" th:field="*{products[__${itemStat.index}__].id}" />
                             <input type="hidden" th:field="*{products[__${itemStat.index}__].productName}" />
-                            <input type="hidden" th:field="*{products[__${itemStat.index}__].productType}" />
+                            <input type="hidden" th:field="*{products[__${itemStat.index}__].productCategory.categoryName}" />
                             <input type="hidden" th:field="*{products[__${itemStat.index}__].status}" />
                             <input type="hidden" th:field="*{products[__${itemStat.index}__].oldProductPrice}" />
 

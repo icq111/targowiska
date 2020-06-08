@@ -21,6 +21,7 @@ import org.thymeleaf.util.ListUtils;
 
 import pl.minicode.targowiska.domain.News;
 import pl.minicode.targowiska.repository.NewsRepository;
+import pl.minicode.targowiska.service.INewsService;
 import pl.minicode.targowiska.service.INotificationService;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 import pl.minicode.targowiska.type.ImageType;
@@ -31,7 +32,7 @@ import pl.minicode.targowiska.utils.PaginationUtils;
 public class NewsController {
 
 	@Autowired
-	private NewsRepository newsRepository;
+	private INewsService newsService;
 	
 	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
@@ -45,7 +46,7 @@ public class NewsController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<News> newsList = newsRepository.findAll(PageRequest.of(currentPage - 1, pageSize));		
+		Page<News> newsList = newsService.findAdminNews(PageRequest.of(currentPage - 1, pageSize));		
 		model.addAttribute("newsList", newsList);
 
 		int totalPages = newsList.getTotalPages();
@@ -54,13 +55,13 @@ public class NewsController {
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		if(ListUtils.isEmpty(newsList.getContent())) {
-			notifyService.addErrorMessage("No any news to show");
+			notifyService.addInfoMessage("No any news to show");
 			
 		}
 		return "admin-news-list"; // view
 	}
 
-	@GetMapping("/admin/newslist/signup")
+	@GetMapping("/admin/newslist/create")
 	public String showAddNewNewsForm(News news) {
 		return "admin-add-news";
 	}
@@ -76,9 +77,9 @@ public class NewsController {
 		if(doSaveFile) {
 			String generatedFileName = CustomUtils.getGeneratedFileName(file);
 			news.setImageName(generatedFileName);			
-			fileSystemStorageService.store(file, generatedFileName, ImageType.NEWS);			
+			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.NEWS);			
 		}
-		newsRepository.save(news);
+		newsService.save(news);
 		return "redirect:/admin/newslist";
 	}
 }

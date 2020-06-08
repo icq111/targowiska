@@ -11,6 +11,7 @@
     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+    <div th:replace="admin_fragment_repository.html :: notification-fragment"></div>
 
     <!-- !PAGE CONTENT! -->
     <div class="content-main-div w3-main">
@@ -19,35 +20,59 @@
             <h5><b><i class="fa fa-dashboard"></i> Towary</b></h5>
         </header>
 
-        <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
+<span th:switch="${isAddNewProductAllowed}">
+<div th:case="true">
+  <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
             <button class="w3-button w3-green">Dodaj towar</button>
         </a>
-
+</div>
+<div th:case="false">
+  <a class="w3-margin-left" th:href="@{'/admin/productlist/newproduct'}">
+            <button class="w3-button w3-green" disabled>Dodaj towar</button>
+        </a>
+       <p> Nie można dodać - brak kategorii</p>
+</div>
+</span>
         <div th:switch="${productList.getContent().size()}">
-            <h2 th:case="'0'">No product yet!</h2>
-
+            <h2 th:case="'0'"></h2>
             <div th:case="*" class="w3-margin-left w3-padding-32">
+                <div class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey">
+                    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                        <thead>
+                            <tr>
+                                <th> Towar</th>
+                                <th> Typ</th>
+                                <th> Status</th>
+                                <th> Opcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productList}">
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.productCategory.categoryName}"></td>
+                                <td th:text="${product.status.toDisplay()}"></td>
+                                <td>
+                                    <a th:href="@{'/admin/productlist/productdetails/{id}'(id=${product.id})}">
+                                        <button title="Detale" class="w3-btn w3-green"><i class="fa fa-info"></i></button>
+                                    </a>
 
-                <div th:each="product : ${productList}">
+                                    <button title="Edycja" class="w3-btn w3-indigo"><i class='fa fa-edit'></i></button>
 
-                    <span th:text="${#dates.format(product.insertStamp, 'dd-MM-yyyy HH:mm')}"></span>
+                                    <a th:href="@{'/admin/productlist/delete/{id}'(id=${product.id})}">
+                                        <button title="Usuń" class="w3-btn w3-red"><i class="fa fa-trash"></i></button>
+                                    </a>
 
-                    <h4><b th:text="${product.productName}"></b></h4>
-                    <i><span th:text="${product.status}"></span></i>
-                    <br>
-                    <span th:text="${product.productType}"></span>
-                                        <br>
-     
-                    <hr>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="w3-center w3-margin-top">
+                        <div th:if="${productList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+                            <a class="w3-button w3-margin" th:href="@{/admin/productlist(size=${productList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==productList.number + 1} ? active"></a>
+                        </div>
+                    </div>
                 </div>
-                <div th:if="${productList.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-                    <a th:href="@{/admin/productlist(size=${productList.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==productList.number + 1} ? active"></a>
-
-                </div>
-                
-                
             </div>
-
         </div>
     </div>
 

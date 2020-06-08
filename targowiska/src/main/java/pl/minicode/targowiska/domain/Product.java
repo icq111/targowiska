@@ -3,6 +3,7 @@ package pl.minicode.targowiska.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -10,14 +11,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import pl.minicode.targowiska.type.ProductType;
 import pl.minicode.targowiska.type.Status;
 
 @Entity
@@ -28,13 +31,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
+	@NotBlank(message = "Name is mandatory")
 	private String productName;
 	
     @Enumerated(EnumType.STRING)
     private Status status;
-    
-    @Enumerated(EnumType.STRING)
-    private ProductType productType;
     
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -54,6 +55,12 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date productPriceUpdateStamp;
+    
+    private String imageName;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_category_id", referencedColumnName = "id")
+    private ProductCategory productCategory;
     
 //	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
 //	private List<ProductPriceHistory> productPriceHistories;
@@ -80,14 +87,6 @@ public class Product {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public ProductType getProductType() {
-		return productType;
-	}
-
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
 	}
 
 	public Date getInsertStamp() {
@@ -138,11 +137,30 @@ public class Product {
 		this.productPriceUpdateStamp = productPriceUpdateStamp;
 	}
 
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", productType="
-				+ productType + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", oldProductPrice="
-				+ oldProductPrice + ", productPrice=" + productPrice + ", productPriceDifference="
-				+ productPriceDifference + ", productPriceUpdateStamp=" + productPriceUpdateStamp + "]";
+		return "Product [id=" + id + ", productName=" + productName + ", status=" + status + ", insertStamp="
+				+ insertStamp + ", updateStamp=" + updateStamp + ", oldProductPrice=" + oldProductPrice
+				+ ", productPrice=" + productPrice + ", productPriceDifference=" + productPriceDifference
+				+ ", productPriceUpdateStamp=" + productPriceUpdateStamp + ", imageName=" + imageName
+				+ ", productCategory=" + productCategory + "]";
 	}
+
+
 }

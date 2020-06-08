@@ -18,26 +18,32 @@
             <h5><b><i class="fa fa-dashboard"></i> Towary > Nowy produkt</b></h5>
         </header>
                 <div class="w3-padding">
-                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/productlist/addproduct}" th:object="${product}" method="post">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/productlist/addproduct}" th:object="${product}" method="post">
                         <label for="name">Name</label>
                         <input class="w3-input w3-border" type="text"th:field="*{productName}" id="productName" placeholder="Product name">
                         <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
-                        <br>
- 			
- 			 			<div>
-            <label for="productType">Typ</label>
-            <select class="w3-input w3-border" th:field="*{productType}" id="productType">
-                <option th:each="productType : ${T(pl.minicode.targowiska.type.ProductType).getGuiValues()}" th:value="${productType}" th:text="${productType.toDisplay()}"></option>
-            </select>
-            </div>
+                        
             <br>
- 			<div>
+ 			<div class="w3-margin-bottom">
             <label for="status">Status</label>
             <select class="w3-input w3-border" th:field="*{status}" id="status">
                 <option th:each="status : ${T(pl.minicode.targowiska.type.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
             </select>
             </div>
-            <br>
+             			<div class="w3-margin-bottom">
+            <label for="status">Kategoria</label>       
+                            <select class="w3-input w3-border" th:field="*{productCategory}" id="productCategory">
+                         <option th:each="productCategory : ${productCategories}"
+                            th:value="${productCategory.id}"
+                            th:utext="${productCategory.categoryName}"/>
+                  </select>
+            
+            
+            </div>
+            
+            						<label for="image">Image</label>
+ 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
+ 						<p th:text="${file_upload_error}"></p>
             
             
 

@@ -1,5 +1,7 @@
 package pl.minicode.targowiska.service.impl;
 
+import java.util.Arrays;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,36 @@ public class OfferService {
 	@Autowired
 	private OfferRepository offerRepository;
 
-	public Page<Offer> findPaginatedOffers(Pageable pageable){
+//	public Page<Offer> findPaginatedOffers(Pageable pageable){
+//		int pageSize = pageable.getPageSize();
+//        int currentPage = pageable.getPageNumber();
+//        
+//        Pageable paging = PageRequest.of(currentPage, pageSize);
+//        
+//        Page<Offer> pagedResult = offerRepository.findAll(paging);
+//        return pagedResult;
+//	}
+	
+	private Page<Offer> findAdminPaginatedOffersByType(Pageable pageable, OfferType offerType){
 		int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
-       // int startItem = currentPage * pageSize;
         
         Pageable paging = PageRequest.of(currentPage, pageSize);
         
-        Page<Offer> pagedResult = offerRepository.findAll(paging);
+        Page<Offer> pagedResult = offerRepository.findByOfferTypeAndStatusNotIn(paging, offerType, Arrays.asList(Status.DELETED));
+        return pagedResult;
+	}
+	
+	public Page<Offer> findPaginatedInternalOffers(Pageable pageable){  
+        Page<Offer> pagedResult = findAdminPaginatedOffersByType(pageable, OfferType.INTERNAL);
         return pagedResult;
 	}
 
+	public Page<Offer> findPaginatedExternalOffers(Pageable pageable){
+		Page<Offer> pagedResult = findAdminPaginatedOffersByType(pageable, OfferType.EXTERNAL);
+        return pagedResult;
+	}
+	
 	public void saveInternalOffer(@Valid Offer offer) {
 		if(offer.getOfferType() == null) {
 			offer.setOfferType(OfferType.INTERNAL);

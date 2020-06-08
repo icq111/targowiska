@@ -65,7 +65,8 @@
     <div th:fragment="product-price-fragment(dbProductObject)" class="w3-quarter w3-container product-item">
         <div class="w3-panel w3-border w3-light-gray w3-padding-64">
             <div class="w3-container">
-                <img src="image/Cherry-Download-PNG.png" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+                <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+                <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
             </div>
         </div>
         <div class="w3-container">
@@ -76,19 +77,19 @@
     </div>
 
     <div th:fragment="news-item-fragment(dbNewsObject, objectIndex)" th:data-id="${objectIndex}" onclick="openNewsModal(this.getAttribute('data-id'))" class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
-        <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter">
+        <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter w3-padding">
             <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="admin">
             <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="user">
         </div>
-        <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird  w3-margin-left">
+        <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird w3-margin">
             <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
             <span class="w3-left"><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
             <br>
             <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
         </div>
-        <div th:unless="${dbNewsObject.imageName} != null">
+        <div th:unless="${dbNewsObject.imageName} != null" class="w3-margin">
             <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
-            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: 11.09.2019</span>
+            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
             <br>
             <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
         </div>
@@ -119,8 +120,8 @@
 
                 </div>
             </div>
-            <div>
-                <span th:text="${dbNewsObject.longDescription}">longDescription </span>
+            <div class="w3-container w3-margin">
+                <span th:utext="${dbNewsObject.longDescription}">longDescription </span>
 
             </div>
             <footer class="w3-container  w3-green">
@@ -131,7 +132,7 @@
     </div>
     
        	<!-- zdjecia w admin panel --> 
-   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}" class="w3-quarter w3-container w3-padding">
+   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}">
       <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
       <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
 	<br>

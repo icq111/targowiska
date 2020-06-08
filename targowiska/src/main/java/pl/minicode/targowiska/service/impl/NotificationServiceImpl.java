@@ -22,12 +22,12 @@ public class NotificationServiceImpl implements INotificationService {
 
 	@Override
     public void addInfoMessage(String msg) {
-        addNotificationMessage(NotificationMessageType.INFO, msg);
+        addNotificationMessage(NotificationMessageType.NOTIF_INFO, msg);
     }
 
     @Override
     public void addErrorMessage(String msg) {
-        addNotificationMessage(NotificationMessageType.ERROR, msg);
+        addNotificationMessage(NotificationMessageType.NOTIF_ERROR, msg);
     }
 
     private void addNotificationMessage(NotificationMessageType type, String msg) {

@@ -33,7 +33,7 @@ public class ExternalOfferController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<Offer> externalOffersList = offerService.findPaginatedOffers(PageRequest.of(currentPage - 1, pageSize));
+		Page<Offer> externalOffersList = offerService.findPaginatedExternalOffers(PageRequest.of(currentPage - 1, pageSize));
 
 		model.addAttribute("externalOffersList", externalOffersList);
 

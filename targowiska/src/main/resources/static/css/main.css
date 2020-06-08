@@ -246,7 +246,7 @@ margin-bottom: 0;
 #messages {
 display: block;
 width: 80%;
-margin: 5px auto;
+margin: 35px auto;
 text-align: center;
 padding: 5px;
 border-radius: 5px;
@@ -254,11 +254,19 @@ top:60px;
 position: absolute;
 }
 
-li.info {
-background: #7f7;
+div.notif_info {
+background: #01c101;
+color: white;
 }
 
-li.error {
+div.notif_error {
 background: #d00;
 color: white;
 }
+
+#notification_info { 
+    position: fixed; 
+    width:50%; 
+	font-size: 14px;
+	margin-top: 50px;
+	}

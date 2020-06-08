@@ -21,7 +21,7 @@
                     <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/gallery/save}" th:object="${imageGallery}" method="post">
 
 						<label for="file">Image</label>
- 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="file">
+ 						<input class="w3-input w3-border" type="file" name="files" accept=".jpg" id="files" multiple>
  						<p th:text="${file_upload_error}"></p>
 
                         <input class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">

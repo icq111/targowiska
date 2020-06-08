@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+</head>
+
+<body>    
+     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+     
+     	<!-- !PAGE CONTENT! -->
+	<div class="content-main-div w3-main">
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> RODO > Nowy wpis</b></h5>
+        </header>
+                <div class="w3-padding">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/rodo/save}" th:object="${rodo}" method="post">
+                        <div>
+                            <div id="quillEditor"> </div>
+                            <div id="justHtml"></div>
+                            <textarea class="w3-input w3-border" th:field="*{rodoText}" id="justHtml" rows="6" placeholder="Text"></textarea>
+                            <span th:if="${#fields.hasErrors('rodoText')}" th:errors="*{rodoText}"></span>
+                        </div>
+                        <input class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">
+                    </form>
+                </div>
+            </div>
+     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+    
+</body>
+
+</html>

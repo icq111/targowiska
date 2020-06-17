@@ -36,9 +36,31 @@ public class NewsController {
 	
 	@Autowired
     private INotificationService notifyService;
+	
+	
+	@GetMapping("/newslist")
+	public String showNewsList(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
+		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
+
+		Page<News> newsList = newsService.findAdminNews(PageRequest.of(currentPage - 1, pageSize));		
+		model.addAttribute("newsList", newsList);
+
+		int totalPages = newsList.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+		if(ListUtils.isEmpty(newsList.getContent())) {
+			notifyService.addInfoMessage("No any news to show");
+			
+		}
+		return "news-list"; // view
+	}
 
 	@GetMapping("/admin/newslist")
-	public String showNewsListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
+	public String showAdminNewsList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);

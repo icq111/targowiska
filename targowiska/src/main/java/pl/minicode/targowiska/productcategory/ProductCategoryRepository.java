@@ -1,8 +1,6 @@
-package pl.minicode.targowiska.repository;
+package pl.minicode.targowiska.productcategory;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import pl.minicode.targowiska.domain.ProductCategory;
 
 public interface ProductCategoryRepository extends PagingAndSortingRepository<ProductCategory, Long> {
 

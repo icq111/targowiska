@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service;
+package pl.minicode.targowiska.common;
 
 public interface INotificationService {
 

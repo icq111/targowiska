@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.domain;
+package pl.minicode.targowiska.product;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +21,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.productcategory.ProductCategory;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)

@@ -1,11 +1,9 @@
-package pl.minicode.targowiska.domain.dto;
+package pl.minicode.targowiska.gallery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.thymeleaf.util.ListUtils;
-
-import pl.minicode.targowiska.domain.ImageGallery;
 
 public class ImagesGalleryDto {
 	

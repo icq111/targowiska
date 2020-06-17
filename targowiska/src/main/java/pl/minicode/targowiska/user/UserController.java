@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.user;
 
 import javax.validation.Valid;
 
@@ -9,9 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import pl.minicode.targowiska.domain.User;
-import pl.minicode.targowiska.repository.UserRepository;
 
 @Controller
 public class UserController {

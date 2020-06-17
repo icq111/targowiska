@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.news;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.ListUtils;
 
-import pl.minicode.targowiska.domain.News;
-import pl.minicode.targowiska.repository.NewsRepository;
-import pl.minicode.targowiska.service.INewsService;
-import pl.minicode.targowiska.service.INotificationService;
+import pl.minicode.targowiska.common.INotificationService;
+import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.fileupload.CustomUtils;
+import pl.minicode.targowiska.gallery.ImageType;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
-import pl.minicode.targowiska.type.ImageType;
-import pl.minicode.targowiska.utils.CustomUtils;
-import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
 public class NewsController {

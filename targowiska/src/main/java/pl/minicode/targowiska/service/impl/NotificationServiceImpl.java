@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.minicode.targowiska.common.INotificationService;
 import pl.minicode.targowiska.common.NotificationMessage;
-import pl.minicode.targowiska.service.INotificationService;
-import pl.minicode.targowiska.type.NotificationMessageType;
+import pl.minicode.targowiska.common.NotificationMessageType;
 
 @Service
 public class NotificationServiceImpl implements INotificationService {

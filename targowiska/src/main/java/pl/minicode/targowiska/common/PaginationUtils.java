@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.utils;
+package pl.minicode.targowiska.common;
 
 public class PaginationUtils {
 	

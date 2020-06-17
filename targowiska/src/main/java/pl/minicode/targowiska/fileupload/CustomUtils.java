@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.utils;
+package pl.minicode.targowiska.fileupload;
 
 import java.util.Optional;
 import java.util.UUID;

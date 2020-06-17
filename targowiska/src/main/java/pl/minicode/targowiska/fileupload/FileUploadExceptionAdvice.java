@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller.interceptor;
+package pl.minicode.targowiska.fileupload;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

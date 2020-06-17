@@ -27,7 +27,7 @@
  			<div class="w3-margin-bottom">
             <label for="status">Status</label>
             <select class="w3-input w3-border" th:field="*{status}" id="status">
-                <option th:each="status : ${T(pl.minicode.targowiska.type.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
+                <option th:each="status : ${T(pl.minicode.targowiska.common.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
             </select>
             </div>
             

@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.gallery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.ListUtils;
 
-import pl.minicode.targowiska.domain.ImageGallery;
-import pl.minicode.targowiska.domain.dto.ImagesGalleryDto;
-import pl.minicode.targowiska.domain.dto.StoredFileInfo;
-import pl.minicode.targowiska.service.IFileSystemStorageService;
-import pl.minicode.targowiska.service.IImageGalleryService;
-import pl.minicode.targowiska.type.ImageType;
-import pl.minicode.targowiska.type.Status;
-import pl.minicode.targowiska.utils.CustomUtils;
-import pl.minicode.targowiska.utils.PaginationUtils;
+import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.fileupload.CustomUtils;
+import pl.minicode.targowiska.fileupload.IFileSystemStorageService;
+import pl.minicode.targowiska.fileupload.StoredFileInfo;
 
 @Controller
 public class ImageGalleryController {

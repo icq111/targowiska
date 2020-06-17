@@ -1,9 +1,9 @@
-package pl.minicode.targowiska.domain.dto;
+package pl.minicode.targowiska.fileupload;
 
 import java.awt.Dimension;
 import java.nio.file.Path;
 
-import pl.minicode.targowiska.type.ImageLayout;
+import pl.minicode.targowiska.gallery.ImageLayout;
 
 public class StoredFileInfo {
 

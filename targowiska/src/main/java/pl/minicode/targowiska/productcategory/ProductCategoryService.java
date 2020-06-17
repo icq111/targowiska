@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service.impl;
+package pl.minicode.targowiska.productcategory;
 
 import java.util.List;
 
@@ -9,10 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import pl.minicode.targowiska.domain.ProductCategory;
-import pl.minicode.targowiska.repository.ProductCategoryRepository;
-import pl.minicode.targowiska.service.IProductCategoryService;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
 
 @Service
 public class ProductCategoryService implements IProductCategoryService {

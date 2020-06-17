@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service.impl;
+package pl.minicode.targowiska.news;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,12 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import pl.minicode.targowiska.domain.News;
-import pl.minicode.targowiska.domain.Offer;
-import pl.minicode.targowiska.repository.NewsRepository;
-import pl.minicode.targowiska.service.INewsService;
-import pl.minicode.targowiska.type.OfferType;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.offer.OfferType;
+import pl.minicode.targowiska.offer.internal.Offer;
 
 @Service
 public class NewsService implements INewsService {

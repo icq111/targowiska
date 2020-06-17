@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.rodo;
 
 import java.util.List;
 
@@ -10,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import pl.minicode.targowiska.domain.Rodo;
-import pl.minicode.targowiska.service.IRodoService;
 
 @Controller
 public class RodoController {

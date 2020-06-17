@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import pl.minicode.targowiska.domain.News;
-import pl.minicode.targowiska.domain.Product;
-import pl.minicode.targowiska.service.INewsService;
-import pl.minicode.targowiska.service.IProductService;
+import pl.minicode.targowiska.news.INewsService;
+import pl.minicode.targowiska.news.News;
+import pl.minicode.targowiska.product.IProductService;
+import pl.minicode.targowiska.product.Product;
 
 @Controller
 public class WelcomeController {

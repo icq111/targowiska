@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.repository;
+package pl.minicode.targowiska.offer.internal;
 
 import java.util.List;
 
@@ -7,9 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import pl.minicode.targowiska.domain.Offer;
-import pl.minicode.targowiska.type.OfferType;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.offer.OfferType;
 
 @Repository
 public interface OfferRepository extends PagingAndSortingRepository<Offer, Long> {

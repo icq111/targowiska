@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.product;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,16 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.minicode.targowiska.domain.Product;
-import pl.minicode.targowiska.domain.ProductCategory;
-import pl.minicode.targowiska.service.INotificationService;
-import pl.minicode.targowiska.service.IProductCategoryService;
-import pl.minicode.targowiska.service.IProductService;
+import pl.minicode.targowiska.common.INotificationService;
+import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.fileupload.CustomUtils;
+import pl.minicode.targowiska.gallery.ImageType;
+import pl.minicode.targowiska.productcategory.IProductCategoryService;
+import pl.minicode.targowiska.productcategory.ProductCategory;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
-import pl.minicode.targowiska.service.validator.ProductValidatorService;
-import pl.minicode.targowiska.type.ImageType;
-import pl.minicode.targowiska.utils.CustomUtils;
-import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
 public class ProductController {
@@ -100,7 +97,7 @@ public class ProductController {
 	public String getProductDetails(@PathVariable("id") Long id, Model model) {
 		Product product = productService.findById(id);
 		 model.addAttribute("product", product);
-		return "redirect:/admin/productpricelist";
+		return "admin-product-details";
 	}
 	
 	@GetMapping("/admin/productlist/delete/{id}")

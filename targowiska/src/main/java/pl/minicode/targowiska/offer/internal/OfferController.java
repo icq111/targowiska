@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.offer.internal;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pl.minicode.targowiska.domain.Offer;
-import pl.minicode.targowiska.service.impl.OfferService;
-import pl.minicode.targowiska.utils.PaginationUtils;
+import pl.minicode.targowiska.common.PaginationUtils;
 
 @Controller
 public class OfferController {

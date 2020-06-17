@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.type;
+package pl.minicode.targowiska.offer;
 
 public enum OfferType {
 

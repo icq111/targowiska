@@ -1,9 +1,8 @@
-package pl.minicode.targowiska.service;
+package pl.minicode.targowiska.fileupload;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.minicode.targowiska.domain.dto.StoredFileInfo;
-import pl.minicode.targowiska.type.ImageType;
+import pl.minicode.targowiska.gallery.ImageType;
 
 public interface IFileSystemStorageService {
 

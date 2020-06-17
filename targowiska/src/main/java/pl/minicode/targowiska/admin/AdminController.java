@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

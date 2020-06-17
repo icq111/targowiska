@@ -1,8 +1,6 @@
-package pl.minicode.targowiska.repository;
+package pl.minicode.targowiska.productprice;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import pl.minicode.targowiska.domain.ProductPriceHistory;
 
 public interface ProductPriceHistoryRepository extends PagingAndSortingRepository<ProductPriceHistory, Long> {
 

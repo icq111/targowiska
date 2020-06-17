@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service.impl;
+package pl.minicode.targowiska.product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,11 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import pl.minicode.targowiska.domain.Product;
-import pl.minicode.targowiska.domain.dto.ProductsDto;
-import pl.minicode.targowiska.repository.ProductRepository;
-import pl.minicode.targowiska.service.IProductService;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
 
 @Service
 public class ProductService implements IProductService {

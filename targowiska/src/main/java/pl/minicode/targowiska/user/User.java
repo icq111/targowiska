@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.domain;
+package pl.minicode.targowiska.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

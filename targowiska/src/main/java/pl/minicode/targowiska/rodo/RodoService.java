@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service.impl;
+package pl.minicode.targowiska.rodo;
 
 import java.util.List;
 
@@ -6,10 +6,6 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import pl.minicode.targowiska.domain.Rodo;
-import pl.minicode.targowiska.repository.RodoRepository;
-import pl.minicode.targowiska.service.IRodoService;
 
 @Service
 public class RodoService implements IRodoService {

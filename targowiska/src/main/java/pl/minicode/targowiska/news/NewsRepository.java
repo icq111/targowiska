@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.repository;
+package pl.minicode.targowiska.news;
 
 import java.util.List;
 
@@ -8,8 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import pl.minicode.targowiska.domain.News;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
 
 @Repository
 public interface NewsRepository extends PagingAndSortingRepository<News, Long>{

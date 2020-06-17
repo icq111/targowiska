@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.domain;
+package pl.minicode.targowiska.rodo;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.type;
+package pl.minicode.targowiska.common;
 
 import java.util.Arrays;
 import java.util.List;

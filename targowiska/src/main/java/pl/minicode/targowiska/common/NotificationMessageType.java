@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.type;
+package pl.minicode.targowiska.common;
 
 public enum NotificationMessageType {
 	NOTIF_INFO, NOTIF_ERROR;

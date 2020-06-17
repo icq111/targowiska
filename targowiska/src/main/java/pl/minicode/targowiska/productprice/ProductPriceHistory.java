@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.domain;
+package pl.minicode.targowiska.productprice;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import pl.minicode.targowiska.product.Product;
 
 @Entity
 public class ProductPriceHistory {

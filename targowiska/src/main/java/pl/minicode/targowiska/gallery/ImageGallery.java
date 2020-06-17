@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.domain;
+package pl.minicode.targowiska.gallery;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.NonNull;
 
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)

@@ -1,7 +1,5 @@
 package pl.minicode.targowiska.common;
 
-import pl.minicode.targowiska.type.NotificationMessageType;
-
 public class NotificationMessage {
 	
 	private NotificationMessageType type;

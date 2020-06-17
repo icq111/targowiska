@@ -1,10 +1,9 @@
-package pl.minicode.targowiska.service.validator;
+package pl.minicode.targowiska.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.minicode.targowiska.service.IProductCategoryService;
-import pl.minicode.targowiska.service.IProductService;
+import pl.minicode.targowiska.productcategory.IProductCategoryService;
 
 @Service
 public class ProductValidatorService {

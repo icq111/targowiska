@@ -1,6 +1,6 @@
-package pl.minicode.targowiska.service;
+package pl.minicode.targowiska.productcategory;
 
-import pl.minicode.targowiska.domain.ProductCategory;
+import pl.minicode.targowiska.common.IPageableCommonService;
 
 public interface IProductCategoryService extends IPageableCommonService<ProductCategory> {
 

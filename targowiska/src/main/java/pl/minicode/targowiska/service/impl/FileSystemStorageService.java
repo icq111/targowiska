@@ -18,10 +18,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.minicode.targowiska.domain.dto.StoredFileInfo;
-import pl.minicode.targowiska.service.IFileSystemStorageService;
-import pl.minicode.targowiska.type.ImageLayout;
-import pl.minicode.targowiska.type.ImageType;
+import pl.minicode.targowiska.fileupload.IFileSystemStorageService;
+import pl.minicode.targowiska.fileupload.StoredFileInfo;
+import pl.minicode.targowiska.gallery.ImageLayout;
+import pl.minicode.targowiska.gallery.ImageType;
 
 @Service
 public class FileSystemStorageService implements IFileSystemStorageService {

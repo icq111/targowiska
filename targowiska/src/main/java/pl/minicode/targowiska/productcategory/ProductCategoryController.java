@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.productcategory;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.minicode.targowiska.domain.Product;
-import pl.minicode.targowiska.domain.ProductCategory;
-import pl.minicode.targowiska.service.INotificationService;
+import pl.minicode.targowiska.common.INotificationService;
+import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.fileupload.CustomUtils;
+import pl.minicode.targowiska.gallery.ImageType;
+import pl.minicode.targowiska.product.Product;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
-import pl.minicode.targowiska.service.impl.ProductCategoryService;
-import pl.minicode.targowiska.type.ImageType;
-import pl.minicode.targowiska.utils.CustomUtils;
-import pl.minicode.targowiska.utils.PaginationUtils;
 
 @Controller
 public class ProductCategoryController {

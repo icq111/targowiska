@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.service.impl;
+package pl.minicode.targowiska.offer.internal;
 
 import java.util.Arrays;
 
@@ -10,10 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import pl.minicode.targowiska.domain.Offer;
-import pl.minicode.targowiska.repository.OfferRepository;
-import pl.minicode.targowiska.type.OfferType;
-import pl.minicode.targowiska.type.Status;
+import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.offer.OfferType;
 
 @Service
 public class OfferService {

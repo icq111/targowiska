@@ -1,4 +1,4 @@
-package pl.minicode.targowiska.controller;
+package pl.minicode.targowiska.productprice;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.ListUtils;
 
-import pl.minicode.targowiska.domain.Product;
-import pl.minicode.targowiska.domain.dto.ProductsDto;
-import pl.minicode.targowiska.service.IProductService;
-import pl.minicode.targowiska.service.validator.ProductValidatorService;
-import pl.minicode.targowiska.utils.PaginationUtils;
+import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.product.IProductService;
+import pl.minicode.targowiska.product.Product;
+import pl.minicode.targowiska.product.ProductValidatorService;
+import pl.minicode.targowiska.product.ProductsDto;
 
 @Controller
 public class ProductPriceController {

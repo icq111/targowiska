@@ -1,11 +1,7 @@
 package pl.minicode.targowiska.gallery;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,30 +38,29 @@ public class ImageGalleryController {
 		int pageSize = size.orElse(12);
 
 		Page<ImageGallery> imagesList = imageGalleryService.findAll(PageRequest.of(currentPage - 1, pageSize, Sort.by("height").descending().and(Sort.by("insertStamp")).descending()));
-		List<ImagesGalleryDto> imagesGalleryList = new ArrayList<>();
-		ImagesGalleryDto imagesGalleryDto =null;
+		ImagesGalleryDto imagesGalleryDto = ImagesGalleryDto.createImageGalleryDto(imagesList);
 		
-		final int chunkSize = 4;
-		final AtomicInteger counter = new AtomicInteger();
-
-		for (ImageGallery ig : imagesList.getContent()) {
-		    if (counter.getAndIncrement() % chunkSize == 0) {
-		    	imagesGalleryDto = new ImagesGalleryDto();
-				imagesGalleryList.add(imagesGalleryDto);
-		    }
-		    imagesGalleryList.get(imagesGalleryList.size() - 1).addImageGallery(ig);
-		}
+//		final int chunkSize = 4;
+//		final AtomicInteger counter = new AtomicInteger();
+//
+//		for (ImageGallery ig : imagesList.getContent()) {
+//		    if (counter.getAndIncrement() % chunkSize == 0) {
+//		    	imagesGalleryDto = new ImagesGalleryDto();
+//				imagesGalleryList.add(imagesGalleryDto);
+//		    }
+//		    imagesGalleryList.get(imagesGalleryList.size() - 1).addImageGallery(ig);
+//		}
 
 		
 		
-		model.addAttribute("imagesGalleryList", imagesGalleryList);	
-
-		int totalPages = imagesList.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-
+//		model.addAttribute("imagesGalleryList", imagesGalleryList);	
+//
+//		int totalPages = imagesList.getTotalPages();
+//		if (totalPages > 0) {
+//			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+//			model.addAttribute("pageNumbers", pageNumbers);
+//		}
+		model.addAttribute("imagesGalleryDto", imagesGalleryDto);
 		return "admin-image-gallery-list"; // view
 	}
 	

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head-data-fragment">
+    <title>W3.CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- menu dla zwykłego wyswietlania strony na górze strony -->
+    <div th:fragment="normal-screen-navbar-fragment" class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <div class="w3-content">
+      <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+        <i class="fa fa-bars"></i>
+      </a>
+      <a href="index.html" class="w3-bar-item w3-button w3-text-white">HOME</a>
+      <div class="w3-dropdown-hover w3-mobile">
+        <button class="w3-button w3-text-white">O NAS <i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+          <a href="oferta.html" class="w3-bar-item w3-button w3-mobile">OFERTA</a>
+          <a href="historia.html" class="w3-bar-item w3-button w3-mobile">HISTORIA</a>
+          <a href="regulamin.html" class="w3-bar-item w3-button w3-mobile">REGULAMIN</a>
+        </div>
+      </div>
+     
+      <a href="notowania-cen.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">NOTOWANIA</a>
+      <a href="cennik-oplat.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">OPŁATY</a>
+      
+      <a href="kontrahenci.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">KATALOG FIRM</a>
+      <a href="aktualnosci.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">AKTUALNOŚCI</a>
+      <a href="kontakt.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">KONTAKT</a>
+      <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"> -->
+        <!-- <i class="fa fa-search"></i> -->
+      <!-- </a> -->
+    </div>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="index.html" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
+    <a href="oferta.html" class="w3-bar-item w3-button" onclick="toggleFunction()">OFERTA</a>
+    <a href="historia.html" class="w3-bar-item w3-button" onclick="toggleFunction()">HISTORIA</a>
+
+    <a href="regulamin.html" class="w3-bar-item w3-button" onclick="toggleFunction()">REGULMIN</a>
+    <a href="notowania-cen.html" class="w3-bar-item w3-button" onclick="toggleFunction()">NOTOWANIA CEN</a>
+    <a href="cennik-oplat.html" class="w3-bar-item w3-button" onclick="toggleFunction()">CENNIK</a>
+    <a href="kontrahenci.html" class="w3-bar-item w3-button" onclick="toggleFunction()">KATALOG FIRM</a>
+    <a href="aktualnosci.html" class="w3-bar-item w3-button" onclick="toggleFunction()">AKTUALNOŚCI</a>
+    <a href="kontakt.html" class="w3-bar-item w3-button" onclick="toggleFunction()">KONTAKT</a>
+    <!-- <a href="#" class="w3-bar-item w3-button">SEARCH</a> -->
+  </div>
+
+    </div>
+
+    <!-- parallax podstron -->
+<div th:fragment="subpage-parallax(imageCssClassName, text, id)" class="w3-display-container" th:classappend="${imageCssClassName}" th:id="${id}">
+  <div class="w3-display-left" style="white-space:nowrap;">
+    <h3 class="w3-center subtitle w3-text-white"><b th:text="${text}">AKTUALNOŚCI</b></h3>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- pojedynczy item cennika -->
+    <div th:fragment="product-price-fragment(dbProductObject)" class="w3-quarter w3-container product-item">
+        <div class="w3-panel w3-border w3-light-gray w3-padding-64">
+            <div class="w3-container">
+                <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+                <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/product/'+ dbProductObject.imageName}}" class="w3-image w3-padding w3-margin-top w3-round-small item-image" alt="">
+            </div>
+        </div>
+        <div class="w3-container">
+            <h4 th:text="${dbProductObject.productName}">Nazwa</h4>
+            <span class="w3-text-green w3-margin-right"><b th:text="${dbProductObject.productPrice}">Cena zł</b><b>zł</b></span>
+            <span th:text="${dbProductObject.productPriceDifference}" /><span>% </span> <i class='fas fa-angle-up'></i>
+        </div>
+    </div>
+
+    <div th:fragment="news-item-fragment(dbNewsObject, objectIndex)" th:data-id="${objectIndex}" onclick="openNewsModal(this.getAttribute('data-id'))" class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
+        <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter w3-padding">
+            <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="admin">
+            <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="user">
+        </div>
+        <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird w3-margin">
+            <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
+            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+            <br>
+            <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+        </div>
+        <div th:unless="${dbNewsObject.imageName} != null" class="w3-margin">
+            <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
+            <span class="w3-left"><i class="fa fa-calendar"></i> Dodano: <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+            <br>
+            <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+        </div>
+    </div>
+
+    <div th:fragment="news-item-modal-fragment(dbNewsObject, objectIndex)" th:id="${objectIndex}" class="w3-modal">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-green">
+                <span th:data-id="${objectIndex}" onclick="document.getElementById(this.getAttribute('data-id')).style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2 th:text="${dbNewsObject.title}" class="w3-left">Modal Title</h2>
+            </header>
+            <div class="w3-padding-16 w3-container">
+                <div>
+                    <div th:if="${dbNewsObject.imageName} != null" class="w3-half">
+                        <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
+                        <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="">
+                    </div>
+                    <div th:if="${dbNewsObject.imageName} != null" class="w3-half">
+                        <span><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+                        <br>
+                        <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+                    </div>
+                    <div th:unless="${dbNewsObject.imageName} != null">
+                        <span><i class="fa fa-calendar"></i> Dodano : <span th:text="${#dates.format(dbNewsObject.insertStamp, 'dd-MM-yyyy')}"></span></span>
+                        <br>
+                        <span th:text="${dbNewsObject.shortDescription}">shortDescription</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="w3-container w3-margin">
+                <span th:utext="${dbNewsObject.longDescription}">longDescription </span>
+
+            </div>
+            <footer class="w3-container  w3-green">
+                <br>
+                <br>
+            </footer>
+        </div>
+    </div>
+    
+       	<!-- zdjecia w admin panel --> 
+   <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}">
+      <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+      <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+	<br>
+    </div>
+
+    <script th:fragment="js-script-fragment">
+        function openNewsModal(id) {
+            var elem = document.getElementById(id);
+            elem.style.display = 'block';
+        }
+
+        function myFunction(id, btnElement) {
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+                if (btnElement.classList.contains("w3-white")) {
+                    btnElement.classList.remove("w3-white");
+                    btnElement.className += " w3-green";
+                }
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+                if (btnElement.classList.contains("w3-green")) {
+                    btnElement.classList.remove("w3-green");
+                    btnElement.className += " w3-white";
+                }
+            }
+        }
+
+        //slideshow
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
+
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+
+        function myMap() {
+            myCenter = new google.maps.LatLng(50.681061, 21.758024);
+            var mapOptions = {
+                center: myCenter,
+                zoom: 17,
+                scrollwheel: false,
+                draggable: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+            });
+            marker.setMap(map);
+        }
+    </script>
+</body>
+
+</html>

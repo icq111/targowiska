@@ -42,7 +42,7 @@ public class ProductPriceController {
 
 		Page<Product> productPriceList = productService.findAll(PageRequest.of(currentPage - 1, pageSize));
 		if(!ListUtils.isEmpty(productPriceList.getContent())) {
-			priceListDate = productPriceList.getContent().iterator().next().getProductPriceUpdateStamp();
+			//priceListDate = productPriceList.getContent().iterator().next().getProductPriceUpdateStamp();
 		}
 		model.addAttribute("productPriceList", productPriceList);
 		model.addAttribute("priceListDate" , priceListDate);		
@@ -67,7 +67,7 @@ public class ProductPriceController {
 
 		if (!ListUtils.isEmpty(products)) {
 			for (Product product : products) {
-				product.setOldProductPrice(product.getProductPrice() == null ? BigDecimal.ZERO : product.getProductPrice());
+				//product.setOldProductPrice(product.getProductPrice() == null ? BigDecimal.ZERO : product.getProductPrice());
 				productsDto.addProduct(product);
 			}
 		}

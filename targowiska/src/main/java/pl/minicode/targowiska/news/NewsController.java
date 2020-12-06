@@ -38,34 +38,33 @@ public class NewsController {
     private INotificationService notifyService;
 	
 	
-	@GetMapping("/newslist")
+	@GetMapping("/aktualnosci")
 	public String showNewsList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<News> newsList = newsService.findAdminNews(PageRequest.of(currentPage - 1, pageSize));		
-		model.addAttribute("newsList", newsList);
-
-		int totalPages = newsList.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-		if(ListUtils.isEmpty(newsList.getContent())) {
+		Page<News> newsList = newsService.findActiveNews(PageRequest.of(currentPage - 1, pageSize));
+		if (ListUtils.isEmpty(newsList.getContent())) {
 			notifyService.addInfoMessage("No any news to show");
-			
 		}
-		return "news-list"; // view
+		NewsDto newsDto = NewsDto.createNewsDto(newsList);
+		model.addAttribute("newsDto", newsDto);
+
+		return "aktualnosci"; // view
 	}
 
+	
 	@GetMapping("/admin/newslist")
 	public String showAdminNewsList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
 
-		Page<News> newsList = newsService.findAdminNews(PageRequest.of(currentPage - 1, pageSize));		
+		Page<News> newsList = newsService.findActiveNews(PageRequest.of(currentPage - 1, pageSize));		
+		//List<NewsDto> newsDtoList = c
+		
+		
 		model.addAttribute("newsList", newsList);
 
 		int totalPages = newsList.getTotalPages();
@@ -79,6 +78,15 @@ public class NewsController {
 		}
 		return "admin-news-list"; // view
 	}
+	
+	@GetMapping("/aktualnosci-detale")
+	public String showSingleNews (Model model, @RequestParam("id") Optional<Integer> id) {
+
+		News news = newsService.findById(id.get().longValue());
+		model.addAttribute("news", news);
+		return "aktualnosci-detal"; // view
+	}
+	
 
 	@GetMapping("/admin/newslist/create")
 	public String showAddNewNewsForm(News news) {

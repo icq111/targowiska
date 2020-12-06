@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import pl.minicode.targowiska.common.Status;
-import pl.minicode.targowiska.offer.OfferType;
-import pl.minicode.targowiska.offer.internal.Offer;
 
 @Service
 public class NewsService implements INewsService {
@@ -62,7 +60,7 @@ public class NewsService implements INewsService {
 		return newsRepository.find4LastNews();
 	}
 	
-	public Page<News> findAdminNews(Pageable pageable) {
+	public Page<News> findActiveNews(Pageable pageable) {
 		int pageSize = pageable.getPageSize();
 		int currentPage = pageable.getPageNumber();
 

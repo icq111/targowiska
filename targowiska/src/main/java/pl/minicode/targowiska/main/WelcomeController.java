@@ -23,13 +23,13 @@ public class WelcomeController {
 	private INewsService newsService;
 	
 	@GetMapping("/")
-	public String showUsersListForm(Model model) {
+	public String showWelcomeSite(Model model) {
 		//List<Product> list = productService.find3RandomProductPrices();
 		Page<Product> productsList = productService.findAll(PageRequest.of(0, 4));
 		Page<News> newsList = newsService.findAll(PageRequest.of(0, 4, Sort.by("insertStamp").descending()));
 		
 		model.addAttribute("productsList", productsList);
 		model.addAttribute("newsList", newsList);
-		return "welcome"; // view
+		return "welcome2"; // view
 	}
 }

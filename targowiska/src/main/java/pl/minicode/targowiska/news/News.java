@@ -1,32 +1,19 @@
 package pl.minicode.targowiska.news;
 
-import java.util.Date;
+import java.io.File;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import pl.minicode.targowiska.common.Status;
+import pl.minicode.targowiska.entity.BasicEntity;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class News {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class News extends BasicEntity {
      
     @NotBlank(message = "Title is mandatory")
     private String title;
@@ -39,27 +26,8 @@ public class News {
     //@Lob 
     private String longDescription;
     
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date insertStamp;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updateStamp;
-    
     private String imageName;
     
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -84,21 +52,6 @@ public class News {
 		this.longDescription = longDescription;
 	}
 
-	public Date getInsertStamp() {
-		return insertStamp;
-	}
-
-	public void setInsertStamp(Date insertStamp) {
-		this.insertStamp = insertStamp;
-	}
-
-	public Date getUpdateStamp() {
-		return updateStamp;
-	}
-
-	public void setUpdateStamp(Date updateStamp) {
-		this.updateStamp = updateStamp;
-	}
 
 	public String getImageName() {
 		return imageName;
@@ -107,19 +60,17 @@ public class News {
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
+	
+	public String getImageURL() {
+		return File.separator + "news" + File.separator + getImageName();
 	}
 
 	@Override
 	public String toString() {
-		return "News [id=" + id + ", title=" + title + ", shortDescription=" + shortDescription + ", longDescription="
-				+ longDescription + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp + ", imageName="
-				+ imageName + ", status=" + status + "]";
+		String s = super.toString();
+		return s + " News [title=" + title + ", shortDescription=" + shortDescription + ", longDescription="
+				+ longDescription + ", imageName=" + imageName + "]";
 	}
+
+	
 }

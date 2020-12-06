@@ -1,35 +1,66 @@
 package pl.minicode.targowiska.gallery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import org.thymeleaf.util.ListUtils;
+import org.springframework.data.domain.Page;
 
 public class ImagesGalleryDto {
-	
-	private List<ImageGallery> imageGalleries;
-	
-	public void addImageGallery(ImageGallery ig) {
-		if(ListUtils.isEmpty(imageGalleries)) {
-			this.imageGalleries = new ArrayList<ImageGallery>();
+
+	private Page<ImageGallery> pageOfImages = Page.empty();
+	private List<List<ImageGallery>> listOfImageRows = Collections.emptyList();
+	private List<Integer> pageNumbers = Collections.emptyList();
+
+	public static ImagesGalleryDto createImageGalleryDto(Page<ImageGallery> listOfImages) {
+		return new ImagesGalleryDto(listOfImages);
+	}
+
+	public List<List<ImageGallery>> getImagesGrid() {
+		return listOfImageRows;
+	}
+
+	public List<Integer> pagesNumbers() {
+		int totalPages = pageOfImages.getTotalPages();
+		if (totalPages > 0) {
+			pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 		}
-		this.imageGalleries.add(ig);
+		return pageNumbers;
 	}
 	
-	public int getImageGaleriesSize() {
-		return getImageGalleries() != null ? getImageGalleries().size() : 0;
+	public Page<ImageGallery> imagesPerPages(){
+		return pageOfImages;
 	}
 
-	public List<ImageGallery> getImageGalleries() {
-		return imageGalleries;
+	private ImagesGalleryDto(Page<ImageGallery> listOfImages) {
+		if (!listOfImages.isEmpty()) {
+			this.pageOfImages = listOfImages;
+			this.listOfImageRows = new ArrayList<>();
+			this.listOfImageRows.add(new ArrayList<>());
+		}
+		devideImagedListToGrind();
 	}
 
-	public void setImageGalleries(List<ImageGallery> imageGalleries) {
-		this.imageGalleries = imageGalleries;
+	private void devideImagedListToGrind() {
+		AtomicInteger counter = new AtomicInteger();
+		final int chunkSize = 4;
+		for (ImageGallery image : getPureListOfImages()) {
+			List<ImageGallery> row = listOfImageRows.get(counter.intValue());
+			if (row.size() > 0 && row.size() % chunkSize == 0) {
+
+				listOfImageRows.add(new ArrayList<>());
+				counter.incrementAndGet();
+			}
+			listOfImageRows.get(counter.intValue()).add(image);
+
+		}
+
 	}
 
-	@Override
-	public String toString() {
-		return "ImagesGalleryDto [imageGalleries=" + imageGalleries + "]";
+	private List<ImageGallery> getPureListOfImages() {
+		return pageOfImages.getContent();
 	}
 }

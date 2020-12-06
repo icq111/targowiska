@@ -72,26 +72,13 @@ public class ProductService implements IProductService {
 		for (Product dbProduct : databaseProducts) {
 			if (idProductMap.containsKey(dbProduct.getId())) {
 				Product formUpdateProduct = idProductMap.get(dbProduct.getId());
-				updateSingleProductPrice(formUpdateProduct, dbProduct);
+				//updateSingleProductPrice(formUpdateProduct, dbProduct);
 			}
 		}
 
 	}
 
-	private void updateSingleProductPrice(Product formProduct, Product dbProduct) {
-		BigDecimal priceBeforeUpdate = dbProduct.getProductPrice() == null ? BigDecimal.ZERO : dbProduct.getProductPrice();
-		BigDecimal priceAfterUpdate = formProduct.getProductPrice() == null ? BigDecimal.ZERO : formProduct.getProductPrice();
-		dbProduct.setOldProductPrice(priceBeforeUpdate);
-		dbProduct.setProductPrice(priceAfterUpdate);
-		if(priceBeforeUpdate.compareTo(BigDecimal.ZERO) == 0) {
-			priceBeforeUpdate = BigDecimal.ONE;
-		}
-		BigDecimal pricesDifference = (ONE_HUNDRED.multiply(priceAfterUpdate)).divide(priceBeforeUpdate, 2, RoundingMode.HALF_UP);
-		pricesDifference = pricesDifference.subtract(ONE_HUNDRED);
-		dbProduct.setProductPriceDifference(pricesDifference);
 
-		update(dbProduct);
-	}
 
 	@Override
 	public List<Product> find3RandomProductPrices() {

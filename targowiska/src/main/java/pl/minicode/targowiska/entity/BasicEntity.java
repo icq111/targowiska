@@ -24,17 +24,14 @@ public class BasicEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date insertStamp;
     
-	@Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updateStamp;
     
-	@Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 

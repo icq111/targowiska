@@ -1,6 +1,5 @@
 package pl.minicode.targowiska.productprice;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,59 +25,48 @@ import pl.minicode.targowiska.product.ProductsDto;
 
 @Controller
 public class ProductPriceController {
+
+	@Autowired
+	private ProductPriceListViewService productPriceListViewService;
+
+	@Autowired
+	private ProductValidatorService productValidatorService;
 	
 	@Autowired
-	IProductService productService;
-	
-	@Autowired
-	ProductValidatorService productValidatorService;
+	private ProductPriceListService productPriceListService;
 
 	@GetMapping("/admin/productpricelist")
-	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size) {
-		Date priceListDate = new Date();
-		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
-		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
+	public String showProductListPageForm(Model model) {
 
-		Page<Product> productPriceList = productService.findAll(PageRequest.of(currentPage - 1, pageSize));
-		if(!ListUtils.isEmpty(productPriceList.getContent())) {
-			//priceListDate = productPriceList.getContent().iterator().next().getProductPriceUpdateStamp();
-		}
-		model.addAttribute("productPriceList", productPriceList);
-		model.addAttribute("priceListDate" , priceListDate);		
+		boolean isAddProductPricesAllowed = productValidatorService.isAddProductPricesAllowed();
 
-		int totalPages = productPriceList.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
+		List<ProductPriceListView> lastPriceList = productPriceListViewService.findLastPriceList();
+		ProductPriceListViewDto productPriceListViewDto = ProductPriceListViewDto
+				.createProductPriceListViewDto(lastPriceList, isAddProductPricesAllowed);
 
-		model.addAttribute("isAddProductPricesAllowed", productValidatorService.isAddProductPricesAllowed());
-		
+		model.addAttribute("productPriceListViewDto", productPriceListViewDto);
+
 		return "admin-product-price-list"; // view
 	}
-	
-	
-	
+
 	@GetMapping("/admin/productpricelist/create")
 	public String showCreateForm(Model model) {
-		ProductsDto productsDto = new ProductsDto();
-		List<Product> products = productService.findAll();
+		List<ProductPriceListView> lastPriceList = productPriceListViewService.findLastPriceList();
+		ProductPriceListViewDto productPriceListViewDto = ProductPriceListViewDto
+				.createProductPriceListViewDto(lastPriceList, true);
+		ProductPriceListCreationDto creationList = new ProductPriceListCreationDto();
 
-		if (!ListUtils.isEmpty(products)) {
-			for (Product product : products) {
-				//product.setOldProductPrice(product.getProductPrice() == null ? BigDecimal.ZERO : product.getProductPrice());
-				productsDto.addProduct(product);
-			}
+		for (ProductPriceListView item : productPriceListViewDto.getAll()) {
+			creationList.addPriceListItem(item);
 		}
 
-		model.addAttribute("productsDto", productsDto);
+		model.addAttribute("productPriceListViewDto", creationList);
 		return "admin-add-product-price";
 	}
-	
+
 	@PostMapping("/admin/productpricelist/save")
-	public String savePriceList(@ModelAttribute ProductsDto productsDto, Model model) {
-		productService.updateProductPrices(productsDto);
+	public String savePriceList(@ModelAttribute ProductPriceListCreationDto productsDto, Model model) {
+		productPriceListService.savePriceList(productsDto);
 		return "redirect:/admin/productpricelist";
-	}	
+	}
 }

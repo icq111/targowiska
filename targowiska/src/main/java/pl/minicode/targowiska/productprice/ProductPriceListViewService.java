@@ -56,4 +56,9 @@ public class ProductPriceListViewService implements IProductPriceListViewService
 		return new EntityNotFoundException("PRODUCT PRICE LIST VIEW: Not found entity with given id:" + id);
 	}
 
+	@Override
+	public List<ProductPriceListView> findLastPriceList() {
+		return productPriceListViewRepository.findLastPriceList();
+	}
+
 }

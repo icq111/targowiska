@@ -4,52 +4,81 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Subselect;
 import org.springframework.data.annotation.Immutable;
 
+import pl.minicode.targowiska.productcategory.ProductCategory;
+
 
 
 @Entity
 @Immutable
-@Subselect("select uuid() as id, hs.* from product_price_list_view hs")
+@Subselect("select hs.* from product_price_list_view hs")
 public class ProductPriceListView implements Serializable{
 
 	@Id
 	private String id;
-	private Long pricelistId;
-	private Long productCategoryId;
+	private Long priceListId;
+    @Enumerated(EnumType.STRING)
+	private ProductCategory productCategory;
 	private Long productId;
 	private String productName;
-	private String productCategoryName;
 	private BigDecimal productPrice;
 	private BigDecimal oldProductPrice;
 	private BigDecimal percentualPriceDifference;
-	public Long getPricelistId() {
-		return pricelistId;
+	public String getId() {
+		return id;
 	}
-	public Long getProductCategoryId() {
-		return productCategoryId;
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Long getPriceListId() {
+		return priceListId;
+	}
+	public void setPriceListId(Long priceListId) {
+		this.priceListId = priceListId;
+	}
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
 	}
 	public Long getProductId() {
 		return productId;
 	}
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 	public String getProductName() {
 		return productName;
 	}
-	public String getProductCategoryName() {
-		return productCategoryName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public BigDecimal getProductPrice() {
 		return productPrice;
 	}
+	public void setProductPrice(BigDecimal productPrice) {
+		this.productPrice = productPrice;
+	}
 	public BigDecimal getOldProductPrice() {
 		return oldProductPrice;
+	}
+	public void setOldProductPrice(BigDecimal oldProductPrice) {
+		this.oldProductPrice = oldProductPrice;
 	}
 	public BigDecimal getPercentualPriceDifference() {
 		return percentualPriceDifference;
 	}
+	public void setPercentualPriceDifference(BigDecimal percentualPriceDifference) {
+		this.percentualPriceDifference = percentualPriceDifference;
+	}
+
 	
 	
 }

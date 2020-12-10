@@ -11,17 +11,17 @@ public class ProductValidatorService {
 	@Autowired
 	IProductService productService;
 	
-	@Autowired 
-	IProductCategoryService productCategoryService;
+//	@Autowired 
+//	IProductCategoryService productCategoryService;
 	
 	public boolean isAddNewProductAllowed() {
-		boolean result = false;
+		boolean result = true;
 		//jesli sa juz produkty to wszystko ok
-		result = result && productService.countRows() > 0;
-		if(!result) {
-			//jesli nie ma produtow to aby dodac nowy musza byc kategorie
-			result = productCategoryService.countRows() > 0;
-		}
+		//result = result && productService.countRows() > 0;
+//		if(!result) {
+//			//jesli nie ma produtow to aby dodac nowy musza byc kategorie
+//			result = productCategoryService.countRows() > 0;
+//		}
 		
 		return result;
 	}

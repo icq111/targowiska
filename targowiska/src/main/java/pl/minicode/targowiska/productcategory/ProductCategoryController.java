@@ -24,58 +24,58 @@ import pl.minicode.targowiska.fileupload.CustomUtils;
 import pl.minicode.targowiska.gallery.ImageType;
 import pl.minicode.targowiska.product.Product;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
-
-@Controller
+//NOT USED TEMPORARY
+//@Controller
 public class ProductCategoryController {
 	
-	@Autowired
-	private ProductCategoryService productCategoryService;
-	
-	@Autowired
-	private FileSystemStorageService fileSystemStorageService;
-	
-	@Autowired
-    private INotificationService notifyService;
-
-	@GetMapping("/admin/productcategorylist")
-	public String showProductCategoryListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size) {
-		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
-		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
-
-		Page<ProductCategory> productCategoryList = productCategoryService.findAll(PageRequest.of(currentPage - 1, pageSize));
-
-		model.addAttribute("productCategoryList", productCategoryList);
-
-		int totalPages = productCategoryList.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-
-		return "admin-product-category-list"; // view
-	}
-	
-	@GetMapping("/admin/productcategorylist/newproductcategory")
-	public String showAddNewProductCategoryForm(ProductCategory productCategory) {
-		return "admin-add-product-category";
-	}
-
-	@PostMapping("/admin/productcategorylist/addproductcategory")
-	public String addProductCategory(@Valid ProductCategory productCategory, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
-		boolean doSaveFile = file.getSize() != 0;
-		
-		if (result.hasErrors()) {
-			return "admin-add-product-category";
-		}
-		
-		if(doSaveFile) {
-			String generatedFileName = CustomUtils.getGeneratedFileName(file);
-			productCategory.setImageName(generatedFileName);			
-			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
-		}
-
-		productCategoryService.save(productCategory);
-		return "redirect:/admin/productcategorylist";
-	}
+//	@Autowired
+//	private ProductCategoryService productCategoryService;
+//	
+//	@Autowired
+//	private FileSystemStorageService fileSystemStorageService;
+//	
+//	@Autowired
+//    private INotificationService notifyService;
+//
+//	@GetMapping("/admin/productcategorylist")
+//	public String showProductCategoryListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
+//			@RequestParam("size") Optional<Integer> size) {
+//		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
+//		int pageSize = size.orElse(PaginationUtils.PAGE_SIZE);
+//
+//		Page<ProductCategory> productCategoryList = productCategoryService.findAll(PageRequest.of(currentPage - 1, pageSize));
+//
+//		model.addAttribute("productCategoryList", productCategoryList);
+//
+//		int totalPages = productCategoryList.getTotalPages();
+//		if (totalPages > 0) {
+//			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+//			model.addAttribute("pageNumbers", pageNumbers);
+//		}
+//
+//		return "admin-product-category-list"; // view
+//	}
+//	
+//	@GetMapping("/admin/productcategorylist/newproductcategory")
+//	public String showAddNewProductCategoryForm(ProductCategory productCategory) {
+//		return "admin-add-product-category";
+//	}
+//
+//	@PostMapping("/admin/productcategorylist/addproductcategory")
+//	public String addProductCategory(@Valid ProductCategory productCategory, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
+//		boolean doSaveFile = file.getSize() != 0;
+//		
+//		if (result.hasErrors()) {
+//			return "admin-add-product-category";
+//		}
+//		
+//		if(doSaveFile) {
+//			String generatedFileName = CustomUtils.getGeneratedFileName(file);
+//			productCategory.setImageName(generatedFileName);			
+//			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
+//		}
+//
+//		productCategoryService.save(productCategory);
+//		return "redirect:/admin/productcategorylist";
+//	}
 }

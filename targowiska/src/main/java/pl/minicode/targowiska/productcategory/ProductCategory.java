@@ -1,125 +1,51 @@
 package pl.minicode.targowiska.productcategory;
 
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+public enum ProductCategory {
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+	LOCAL_FRUIT, LOCAL_VEGETABLE, FOREIGN_FRUIT, FOREIGN_VEGETABLE;
 
-import pl.minicode.targowiska.common.Status;
-import pl.minicode.targowiska.product.Product;
-
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-public class ProductCategory {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-	
-	private String categoryNumber;
-	
-	private String categoryName;
-	
-    @Enumerated(EnumType.STRING)
-    private Status status;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date insertStamp;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updateStamp;
-    
-    private String imageName;
-    
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "productCategory")
-	private List<Product> products;
-
-	public long getId() {
-		return id;
+	public static List<ProductCategory> getGuiValues() {
+		return Arrays.asList(LOCAL_FRUIT, LOCAL_VEGETABLE, FOREIGN_FRUIT, FOREIGN_VEGETABLE);
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public String toDisplay() {
+		String result = "";
+		switch (this) {
+		case LOCAL_FRUIT:
+			result = "Owoce krajowe";
+			break;
+		case FOREIGN_FRUIT:
+			result = "Owoce zagraniczne";
+			break;
+		case LOCAL_VEGETABLE:
+			result = "Warzywa krajowe";
+			break;
+		case FOREIGN_VEGETABLE:
+			result = "Warzywa zagraniczne";
+			break;
+		default:
+			break;
+		}
+		return result;
 	}
 
-	public String getCategoryNumber() {
-		return categoryNumber;
+	public boolean isLocalFruit() {
+		return this == LOCAL_FRUIT;
 	}
 
-	public void setCategoryNumber(String categoryNumber) {
-		this.categoryNumber = categoryNumber;
+	public boolean isForeignFruit() {
+		return this == FOREIGN_FRUIT;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public boolean isLocalVegetable() {
+		return this == LOCAL_VEGETABLE;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public boolean isForeignVegetable() {
+		return this == FOREIGN_VEGETABLE;
 	}
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Date getInsertStamp() {
-		return insertStamp;
-	}
-
-	public void setInsertStamp(Date insertStamp) {
-		this.insertStamp = insertStamp;
-	}
-
-	public Date getUpdateStamp() {
-		return updateStamp;
-	}
-
-	public void setUpdateStamp(Date updateStamp) {
-		this.updateStamp = updateStamp;
-	}
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductCategory [id=" + id + ", categoryNumber=" + categoryNumber + ", categoryName=" + categoryName
-				+ ", status=" + status + ", insertStamp=" + insertStamp + ", updateStamp=" + updateStamp
-				+ ", imageName=" + imageName + "]";
-	}
- 
 }

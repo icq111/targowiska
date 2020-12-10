@@ -31,11 +31,9 @@
             </select>
             </div>
              			<div class="w3-margin-bottom">
-            <label for="status">Kategoria</label>       
+            <label for="productCategory">Kategoria</label>       
                             <select class="w3-input w3-border" th:field="*{productCategory}" id="productCategory">
-                         <option th:each="productCategory : ${productCategories}"
-                            th:value="${productCategory.id}"
-                            th:utext="${productCategory.categoryName}"/>
+ <option th:each="productCategory : ${T(pl.minicode.targowiska.productcategory.ProductCategory).getGuiValues()}" th:value="${productCategory}" th:text="${productCategory.toDisplay()}"></option>
                   </select>
             
             

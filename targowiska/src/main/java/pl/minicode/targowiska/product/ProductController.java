@@ -25,6 +25,7 @@ import pl.minicode.targowiska.fileupload.CustomUtils;
 import pl.minicode.targowiska.gallery.ImageType;
 import pl.minicode.targowiska.productcategory.IProductCategoryService;
 import pl.minicode.targowiska.productcategory.ProductCategory;
+import pl.minicode.targowiska.productcategory.ProductCategoryOld;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 
 @Controller
@@ -33,8 +34,8 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 	
-	@Autowired
-	private IProductCategoryService productCategoryService;
+//	@Autowired
+//	private IProductCategoryService productCategoryService;
 	
 	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
@@ -69,7 +70,7 @@ public class ProductController {
 	@GetMapping("/admin/productlist/newproduct")
 	public String showAddNewProductForm(Model model, Product product) {
 		
-		List<ProductCategory> productCategories = productCategoryService.findAll();
+		List<ProductCategory> productCategories = ProductCategory.getGuiValues();
 		model.addAttribute("productCategories", productCategories);
 		return "admin-add-product";
 	}

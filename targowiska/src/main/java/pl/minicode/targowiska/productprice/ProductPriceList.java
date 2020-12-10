@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 
 import pl.minicode.targowiska.entity.BasicEntity;
 import pl.minicode.targowiska.product.Product;
-import pl.minicode.targowiska.productcategory.ProductCategory;
+import pl.minicode.targowiska.productcategory.ProductCategoryOld;
 
 @Entity
 public class ProductPriceList extends BasicEntity {
@@ -19,9 +19,6 @@ public class ProductPriceList extends BasicEntity {
     @OneToOne
     private Product product;
     
-    @OneToOne
-    private ProductCategory productCategory;
-
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -45,6 +42,13 @@ public class ProductPriceList extends BasicEntity {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-    
+
+	public boolean isValid() {
+		boolean result = this.getPrice() != null;
+		result = result && this.getPriceListId() != null;
+		result = result && this.getProduct() != null;
+		result = result && this.getStatus() != null;
+		return result;
+	}
+
 }

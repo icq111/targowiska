@@ -2,13 +2,17 @@ package pl.minicode.targowiska.productprice;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Subselect;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Immutable;
 
 import pl.minicode.targowiska.productcategory.ProductCategory;
@@ -30,6 +34,9 @@ public class ProductPriceListView implements Serializable{
 	private BigDecimal productPrice;
 	private BigDecimal oldProductPrice;
 	private BigDecimal percentualPriceDifference;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date priceListDate;
+    private String productStatus;
 	public String getId() {
 		return id;
 	}
@@ -78,7 +85,16 @@ public class ProductPriceListView implements Serializable{
 	public void setPercentualPriceDifference(BigDecimal percentualPriceDifference) {
 		this.percentualPriceDifference = percentualPriceDifference;
 	}
-
-	
-	
+	public Date getPriceListDate() {
+		return priceListDate;
+	}
+	public void setPriceListDate(Date priceListDate) {
+		this.priceListDate = priceListDate;
+	}
+	public String getProductStatus() {
+		return productStatus;
+	}
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
+	}
 }

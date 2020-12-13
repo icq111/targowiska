@@ -134,3 +134,9 @@ body, html {
 .table tr {
     border-bottom: 1px solid #ddd;
 }
+
+.set_selected{
+  opacity: 0.3;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 3px solid #0d6e00;
+}

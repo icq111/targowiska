@@ -17,7 +17,9 @@ p.id as product_id,
 p.product_name as product_name,
 ppl.price as product_price,
 oppl.price as old_product_price,
-((ppl.price * 100) / oppl.price) as percentual_price_difference
+(((ppl.price/oppl.price)*100)-100) as percentual_price_difference,
+ppl.insert_stamp as price_list_date,
+p.status as product_status
 from product p
 left outer join product_price_list ppl on p.id = ppl.product_id
-left outer join product_price_list oppl on p.id = ppl.product_id and ppl.price_list_id - 1 = oppl.price_list_id;
+left outer join product_price_list oppl on ppl.product_id = oppl.product_id and ppl.price_list_id = oppl.price_list_id +1 ;

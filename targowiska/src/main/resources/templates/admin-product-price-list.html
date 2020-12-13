@@ -46,26 +46,144 @@
               
               
                 </div>
-                    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                
+                
+                
+                
+                
+                
+                
+                <div class="w3-container">
+  <div class="w3-row">
+    <a href="javascript:void(0)" onclick="openCity(event, 'LOCAL_FRUIT');">
+      <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Owoce krajowe</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'FOREIGN_FRUIT');">
+      <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Owoce zagraniczne</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'LOCAL_VEGETABLES');">
+      <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Warzywa krajowe</div>
+    </a>
+        <a href="javascript:void(0)" onclick="openCity(event, 'FOREIGN_VEGETABLES');">
+      <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Warzywa zagraniczne</div>
+    </a>
+  </div>
+
+  <div id="LOCAL_FRUIT" class="w3-container city w3-padding-32" style="display:block">
+                        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
                         <thead>
                             <tr>
                                 <th> Towar</th>
                                 <th> Typ</th>
-                        
+                                 <th> Stara cena (zł)</th>
+                        <th> Aktualna cena (zł)</th>
                                 <th> Zmiana ceny (%)</th>
-                                <th> Aktualna cena (zł)</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${productPriceListViewDto.getLocalFruitsList()}">
                                 <td th:text="${product.productName}"></td>
                                 <td th:text="${product.getProductCategory().toDisplay()}"></td>
-                               
+                                <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
                                 <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
-                                <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
+                                
                             </tr>
                         </tbody>
                     </table>
+  </div>
+
+  <div id="FOREIGN_FRUIT" class="w3-container city  w3-padding-32" style="display:none">
+                            <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                        <thead>
+                            <tr>
+                                <th> Towar</th>
+                                <th> Typ</th>
+                                 <th> Stara cena (zł)</th>
+                        <th> Aktualna cena (zł)</th>
+                                <th> Zmiana ceny (%)</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productPriceListViewDto.getForeignFruitsList()}">
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+  </div>
+
+  <div id="LOCAL_VEGETABLES" class="w3-container city w3-padding-32" style="display:none">
+                                <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                        <thead>
+                            <tr>
+                                <th> Towar</th>
+                                <th> Typ</th>
+                                 <th> Stara cena (zł)</th>
+                        <th> Aktualna cena (zł)</th>
+                                <th> Zmiana ceny (%)</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productPriceListViewDto.getLocalVegetablesList()}">
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+  </div>
+  
+    <div id="FOREIGN_VEGETABLES" class="w3-container city  w3-padding-32" style="display:none">
+                                   <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                        <thead>
+                            <tr>
+                                <th> Towar</th>
+                                <th> Typ</th>
+                                 <th> Stara cena (zł)</th>
+                        <th> Aktualna cena (zł)</th>
+                                <th> Zmiana ceny (%)</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productPriceListViewDto.getForeignVegetablesList()}">
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+  </div>
+</div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+        
 
 
                 </div>
@@ -76,6 +194,21 @@
     </div>
 
     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-border-red";
+}
+</script>
 </body>
 
 </html>

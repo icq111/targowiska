@@ -3,13 +3,16 @@ package pl.minicode.targowiska.productprice;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.OneToOne;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import pl.minicode.targowiska.entity.BasicEntity;
 import pl.minicode.targowiska.product.Product;
-import pl.minicode.targowiska.productcategory.ProductCategoryOld;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class ProductPriceList extends BasicEntity {
 
 	private BigDecimal price;

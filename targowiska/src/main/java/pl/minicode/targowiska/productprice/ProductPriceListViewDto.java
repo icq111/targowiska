@@ -1,7 +1,10 @@
 package pl.minicode.targowiska.productprice;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.thymeleaf.util.ListUtils;
 
 public class ProductPriceListViewDto {
 
@@ -12,14 +15,24 @@ public class ProductPriceListViewDto {
 	
 	private boolean isAddProductPricesAllowed = false;
 	
+	private Date priceListDate;
+	
 	public ProductPriceListViewDto() {
 	}
 
 	private ProductPriceListViewDto(List<ProductPriceListView> priceList, boolean isAddProductPricesAllowed) {
 		sortByProductCategory(priceList);
+		setPriceListDate(priceList);
 		this.isAddProductPricesAllowed = isAddProductPricesAllowed;
 	}
 	
+	private void setPriceListDate(List<ProductPriceListView> priceList) {
+		if(!ListUtils.isEmpty(priceList)) {
+			this.priceListDate = priceList.get(0).getPriceListDate();
+		}
+		
+	}
+
 	public static ProductPriceListViewDto createProductPriceListViewDto(List<ProductPriceListView> priceList, boolean isAddProductPricesAllowed) {
 		return new ProductPriceListViewDto(priceList, isAddProductPricesAllowed);
 	}
@@ -30,6 +43,7 @@ public class ProductPriceListViewDto {
 			if(row.getProductCategory().isForeignFruit()) {foreignFruitsList.add(row);}
 			if(row.getProductCategory().isLocalVegetable()) {localVegetablesList.add(row);}
 			if(row.getProductCategory().isForeignVegetable()) {foreignVegetablesList.add(row);}
+			
 		}
 	}
 
@@ -61,6 +75,10 @@ public class ProductPriceListViewDto {
 
 	public boolean isAddProductPricesAllowed() {
 		return isAddProductPricesAllowed;
+	}
+
+	public Date getPriceListDate() {
+		return priceListDate;
 	}
 	
 }

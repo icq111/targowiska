@@ -1,5 +1,6 @@
 package pl.minicode.targowiska.productprice;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -57,8 +58,14 @@ public class ProductPriceListViewService implements IProductPriceListViewService
 	}
 
 	@Override
-	public List<ProductPriceListView> findLastPriceList() {
-		return productPriceListViewRepository.findLastPriceList();
+	public List<ProductPriceListView> findLastPriceListWhereStatusIn(List<String> statuses) {
+		return productPriceListViewRepository.findLastPriceListWhereStatusIn(statuses);
 	}
 
+	@Override
+	public List<ProductPriceListView> getByDate(Date date) {
+		return productPriceListViewRepository.getByDate(date);
+	}
+
+	
 }

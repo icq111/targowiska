@@ -86,7 +86,7 @@ public class ProductController {
 		if(doSaveFile) {
 			String generatedFileName = CustomUtils.getGeneratedFileName(file);
 			product.setImageName(generatedFileName);			
-			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
+			//fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
 		}
 
 		productService.save(product);

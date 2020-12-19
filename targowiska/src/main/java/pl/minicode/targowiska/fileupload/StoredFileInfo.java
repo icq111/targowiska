@@ -31,6 +31,18 @@ public class StoredFileInfo {
 	public String getFileName() {
 		return fileName;
 	}
+	
+	public String getFileExtension() {
+		return fileName.substring(fileName.lastIndexOf(".")+1);
+	}
+	
+	public String getCleanFileName() {
+		return fileName.substring(0, fileName.lastIndexOf("."));
+	}
+	
+	public String getMinFileName() {
+		return getCleanFileName() + "-min." + getFileExtension();
+	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;

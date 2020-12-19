@@ -80,13 +80,12 @@ public class ImageGalleryController {
 		
 		if (doSaveFile) {
 			for (MultipartFile f : files) {
-				String generatedFileName = CustomUtils.getGeneratedFileName(f);
-				imageGallery.setImageName(generatedFileName);
-				StoredFileInfo storedFileInfo = fileSystemStorageService.storeImage(f, generatedFileName, ImageType.GALLERY);
+				
+				StoredFileInfo storedFileInfo = fileSystemStorageService.storeImage(f, ImageType.GALLERY);
 
 				
 				ImageGallery gallery = new ImageGallery();
-				gallery.setImageName(generatedFileName);
+				gallery.setImageName(storedFileInfo.getFileName());
 				gallery.setStatus(Status.ACTIVE);
 				gallery.setHeight(storedFileInfo.getDimension().height);
 				gallery.setWidth(storedFileInfo.getDimension().width);

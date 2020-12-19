@@ -2,6 +2,8 @@ package pl.minicode.targowiska.service.impl;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,11 +15,14 @@ import java.nio.file.StandardCopyOption;
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import pl.minicode.targowiska.fileupload.CustomUtils;
 import pl.minicode.targowiska.fileupload.IFileSystemStorageService;
 import pl.minicode.targowiska.fileupload.StoredFileInfo;
 import pl.minicode.targowiska.gallery.ImageLayout;
@@ -41,7 +46,8 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 		}
 	}
 
-	public StoredFileInfo storeImage(MultipartFile file, String generatedFileName, ImageType imageType) {
+	public StoredFileInfo storeImage(MultipartFile file, ImageType imageType) {
+		String generatedFileName = CustomUtils.getGeneratedFileName(file);
 		StoredFileInfo storedFileInfo = null;
 		try {
 			if (file.isEmpty()) {
@@ -59,6 +65,17 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 				Files.createDirectories(location);
 				Files.copy(inputStream, location.resolve(generatedFileName), StandardCopyOption.REPLACE_EXISTING);
 				storedFileInfo = getSroredFileInfo(location, generatedFileName);
+				InputStream minimalizedImage = inputStream;
+				if(storedFileInfo.getImageLayout().isVertical()) {
+					minimalizedImage = cropFromImage(file, storedFileInfo);
+					minimalizedImage.close();
+				} else {
+					minimalizedImage = changeImageSize(file, storedFileInfo);					
+					minimalizedImage.close();
+				}
+				
+				Files.copy(minimalizedImage, location.resolve(storedFileInfo.getCleanFileName()+"-min."+storedFileInfo.getFileExtension()), StandardCopyOption.REPLACE_EXISTING);
+				inputStream.close();
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to store file " + generatedFileName, e);
@@ -66,6 +83,34 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 		return storedFileInfo;
 	}
 	
+	private InputStream changeImageSize(MultipartFile file, StoredFileInfo storedFileInfo) throws IOException {
+		BufferedImage imBuff = ImageIO.read(file.getInputStream());
+		Integer width = new Integer(applicationProperty.getProperty("dynamic.images.min.image.width"));
+		Integer height = new Integer(applicationProperty.getProperty("dynamic.images.min.image.height"));
+		
+		BufferedImage scalledImgBuff = Scalr.resize(imBuff, Mode.FIT_EXACT, width, height);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		ImageIO.write(scalledImgBuff, storedFileInfo.getFileExtension(), os);                          // Passing: ​(RenderedImage im, String formatName, OutputStream output)
+		os.close();
+		return new ByteArrayInputStream(os.toByteArray());
+	}
+	
+	private InputStream cropFromImage(MultipartFile file, StoredFileInfo storedFileInfo) throws IOException {
+		BufferedImage originalImgage = ImageIO.read(file.getInputStream());
+		Integer width = new Integer(applicationProperty.getProperty("dynamic.images.min.image.width"));
+		Integer height = new Integer(applicationProperty.getProperty("dynamic.images.min.image.height"));
+		int imgWidth = storedFileInfo.getDimension().width;
+		int imgHeight = storedFileInfo.getDimension().height;
+		double x_coordinate = (imgWidth / 2) - (width / 2);
+		double y_coordinate = (imgHeight / 2) - (height / 2);
+		BufferedImage subImgage = originalImgage.getSubimage((int) x_coordinate, (int) y_coordinate, width, height);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		ImageIO.write(subImgage, storedFileInfo.getFileExtension(), os); // Passing: ​(RenderedImage im, String
+																			// formatName, OutputStream output)
+		os.close();
+		return new ByteArrayInputStream(os.toByteArray());
+	}
+
 	private StoredFileInfo getSroredFileInfo(Path location, String fileName) throws IOException {
 		StoredFileInfo storedFileInfo = new StoredFileInfo();
 		File f = location.resolve(fileName).toFile();
@@ -94,6 +139,8 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 		case PRODUCT:
 			result = "product";
 			break;
+		case CONTRACTOR:
+			result = "contractor";
 		default:
 			break;
 		}

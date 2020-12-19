@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+</head>
+
+<body>    
+     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+     
+     	<!-- !PAGE CONTENT! -->
+	<div class="content-main-div w3-main">
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> GUI > Strona główna</b></h5>
+        </header>
+<hr>
+<div class="w3-container">
+<div class="w3-row">
+  <div class="w3-half">
+<h2><b>Sekcja slider</b></h2>
+  </div>
+  <div class="w3-half">
+  <button class="w3-btn w3-white w3-border w3-border-orange w3-right">EDYTUJ</button>
+  </div>
+</div>
+</div>  
+<div class="w3-container w3-padding-16">
+<div class="w3-row">
+  <div class="w3-half w3-container">
+<img src="/image/1.jpg" alt="Lights" class="w3-image">
+  <h4>AGRICOM</h4>
+  <p>Subtext !!!</p>
+  </div>
+  <div class="w3-half  w3-container">
+  <img src="/image/2.jpg" alt="Lights" class="w3-image">
+    <h4>AGRICOM</h4>
+  <p>Subtext !!!</p>
+  </div>
+</div>
+</div>  
+<div class="w3-container w3-padding-16">
+<div class="w3-row">
+  <div class="w3-half w3-container">
+<img src="/image/3.jpg" alt="Lights" class="w3-image">
+  <h4>AGRICOM</h4>
+  <p>Subtext !!!</p>
+  </div>
+  <div class="w3-half w3-container">
+  <img src="/image/4.jpg" alt="Lights" class="w3-image">
+  <h4>AGRICOM</h4>
+  <p>Subtext !!!</p>
+  </div>
+</div>
+</div>  
+
+
+
+<hr>
+        
+        
+        
+<div class="w3-container">
+<div class="w3-row">
+  <div class="w3-half">
+<h2>Sekcja opisowa 1</h2>
+  </div>
+  <div class="w3-half">
+  <button class="w3-btn w3-white w3-border w3-border-orange w3-right">EDYTUJ</button>
+  </div>
+</div>
+</div>        
+<div class="w3-container w3-padding-64" id="offer-main">
+  <div class="w3-row">
+    <div class="w3-half w3-container">
+      <h2><b>The Largest Crop Ever</b></h2>
+      <p><b>Smells racy free announcing than durable zesty smart exotic far feel. Screamin' affordable secret way absolutely.
+      </b></p>
+      <p>
+        Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime.
+
+        Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Evulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Odor to yummy high racy bonus soaking mouthwatering. First superior
+
+      </p>
+    </div>
+    <div class="w3-half">
+      <img src="/image/1.jpg" alt="Italian Trulli" class="w3-image">
+    </div>
+  </div>
+
+</div>
+<hr>
+            </div>
+
+     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+    
+</body>
+
+</html>

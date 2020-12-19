@@ -6,5 +6,5 @@ import pl.minicode.targowiska.gallery.ImageType;
 
 public interface IFileSystemStorageService {
 
-	StoredFileInfo storeImage(MultipartFile file, String generatedFileName, ImageType imageType);
+	StoredFileInfo storeImage(MultipartFile file, ImageType imageType);
 }

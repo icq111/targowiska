@@ -4,57 +4,54 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import pl.minicode.targowiska.common.Status;
+
 @Service
 public class ContractorService implements IContractorService {
 
-	public ContractorService() {
-		// TODO Auto-generated constructor stub
-	}
+	@Autowired
+	private ContractorRepository contractorRepository;
 
 	@Override
 	public Page<Contractor> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return contractorRepository.findAll(pageable);
 	}
 
 	@Override
 	public List<Contractor> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return contractorRepository.findAll();
 	}
 
 	@Override
 	public Contractor findById(Long id) throws EntityNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return contractorRepository.findById(id).orElseThrow(()-> throwEntityNotFoundException(id));
 	}
 
 	@Override
 	public Contractor save(Contractor entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return contractorRepository.save(entity);
 	}
 
 	@Override
 	public Contractor update(Contractor entity) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return save(entity);
 	}
 
 	@Override
 	public Contractor delete(Contractor entity) {
-		// TODO Auto-generated method stub
-		return null;
+		entity.setStatus(Status.DELETED);
+		return save(entity);
 	}
 
 	@Override
 	public EntityNotFoundException throwEntityNotFoundException(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return new EntityNotFoundException("CONTRACTOR: Not found entity with given id:" + id);
 	}
 
 }

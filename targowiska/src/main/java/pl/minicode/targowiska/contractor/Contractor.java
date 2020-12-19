@@ -15,7 +15,6 @@ public class Contractor extends BasicEntity{
     @NotBlank(message = "Name is mandatory")
 	private String name;
 	
-    @NotBlank(message = "Image is mandatory")
     private String imageLogoName;
 
 	public String getName() {

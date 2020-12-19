@@ -26,6 +26,6 @@ public class CustomUtils {
 	public static Optional<String> getExtensionByStringHandling(String filename) {
 	    return Optional.ofNullable(filename)
 	      .filter(f -> f.contains("."))
-	      .map(f -> f.substring(filename.lastIndexOf(".")));
+	      .map(f -> f.toLowerCase().substring(filename.lastIndexOf(".")));
 	}
 }

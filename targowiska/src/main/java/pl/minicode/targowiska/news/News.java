@@ -28,6 +28,8 @@ public class News extends BasicEntity {
     
     private String imageName;
     
+    private String minImageName;
+    
 	public String getTitle() {
 		return title;
 	}
@@ -61,6 +63,14 @@ public class News extends BasicEntity {
 		this.imageName = imageName;
 	}
 	
+	public String getMinImageName() {
+		return minImageName;
+	}
+
+	public void setMinImageName(String minImageName) {
+		this.minImageName = minImageName;
+	}
+
 	public String getImageURL() {
 		return File.separator + "news" + File.separator + getImageName();
 	}

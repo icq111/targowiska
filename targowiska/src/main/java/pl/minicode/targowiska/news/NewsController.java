@@ -22,6 +22,7 @@ import org.thymeleaf.util.ListUtils;
 import pl.minicode.targowiska.common.INotificationService;
 import pl.minicode.targowiska.common.PaginationUtils;
 import pl.minicode.targowiska.fileupload.CustomUtils;
+import pl.minicode.targowiska.fileupload.StoredFileInfo;
 import pl.minicode.targowiska.gallery.ImageType;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 
@@ -93,7 +94,7 @@ public class NewsController {
 		return "admin-add-news";
 	}
 
-	@PostMapping("/admin/newslist/addnews")
+	@PostMapping("/admin/newslist/save")
 	public String addNews(@Valid News news, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
 		boolean doSaveFile = file.getSize() != 0;
 		
@@ -102,9 +103,9 @@ public class NewsController {
 		}
 		
 		if(doSaveFile) {
-			String generatedFileName = CustomUtils.getGeneratedFileName(file);
-			news.setImageName(generatedFileName);			
-			fileSystemStorageService.storeImage(file, generatedFileName, ImageType.NEWS);			
+			StoredFileInfo info = fileSystemStorageService.storeImage(file, ImageType.NEWS);			
+			news.setImageName(info.getFileName());
+			news.setMinImageName(info.getMinFileName());
 		}
 		newsService.save(news);
 		return "redirect:/admin/newslist";

@@ -6,12 +6,15 @@ import java.util.List;
 
 import org.thymeleaf.util.ListUtils;
 
+import pl.minicode.targowiska.unit.Unit;
+
 public class ProductPriceListViewDto {
 
 	private List<ProductPriceListView> localFruitsList = new ArrayList<>();
 	private List<ProductPriceListView> foreignFruitsList = new ArrayList<>();
 	private List<ProductPriceListView> localVegetablesList = new ArrayList<>();
 	private List<ProductPriceListView> foreignVegetablesList = new ArrayList<>();
+
 	
 	private boolean isAddProductPricesAllowed = false;
 	
@@ -24,6 +27,7 @@ public class ProductPriceListViewDto {
 		sortByProductCategory(priceList);
 		setPriceListDate(priceList);
 		this.isAddProductPricesAllowed = isAddProductPricesAllowed;
+
 	}
 	
 	private void setPriceListDate(List<ProductPriceListView> priceList) {
@@ -62,7 +66,7 @@ public class ProductPriceListViewDto {
 	public List<ProductPriceListView> getForeignVegetablesList() {
 		return foreignVegetablesList;
 	}
-	
+
 	public List<ProductPriceListView> getAll(){
 		List<ProductPriceListView> result = new ArrayList<>();
 		result.addAll(localFruitsList);

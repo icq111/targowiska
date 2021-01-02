@@ -71,7 +71,7 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 					minimalizedImage.close();
 				} else {
 					minimalizedImage = changeImageSize(file, storedFileInfo);					
-					minimalizedImage.close();
+//					minimalizedImage.close();
 				}
 				
 				Files.copy(minimalizedImage, location.resolve(storedFileInfo.getCleanFileName()+"-min."+storedFileInfo.getFileExtension()), StandardCopyOption.REPLACE_EXISTING);
@@ -84,15 +84,18 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 	}
 	
 	private InputStream changeImageSize(MultipartFile file, StoredFileInfo storedFileInfo) throws IOException {
-		BufferedImage imBuff = ImageIO.read(file.getInputStream());
 		Integer width = new Integer(applicationProperty.getProperty("dynamic.images.min.image.width"));
 		Integer height = new Integer(applicationProperty.getProperty("dynamic.images.min.image.height"));
-		
+
+		BufferedImage imBuff = ImageIO.read(file.getInputStream());
+
 		BufferedImage scalledImgBuff = Scalr.resize(imBuff, Mode.FIT_EXACT, width, height);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		ImageIO.write(scalledImgBuff, storedFileInfo.getFileExtension(), os);                          // Passing: ​(RenderedImage im, String formatName, OutputStream output)
+		ImageIO.write(scalledImgBuff, storedFileInfo.getFileExtension(), os); // Passing: ​(RenderedImage im, String
+																				// formatName, OutputStream output)
 		os.close();
 		return new ByteArrayInputStream(os.toByteArray());
+
 	}
 	
 	private InputStream cropFromImage(MultipartFile file, StoredFileInfo storedFileInfo) throws IOException {
@@ -141,6 +144,8 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 			break;
 		case CONTRACTOR:
 			result = "contractor";
+		case MAIN_GUI:
+			result = "main_gui";
 		default:
 			break;
 		}

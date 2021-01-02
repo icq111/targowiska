@@ -30,8 +30,8 @@ public class NewsDto {
 		}
 		return pageNumbers;
 	}
-	
-	public Page<News> rowsPerPages(){
+
+	public Page<News> rowsPerPages() {
 		return newsPages;
 	}
 
@@ -55,7 +55,6 @@ public class NewsDto {
 				counter.incrementAndGet();
 			}
 			newsRows.get(counter.intValue()).add(image);
-
 		}
 
 	}

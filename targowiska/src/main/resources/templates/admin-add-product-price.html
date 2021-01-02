@@ -26,7 +26,8 @@
                             <th> Towar</th>
                             <th> Typ</th>
                             <th> Aktualna cena (zł)</th>
-                            <th> Nowa cena (zł)</th>
+                            <th> Nowa cena minimalna(zł)</th>
+                            <th> Nowa cena maksymalna(zł)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,14 +37,18 @@
                             <td th:text="${#numbers.formatDecimal({product.getOldProductPrice()},2, 2, 'COMMA')}"></td>
 
                             <td>
-                                <input th:name="|creationPriceList[${itemStat.index}]|" th:field="*{creationPriceList[__${itemStat.index}__].productPrice}"
-                                 th:value="${product.productPrice}" type="number" step="0.01" />
+                                <input th:name="|creationPriceList[${itemStat.index}]|" th:field="*{creationPriceList[__${itemStat.index}__].minimumProductPrice}"
+                                 th:value="${product.minimumProductPrice}" type="number" step="0.01" />
+                            </td>
+                                                        <td>
+                                <input th:name="|creationPriceList[${itemStat.index}]|" th:field="*{creationPriceList[__${itemStat.index}__].maximumProductPrice}"
+                                 th:value="${product.minimumProductPrice}" type="number" step="0.01" />
                             </td>
 							<input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].productId}" />
                             <input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].productName}" />
                             <input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].productCategory}" />
-                            <input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].oldProductPrice}" />
-
+                            <input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].minimumProductPrice}" />
+          					<input type="hidden" th:field="*{creationPriceList[__${itemStat.index}__].maximumProductPrice}" />
                         </tr>
                     </tbody>
                 </table>

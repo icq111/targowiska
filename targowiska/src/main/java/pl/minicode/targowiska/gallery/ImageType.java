@@ -2,7 +2,7 @@ package pl.minicode.targowiska.gallery;
 
 public enum ImageType {
 
-	NEWS, OFFER, GALLERY, PRODUCT, PRODUCT_CATEGORY, CONTRACTOR;
+	NEWS, OFFER, GALLERY, PRODUCT, PRODUCT_CATEGORY, CONTRACTOR, MAIN_GUI;
 
 	public boolean isNewsType() {
 		return this.equals(NEWS);
@@ -23,4 +23,10 @@ public enum ImageType {
 	public boolean isContractorType() {
 		return this.equals(CONTRACTOR);
 	}
+	
+	public boolean isMainGuiType() {
+		return this.equals(MAIN_GUI);
+	}
+	
+	
 }

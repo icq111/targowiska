@@ -24,41 +24,48 @@
 <h2><b>Sekcja slider</b></h2>
   </div>
   <div class="w3-half">
-  <button class="w3-btn w3-white w3-border w3-border-orange w3-right">EDYTUJ</button>
+
   </div>
 </div>
 </div>  
 <div class="w3-container w3-padding-16">
 <div class="w3-row">
-  <div class="w3-half w3-container">
-<img src="/image/1.jpg" alt="Lights" class="w3-image">
-  <h4>AGRICOM</h4>
-  <p>Subtext !!!</p>
+              <div th:each="slider : ${sliders}" class="w3-container">
+
+
+
+  <div class="w3-container">
+<img src="/image/1.jpg" alt="Lights" class="w3-image" th:src="@{${'../tmpFiles/main_gui/'+ slider.fileName}}">
+  <h4 th:text="${slider.bigText}">AGRICOM</h4>
+  <p th:text="${slider.smallText}">Subtext !!!</p>
+  <br>
+  <a th:href="@{'/admin/gui-content/edit-slide/{slideNo}'(slideNo = ${slider.id})}">
+    <button class="w3-btn w3-white w3-border w3-borde0r-orange">EDYTUJ</button>
+    </a>
+    
   </div>
-  <div class="w3-half  w3-container">
-  <img src="/image/2.jpg" alt="Lights" class="w3-image">
-    <h4>AGRICOM</h4>
-  <p>Subtext !!!</p>
-  </div>
+<hr>
+
+
+
+</div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
 </div>
 </div>  
-<div class="w3-container w3-padding-16">
-<div class="w3-row">
-  <div class="w3-half w3-container">
-<img src="/image/3.jpg" alt="Lights" class="w3-image">
-  <h4>AGRICOM</h4>
-  <p>Subtext !!!</p>
-  </div>
-  <div class="w3-half w3-container">
-  <img src="/image/4.jpg" alt="Lights" class="w3-image">
-  <h4>AGRICOM</h4>
-  <p>Subtext !!!</p>
-  </div>
-</div>
-</div>  
-
-
-
 <hr>
         
         

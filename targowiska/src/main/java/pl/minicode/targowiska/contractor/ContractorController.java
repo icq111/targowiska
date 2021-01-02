@@ -57,6 +57,14 @@ public class ContractorController {
 		return "kontrahenci"; // view
 	}
 	
+	@GetMapping("/kontrahenci-detale")
+	public String showSingleNews (Model model, @RequestParam("id") Optional<Integer> id) {
+
+		Contractor contractor = contractorService.findById(id.get().longValue());
+		model.addAttribute("contractor", contractor);
+		return "kontrahenci-detale"; // view
+	}
+	
 	@GetMapping("/admin/contractorslist")
 	public String showAdminNewsList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
@@ -95,7 +103,8 @@ public class ContractorController {
 		
 		if(doSaveFile) {
 			StoredFileInfo info = fileSystemStorageService.storeImage(file, ImageType.CONTRACTOR);			
-			contractor.setImageLogoName(info.getFileName());			
+			contractor.setImageLogoName(info.getFileName());	
+			contractor.setMinImageLogoName(info.getMinFileName());
 		}
 		contractorService.save(contractor);
 		return "redirect:/admin/contractorslist";

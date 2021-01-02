@@ -24,10 +24,10 @@ public class TargowiskaApplication extends SpringBootServletInitializer {
         return builder.sources(TargowiskaApplication.class);
     }
 
-	@Bean
-	  public MultipartConfigElement multipartConfigElement() {
-	      MultipartConfigFactory factory = new MultipartConfigFactory();	      
-	      factory.setMaxFileSize(DataSize.ofKilobytes(180));
-	      return factory.createMultipartConfig();
-	  }
+//	@Bean
+//	  public MultipartConfigElement multipartConfigElement() {
+//	      MultipartConfigFactory factory = new MultipartConfigFactory();	      
+//	      factory.setMaxFileSize(DataSize.ofKilobytes(180));
+//	      return factory.createMultipartConfig();
+//	  }
 }

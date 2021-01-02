@@ -1,5 +1,6 @@
 package pl.minicode.targowiska.contractor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,11 @@ public class Contractor extends BasicEntity{
 	private String name;
 	
     private String imageLogoName;
+    
+    private String minImageLogoName;
+    
+    @Column(columnDefinition="TEXT NOT NULL") 
+    private String description;
 
 	public String getName() {
 		return name;
@@ -31,6 +37,23 @@ public class Contractor extends BasicEntity{
 
 	public void setImageLogoName(String imageLogoName) {
 		this.imageLogoName = imageLogoName;
+	}
+	
+
+	public String getMinImageLogoName() {
+		return minImageLogoName;
+	}
+
+	public void setMinImageLogoName(String minImageLogoName) {
+		this.minImageLogoName = minImageLogoName;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

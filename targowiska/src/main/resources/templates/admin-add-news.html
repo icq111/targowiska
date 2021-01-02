@@ -28,22 +28,23 @@
                     <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/newslist/save}" th:object="${news}" method="post">
                         <label for="name">Title</label>
                         <input class="w3-input w3-border" type="text"th:field="*{title}" id="title" placeholder="Title">
-                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  th:class="error-text"></span>
                         <br>
                         <label for="email">Short desc</label>
                         <input class="w3-input w3-border" type="text" th:field="*{shortDescription}" id="shortDescription" placeholder="Short description">
-                        <span th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"></span>
+                        <span th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}" th:class="error-text"></span>
                         <br>
                             <label for="longDescription">Description</label>
                         <div class="w3-white">
 
                             <textarea class="w3-input w3-border w3-white" th:field="*{longDescription}" id="longDescription" rows="6" placeholder="Description" autocomplete="off"></textarea>
                         </div>
-                            <span th:if="${#fields.hasErrors('longDescription')}" th:errors="*{longDescription}"></span>
+                            <span th:if="${#fields.hasErrors('longDescription')}" th:errors="*{longDescription}" th:class="error-text"></span>
                             <br>
 						<label for="image">Image</label>
  						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
  						<p th:text="${file_upload_error}"></p>
+ 						           <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" th:class="error-text">Name Error</span>
 		<div>
             <label for="status">Status</label>
             <select class="w3-input w3-border" th:field="*{status}" id="status">

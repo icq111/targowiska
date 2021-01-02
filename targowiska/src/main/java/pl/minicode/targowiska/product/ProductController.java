@@ -22,11 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.minicode.targowiska.common.INotificationService;
 import pl.minicode.targowiska.common.PaginationUtils;
 import pl.minicode.targowiska.fileupload.CustomUtils;
-import pl.minicode.targowiska.gallery.ImageType;
-import pl.minicode.targowiska.productcategory.IProductCategoryService;
 import pl.minicode.targowiska.productcategory.ProductCategory;
-import pl.minicode.targowiska.productcategory.ProductCategoryOld;
-import pl.minicode.targowiska.service.impl.FileSystemStorageService;
+import pl.minicode.targowiska.unit.IUnitService;
+import pl.minicode.targowiska.unit.Unit;
 
 @Controller
 public class ProductController {
@@ -34,17 +32,14 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 	
-//	@Autowired
-//	private IProductCategoryService productCategoryService;
-	
-	@Autowired
-	private FileSystemStorageService fileSystemStorageService;
-	
 	@Autowired
     private INotificationService notifyService;
 	
 	@Autowired
 	private ProductValidatorService validator;
+	
+	@Autowired
+	private IUnitService unitService;
 
 	@GetMapping("/admin/productlist")
 	public String showProductListPageForm(Model model, @RequestParam("page") Optional<Integer> page,
@@ -70,8 +65,12 @@ public class ProductController {
 	@GetMapping("/admin/productlist/newproduct")
 	public String showAddNewProductForm(Model model, Product product) {
 		
+		
+		
 		List<ProductCategory> productCategories = ProductCategory.getGuiValues();
+		List<Unit> units = unitService.findAll();
 		model.addAttribute("productCategories", productCategories);
+		model.addAttribute("units", units);
 		return "admin-add-product";
 	}
 

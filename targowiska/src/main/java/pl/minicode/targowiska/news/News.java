@@ -1,13 +1,16 @@
 package pl.minicode.targowiska.news;
 
+
 import java.io.File;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.entity.BasicEntity;
 
@@ -29,6 +32,9 @@ public class News extends BasicEntity {
     private String imageName;
     
     private String minImageName;
+    
+    @Transient
+    private MultipartFile file;
     
 	public String getTitle() {
 		return title;
@@ -73,6 +79,14 @@ public class News extends BasicEntity {
 
 	public String getImageURL() {
 		return File.separator + "news" + File.separator + getImageName();
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
 	@Override

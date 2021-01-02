@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import pl.minicode.targowiska.entity.BasicEntity;
 import pl.minicode.targowiska.productcategory.ProductCategory;
+import pl.minicode.targowiska.unit.Unit;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -26,8 +28,8 @@ public class Product extends BasicEntity {
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
     
-//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
-//	private List<ProductPriceHistory> productPriceHistories;
+    @OneToOne
+    private Unit unit;
 
 	public String getProductName() {
 		return productName;
@@ -52,4 +54,13 @@ public class Product extends BasicEntity {
 	public void setProductCategory(ProductCategory productCategory) {
 		this.productCategory = productCategory;
 	}
+
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
 }

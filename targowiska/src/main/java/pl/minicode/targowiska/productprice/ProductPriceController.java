@@ -18,6 +18,7 @@ import pl.minicode.targowiska.common.Status;
 import pl.minicode.targowiska.common.date.DateUtils;
 import pl.minicode.targowiska.common.date.StringDateValidator;
 import pl.minicode.targowiska.product.ProductValidatorService;
+import pl.minicode.targowiska.unit.IUnitService;
 
 @Controller
 public class ProductPriceController {
@@ -75,6 +76,7 @@ public class ProductPriceController {
 	public String showCreateForm(Model model) {
 		List<ProductPriceListView> lastPriceList = productPriceListViewService
 				.findLastPriceListWhereStatusIn(Arrays.asList(Status.ACTIVE.toString(), Status.INACTIVE.toString()));
+		
 		ProductPriceListViewDto productPriceListViewDto = ProductPriceListViewDto
 				.createProductPriceListViewDto(lastPriceList, true);
 		ProductPriceListCreationDto creationList = new ProductPriceListCreationDto();

@@ -115,19 +115,19 @@
                         <thead>
                             <tr>
                                 <th> Towar</th>
-                                <th> Typ</th>
+                                <th> Jednostka</th>
 
-                        <th> Aktualna cena (zł)</th>
-                                <th> Zmiana ceny (%)</th>
+                        <th> Minimalna cena (zł)</th>
+                                <th>Maksymalna cena (zł)</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${productPriceListViewDto.getLocalFruitsList()}">
                                 <td th:text="${product.productName}"></td>
-                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
-                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
-                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${product.getUnit()}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getMinimumProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getMaximumProductPrice()},2, 2, 'COMMA')}"></td>
                                 
                             </tr>
                         </tbody>
@@ -140,19 +140,19 @@
                         <thead>
                             <tr>
                                 <th> Towar</th>
-                                <th> Typ</th>
-                        <th> Aktualna cena (zł)</th>
-                                <th> Zmiana ceny (%)</th>
+                                <th>Jednostka</th>
+                        <th> Minimalna cena (zł)</th>
+                                <th>Maksymalna cena (zł)</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${productPriceListViewDto.getForeignFruitsList()}">
                                 <td th:text="${product.productName}"></td>
-                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
-                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
-                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
-                                
+                                 <td th:text="${product.getUnit()}"></td>
+                               <td th:text="${#numbers.formatDecimal({product.getMinimumProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getMaximumProductPrice()},2, 2, 'COMMA')}"></td>
+                            
                             </tr>
                         </tbody>
                     </table> 
@@ -164,21 +164,21 @@
                         <thead>
                             <tr>
                                 <th> Towar</th>
-                                <th> Typ</th>
+                                <th>Jednostka</th>
 
-                        <th> Aktualna cena (zł)</th>
-                                <th> Zmiana ceny (%)</th>
+                        <th> Minimalna cena (zł)</th>
+                                <th>Maksymalna cena (zł)</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${productPriceListViewDto.getLocalVegetablesList()}">
                                 <td th:text="${product.productName}"></td>
-                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
+                           <td th:text="${product.getUnit()}"></td>
 
-                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
-                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
-                                
+                                   <td th:text="${#numbers.formatDecimal({product.getMinimumProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getMaximumProductPrice()},2, 2, 'COMMA')}"></td>
+                      
                             </tr>
                         </tbody>
                     </table>
@@ -192,20 +192,19 @@
                         <thead>
                             <tr>
                                 <th> Towar</th>
-                                <th> Typ</th>
-                        <th> Aktualna cena (zł)</th>
-                                <th> Zmiana ceny (%)</th>
+                                <th>Jednostka</th>
+                        <th> Minimalna cena (zł)</th>
+                                <th>Maksymalna cena (zł)</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${productPriceListViewDto.getForeignVegetablesList()}">
-                                <td th:text="${product.productName}"></td>
-                                <td th:text="${product.getProductCategory().toDisplay()}"></td>
+                           <td th:text="${product.getUnit()}"></td>
    
-                               <td th:text="${#numbers.formatDecimal({product.getProductPrice()},2, 2, 'COMMA')}"></td>
-                                <td th:text="${#numbers.formatDecimal({product.getPercentualPriceDifference()},2, 2, 'COMMA')}"></td>
-                                
+                               <td th:text="${#numbers.formatDecimal({product.getMinimumProductPrice()},2, 2, 'COMMA')}"></td>
+                                <td th:text="${#numbers.formatDecimal({product.getMaximumProductPrice()},2, 2, 'COMMA')}"></td>
+                          
                             </tr>
                         </tbody>
                     </table>

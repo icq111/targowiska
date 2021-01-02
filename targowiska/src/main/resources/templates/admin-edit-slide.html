@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+</head>
+
+<body>    
+     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+     
+     	<!-- !PAGE CONTENT! -->
+	<div class="content-main-div w3-main">
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> GUI > Slider > Edycja</b></h5>
+        </header>
+                <div class="w3-padding">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{'/admin/gui-content/edit-slide/{slideNo}'(slideNo = ${slider.id})}" th:object="${slider}" method="post">
+                       
+                        <label for="name">Big text</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{bigText}" id="bigText" >
+                        <span th:if="${#fields.hasErrors('bigText')}" th:errors="*{bigText}"></span>
+                        
+                                                <label for="name">Small text</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{smallText}" id="smallText">
+                        <span th:if="${#fields.hasErrors('smallText')}" th:errors="*{smallText}"></span>
+    
+    
+    <label for="image">Image</label>
+ 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
+ 						<p th:text="${file_upload_error}"></p>
+ 						           <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" th:class="error-text">Name Error</span>
+    
+<input type="hidden" th:field="*{fileName}" id="fileName" >
+
+                        <input class="w3-btn w3-green w3-margin-top" type="submit" value="Zapisz">
+                    </form>
+                </div>                  
+            </div>
+
+     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+    
+</body>
+
+</html>

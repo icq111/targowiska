@@ -24,7 +24,14 @@
                         <label for="name">Name</label>
                         <input class="w3-input w3-border" type="text"th:field="*{name}" id="name" placeholder="Name">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                        <br>
+                                                <br>
+                            <label for="description">Description</label>
+                        <div class="w3-white">
+
+                            <textarea class="w3-input w3-border w3-white" th:field="*{description}" id="description" rows="6" placeholder="Description" autocomplete="off"></textarea>
+                        </div>
+                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                            <br>
     
 						<label for="image">Image</label>
  						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
@@ -43,7 +50,19 @@
 
 
 
-
+<script>
+$('#description').summernote({
+    height: 320,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture']]
+    ]
+  });
+</script>
      <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
     
 </body>

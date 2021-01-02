@@ -24,6 +24,17 @@
                         <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
                         
             <br>
+             			<div class="w3-margin-bottom">
+            <label for="unit">Jednostka</label>
+            <select class="w3-input w3-border" th:field="*{unit}" id="unit">
+                <option th:each="unit : ${units}" th:value="${unit.id}" th:text="${unit.name + ' [' + unit.shortName + ']'} "></option>
+            </select>
+            </div>
+            
+            
+            
+            
+            
  			<div class="w3-margin-bottom">
             <label for="status">Status</label>
             <select class="w3-input w3-border" th:field="*{status}" id="status">

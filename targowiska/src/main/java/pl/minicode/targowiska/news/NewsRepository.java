@@ -13,7 +13,7 @@ import pl.minicode.targowiska.common.Status;
 @Repository
 public interface NewsRepository extends PagingAndSortingRepository<News, Long>{
 	
-	@Query(nativeQuery= true, value ="select * from news n order by n.insertStamp limit 4 ")
+	@Query(nativeQuery= true, value ="select * from news n order by n.insert_stamp limit 4 ")
 	public List<News> find4LastNews();
 	
 	Page<News> findByStatus(Pageable pageable, Status status);

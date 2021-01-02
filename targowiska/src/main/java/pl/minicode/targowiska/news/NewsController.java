@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.ListUtils;
 
 import pl.minicode.targowiska.common.INotificationService;
+import pl.minicode.targowiska.common.ImageProperties;
 import pl.minicode.targowiska.common.PaginationUtils;
+import pl.minicode.targowiska.common.validation.ImageCustomValidator;
 import pl.minicode.targowiska.fileupload.CustomUtils;
 import pl.minicode.targowiska.fileupload.StoredFileInfo;
 import pl.minicode.targowiska.gallery.ImageType;
@@ -37,6 +39,9 @@ public class NewsController {
 	
 	@Autowired
     private INotificationService notifyService;
+	
+	@Autowired
+	private ImageCustomValidator validator;
 	
 	
 	@GetMapping("/aktualnosci")
@@ -97,10 +102,13 @@ public class NewsController {
 	@PostMapping("/admin/newslist/save")
 	public String addNews(@Valid News news, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
 		boolean doSaveFile = file.getSize() != 0;
-		
+		validator.validate(file, result);
 		if (result.hasErrors()) {
 			return "admin-add-news";
 		}
+		
+
+		
 		
 		if(doSaveFile) {
 			StoredFileInfo info = fileSystemStorageService.storeImage(file, ImageType.NEWS);			

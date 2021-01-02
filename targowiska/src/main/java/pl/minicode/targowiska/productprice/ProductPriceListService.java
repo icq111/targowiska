@@ -84,7 +84,8 @@ public class ProductPriceListService implements IProductPriceListService {
     	priceList.setStatus(Status.ACTIVE);
     	priceList.setProduct(product.get());
     	priceList.setPriceListId(priceListId);
-    	priceList.setPrice(listView.getProductPrice());
+    	priceList.setMinimumPrice(listView.getMinimumProductPrice());
+    	priceList.setMaximumPrice(listView.getMaximumProductPrice());
     	return priceList;
     }
 }

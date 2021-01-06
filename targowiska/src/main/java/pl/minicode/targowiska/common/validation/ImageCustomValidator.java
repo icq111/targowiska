@@ -39,8 +39,8 @@ public class ImageCustomValidator implements Validator {
 		try {
 			File file = convert(this.file);
 			BufferedImage bimg = ImageIO.read(file);
-			boolean isDimensionCorrect = bimg.getWidth() < this.properties.getMinimumWidth();
-			isDimensionCorrect = isDimensionCorrect && bimg.getHeight() < this.properties.getMinimumHeight();
+			boolean isDimensionCorrect = bimg.getWidth() > this.properties.getMinimumWidth();
+			isDimensionCorrect = isDimensionCorrect && bimg.getHeight() > this.properties.getMinimumHeight();
 			
 			if(! isDimensionCorrect) {
 				errors.rejectValue("file", "upload.error.wrong.file.dimensions");

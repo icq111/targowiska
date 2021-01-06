@@ -16,7 +16,15 @@ public class ImagesGalleryDto {
 	private List<Integer> pageNumbers = Collections.emptyList();
 
 	public static ImagesGalleryDto createImageGalleryDto(Page<ImageGallery> listOfImages) {
-		return new ImagesGalleryDto(listOfImages);
+		ImagesGalleryDto dto = new ImagesGalleryDto(listOfImages);
+		dto.devideImagedListToGrind();
+		return dto;
+	}
+
+	public static ImagesGalleryDto createImageGalleryDtoForMainPage(Page<ImageGallery> listOfImages) {
+		ImagesGalleryDto dto = new ImagesGalleryDto(listOfImages);
+		dto.devideForMainPage();
+		return dto;
 	}
 
 	public List<List<ImageGallery>> getImagesGrid() {
@@ -30,8 +38,8 @@ public class ImagesGalleryDto {
 		}
 		return pageNumbers;
 	}
-	
-	public Page<ImageGallery> imagesPerPages(){
+
+	public Page<ImageGallery> imagesPerPages() {
 		return pageOfImages;
 	}
 
@@ -41,7 +49,6 @@ public class ImagesGalleryDto {
 			this.listOfImageRows = new ArrayList<>();
 			this.listOfImageRows.add(new ArrayList<>());
 		}
-		devideImagedListToGrind();
 	}
 
 	private void devideImagedListToGrind() {
@@ -58,6 +65,26 @@ public class ImagesGalleryDto {
 
 		}
 
+	}
+
+	private void devideForMainPage() {
+		if (getPureListOfImages().size() == 7) {
+
+			AtomicInteger counter = new AtomicInteger();
+			int chunkSize = 3;
+			for (ImageGallery image : getPureListOfImages()) {
+				List<ImageGallery> row = listOfImageRows.get(counter.intValue());
+				if (row.size() > 0 && row.size() % chunkSize == 0) {
+
+					listOfImageRows.add(new ArrayList<>());
+					counter.incrementAndGet();
+					chunkSize = 4;
+				}
+				listOfImageRows.get(counter.intValue()).add(image);
+
+			}
+
+		}
 	}
 
 	private List<ImageGallery> getPureListOfImages() {

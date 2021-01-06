@@ -48,19 +48,23 @@
             <h5>Dashboard</h5>
         </div>
         <div class="w3-bar-block">
-            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>  
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/panel') ? 'w3-blue':''}" th:href="@{'/admin/panel'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
+            <hr>
+            
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/newslist') ? 'w3-blue':''}" th:href="@{'/admin/newslist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-id-card fa-fw"></i>  Aktualności</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/cennik-oplaty') ? 'w3-blue':''}" th:href="@{'/admin/cennik-oplaty'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cloud-download fa-fw"></i>  Cennik-opłaty</a>
             <!--<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/externalofferslist') ? 'w3-blue':''}" th:href="@{'/admin/externalofferslist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cloud-upload fa-fw"></i>  Ogłoszenia zewnętrzne</a>
-            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/employee') ? 'w3-blue':''}" th:href="@{'/admin/employee'}" class="w3-bar-item w3-button w3-padding"></i>  Pracownicy</a> 
-            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productcategorylist') ? 'w3-blue':''}" th:href="@{'/admin/productcategorylist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Kategorie towarów</a> -->
-            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" th:href="@{'/admin/productlist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Towary</a>
-            
-            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" th:href="@{'/admin/productpricelist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-euro fa-fw"></i>  Cennik</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/employee') ? 'w3-blue':''}" th:href="@{'/admin/employee'}" class="w3-bar-item w3-button w3-padding"></i>  Pracownicy</a> -->
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/contractorslist') ? 'w3-blue':''}" th:href="@{'/admin/contractorslist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Kontrahenci</a> 
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productlist') ? 'w3-blue':''}" th:href="@{'/admin/productlist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-archive fa-fw"></i>  Produkty</a>            
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/productpricelist') ? 'w3-blue':''}" th:href="@{'/admin/productpricelist'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-euro fa-fw"></i>  Cennik - produkty</a>
+            <hr>
+                          <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/gui-content') ? 'w3-blue':''}" th:href="@{'/admin/gui-content'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Strona główna</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/address') ? 'w3-blue':''}" th:href="@{'/admin/address'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Kontakt</a>
             <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/gallery') ? 'w3-blue':''}" th:href="@{'/admin/gallery'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Galeria</a>
 			<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/rodo') ? 'w3-blue':''}" th:href="@{'/admin/rodo'}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-camera fa-fw"></i>  Rodo</a>
-
+			<hr>
             <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Wyloguj</a>
             <br>
             <br>

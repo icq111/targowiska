@@ -52,7 +52,7 @@ public class NewsController {
 
 		Page<News> newsList = newsService.findActiveNews(PageRequest.of(currentPage - 1, pageSize));
 		if (ListUtils.isEmpty(newsList.getContent())) {
-			notifyService.addInfoMessage("No any news to show");
+			notifyService.addInfoMessage("Brak aktualności do wyświetlenia. Dodaj nowe aktualności");
 		}
 		NewsDto newsDto = NewsDto.createNewsDto(newsList);
 		model.addAttribute("newsDto", newsDto);
@@ -79,7 +79,7 @@ public class NewsController {
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		if(ListUtils.isEmpty(newsList.getContent())) {
-			notifyService.addInfoMessage("No any news to show");
+			notifyService.addInfoMessage("Brak aktualności do wyświetlenia. Dodaj nowe aktualności");
 			
 		}
 		return "admin-news-list"; // view
@@ -100,18 +100,19 @@ public class NewsController {
 	}
 
 	@PostMapping("/admin/newslist/save")
-	public String addNews(@Valid News news, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
-		boolean doSaveFile = file.getSize() != 0;
-		validator.validate(file, result);
+	public String addNews(@Valid News news, BindingResult result, Model model) {
+		boolean doSaveFile = news.getFile().getSize() != 0;
 		if (result.hasErrors()) {
+			notifyService.addErrorMessage("Nie zapisano! Popraw błędy w formularzu");
 			return "admin-add-news";
 		}
-		
-
-		
-		
 		if(doSaveFile) {
-			StoredFileInfo info = fileSystemStorageService.storeImage(file, ImageType.NEWS);			
+			validator.validate(news, result);
+			if (result.hasErrors()) {
+				notifyService.addErrorMessage("Nie zapisano! Popraw błędy w formularzu");
+				return "admin-add-news";
+			}
+			StoredFileInfo info = fileSystemStorageService.storeImage(news.getFile(), ImageType.NEWS);			
 			news.setImageName(info.getFileName());
 			news.setMinImageName(info.getMinFileName());
 		}

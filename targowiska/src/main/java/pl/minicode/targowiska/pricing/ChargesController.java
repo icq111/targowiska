@@ -44,7 +44,7 @@ public class ChargesController {
 		}
 		model.addAttribute("charges", charges);
 		if (ListUtils.isEmpty(charges)) {
-			notifyService.addInfoMessage("No any charges to show");
+			notifyService.addInfoMessage("Brak cenników opłat. Dodaj nowy cennik opłat");
 
 		}
 		return "admin-cennik-oplaty"; // view
@@ -61,6 +61,7 @@ public class ChargesController {
 			return "admin-add-news";
 		}
 		chargesService.save(charges);
+		notifyService.addInfoMessage("Nowy cennik opłat zapisany poprawnie");
 		return "redirect:/admin/cennik-oplaty";
 	}
 }

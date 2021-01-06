@@ -78,8 +78,8 @@
 
     <div th:fragment="news-item-fragment(dbNewsObject, objectIndex)" th:data-id="${objectIndex}" onclick="openNewsModal(this.getAttribute('data-id'))" class="w3-container w3-hover-opacity w3-margin w3-border-bottom">
         <div th:if="${dbNewsObject.imageName} != null" class="w3-quarter w3-padding">
-            <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="admin">
-            <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.imageName}}" class="w3-image" alt="user">
+            <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/news/'+ dbNewsObject.minImageName}}" class="w3-image" alt="admin">
+            <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/news/'+ dbNewsObject.minImageName}}" class="w3-image" alt="user">
         </div>
         <div th:if="${dbNewsObject.imageName} != null" class="w3-twothird w3-margin">
             <h4><b th:text="${dbNewsObject.title}">Title </b></h4>
@@ -133,8 +133,8 @@
     
        	<!-- zdjecia w admin panel --> 
    <div th:fragment="image-item-fragment(dbNewsObject, objectIndex)" th:data-id ="${objectIndex}">
-      <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
-      <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.imageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+      <img th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'../tmpFiles/gallery/'+ dbNewsObject.minImageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
+      <img th:unless="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}" th:src="@{${'tmpFiles/gallery/'+ dbNewsObject.minImageName}}" style="width:100%"  class="w3-image w3-hover-opacity" alt="Opis">
 	<br>
     </div>
 

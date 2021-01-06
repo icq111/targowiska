@@ -31,6 +31,8 @@ public class ImageGallery {
     @NotBlank(message = "Image name is mandatory")
     private String imageName;
     
+    private String minImageName;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date insertStamp;
@@ -101,6 +103,14 @@ public class ImageGallery {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public String getMinImageName() {
+		return minImageName;
+	}
+
+	public void setMinImageName(String minImageName) {
+		this.minImageName = minImageName;
 	}
 
 	@Override

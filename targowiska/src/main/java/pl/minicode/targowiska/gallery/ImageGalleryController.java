@@ -37,7 +37,7 @@ public class ImageGalleryController {
 		int currentPage = page.orElse(PaginationUtils.DEFAULT_PAGE);
 		int pageSize = size.orElse(12);
 
-		Page<ImageGallery> imagesList = imageGalleryService.findAll(PageRequest.of(currentPage - 1, pageSize, Sort.by("height").descending().and(Sort.by("insertStamp")).descending()));
+		Page<ImageGallery> imagesList = imageGalleryService.findAll(PageRequest.of(currentPage - 1, pageSize, Sort.by("height").descending()));
 		ImagesGalleryDto imagesGalleryDto = ImagesGalleryDto.createImageGalleryDto(imagesList);
 		
 //		final int chunkSize = 4;
@@ -86,6 +86,7 @@ public class ImageGalleryController {
 				
 				ImageGallery gallery = new ImageGallery();
 				gallery.setImageName(storedFileInfo.getFileName());
+				gallery.setMinImageName(storedFileInfo.getMinFileName());
 				gallery.setStatus(Status.ACTIVE);
 				gallery.setHeight(storedFileInfo.getDimension().height);
 				gallery.setWidth(storedFileInfo.getDimension().width);

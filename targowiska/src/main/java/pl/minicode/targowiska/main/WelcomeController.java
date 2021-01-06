@@ -3,6 +3,8 @@ package pl.minicode.targowiska.main;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,10 @@ import pl.minicode.targowiska.address.Address;
 import pl.minicode.targowiska.address.IAddressService;
 import pl.minicode.targowiska.common.validation.ImageCustomValidator;
 import pl.minicode.targowiska.fileupload.StoredFileInfo;
+import pl.minicode.targowiska.gallery.IImageGalleryService;
+import pl.minicode.targowiska.gallery.ImageGallery;
 import pl.minicode.targowiska.gallery.ImageType;
+import pl.minicode.targowiska.gallery.ImagesGalleryDto;
 import pl.minicode.targowiska.news.INewsService;
 import pl.minicode.targowiska.news.News;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
@@ -41,6 +46,9 @@ public class WelcomeController {
 	@Autowired
 	private FileSystemStorageService fileSystemStorageService;
 	
+	@Autowired
+	private IImageGalleryService imageGalleryService;
+	
 	private List<News> news;
 
 	@GetMapping("/")
@@ -57,9 +65,13 @@ public class WelcomeController {
 		
 		Address address = addresservice.getLastRowInTable();
 		List<Slider> sliders = sliderService.findAll(Sort.by("id"));
+		
+		Page<ImageGallery> imageGaleries = imageGalleryService.findAll(PageRequest.of(0, 7));
+		ImagesGalleryDto galleryDto = ImagesGalleryDto.createImageGalleryDtoForMainPage(imageGaleries);
 		model.addAttribute("news", news);
 		model.addAttribute("address", address);
 		model.addAttribute("sliders", sliders);
+		model.addAttribute("galleryDto", galleryDto);
 		return "welcome2"; // view
 	}
 

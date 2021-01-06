@@ -53,4 +53,9 @@ public class ImageGalleryService implements IImageGalleryService {
 		return new EntityNotFoundException("IMAGE: Not found entity with given id:" + id);
 	}
 
+	@Override
+	public Page<ImageGallery> getLastXRows(int numberOfRows, Pageable pageable) {
+		return imageGalleryRepository.getLastXRows(numberOfRows, pageable);
+	}
+
 }

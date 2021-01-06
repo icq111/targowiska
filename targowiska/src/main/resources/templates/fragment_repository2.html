@@ -2,25 +2,26 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head-data-fragment">
-    <title>W3.CSS Template</title>
+    <title>Targowiska Sandomierz</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="glightbox/css/glightbox.css">
 </head>
 
 <body>
 
     <!-- menu dla zwykłego wyswietlania strony na górze strony -->
     <div th:fragment="normal-screen-navbar-fragment" class="w3-top">
-  <div class="w3-bar" id="myNavbar">
+  <div class="w3-card w3-animate-top w3-black" id="myNavbar">
     <div class="w3-content">
       <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
         <i class="fa fa-bars"></i>
       </a>
-      <a href="index.html" class="w3-bar-item w3-button w3-text-white">HOME</a>
+      <a href="/" class="w3-bar-item w3-button w3-text-white">HOME</a>
       <div class="w3-dropdown-hover w3-mobile">
         <button class="w3-button w3-text-white">O NAS <i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
@@ -30,11 +31,11 @@
         </div>
       </div>
      
-      <a href="notowania-cen.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">NOTOWANIA</a>
-      <a href="cennik-oplat.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">OPŁATY</a>
+      <a href="/cennik-produkty" class="w3-bar-item w3-button w3-hide-small  w3-text-white">NOTOWANIA</a>
+      <a href="/cennik-oplaty" class="w3-bar-item w3-button w3-hide-small  w3-text-white">OPŁATY</a>
       
-      <a href="kontrahenci.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">KATALOG FIRM</a>
-      <a href="aktualnosci.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">AKTUALNOŚCI</a>
+      <a href="/kontrahenci" class="w3-bar-item w3-button w3-hide-small  w3-text-white">KATALOG FIRM</a>
+      <a href="/aktualnosci" class="w3-bar-item w3-button w3-hide-small  w3-text-white">AKTUALNOŚCI</a>
       <a href="kontakt.html" class="w3-bar-item w3-button w3-hide-small  w3-text-white">KONTAKT</a>
       <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"> -->
         <!-- <i class="fa fa-search"></i> -->
@@ -44,15 +45,15 @@
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-    <a href="index.html" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
+    <a href="/" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
     <a href="oferta.html" class="w3-bar-item w3-button" onclick="toggleFunction()">OFERTA</a>
     <a href="historia.html" class="w3-bar-item w3-button" onclick="toggleFunction()">HISTORIA</a>
 
     <a href="regulamin.html" class="w3-bar-item w3-button" onclick="toggleFunction()">REGULMIN</a>
-    <a href="notowania-cen.html" class="w3-bar-item w3-button" onclick="toggleFunction()">NOTOWANIA CEN</a>
-    <a href="cennik-oplat.html" class="w3-bar-item w3-button" onclick="toggleFunction()">CENNIK</a>
-    <a href="kontrahenci.html" class="w3-bar-item w3-button" onclick="toggleFunction()">KATALOG FIRM</a>
-    <a href="aktualnosci.html" class="w3-bar-item w3-button" onclick="toggleFunction()">AKTUALNOŚCI</a>
+    <a href="/cennik-produkty" class="w3-bar-item w3-button" onclick="toggleFunction()">NOTOWANIA CEN</a>
+    <a href="/cennik-oplaty" class="w3-bar-item w3-button" onclick="toggleFunction()">CENNIK</a>
+    <a href="/kontrahenci" class="w3-bar-item w3-button" onclick="toggleFunction()">KATALOG FIRM</a>
+    <a href="/aktualnosci" class="w3-bar-item w3-button" onclick="toggleFunction()">AKTUALNOŚCI</a>
     <a href="kontakt.html" class="w3-bar-item w3-button" onclick="toggleFunction()">KONTAKT</a>
     <!-- <a href="#" class="w3-bar-item w3-button">SEARCH</a> -->
   </div>

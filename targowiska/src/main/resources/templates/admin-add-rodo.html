@@ -23,10 +23,11 @@
             <h5><b><i class="fa fa-dashboard"></i> RODO > Nowy wpis</b></h5>
         </header>
                 <div class="w3-padding">
-                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" th:action="@{/admin/rodo/save}" th:object="${rodo}" method="post">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#" 
+                    th:action="${textPicture.id} == 0 ? @{/admin/rodo/save} : @{/admin/rodo/save/{id}(id = ${textPicture.id})}" th:object="${textPicture}" method="post">
                         <div  class="w3-white">
-                            <textarea class="w3-input w3-border w3-white" th:field="*{rodoText}" id="rodoDescription" rows="6" placeholder="Text"></textarea>
-                            <span th:if="${#fields.hasErrors('rodoText')}" th:errors="*{rodoText}"></span>
+                            <textarea class="w3-input w3-border w3-white" th:field="*{text}" id="rodoDescription" rows="6" placeholder="Text"></textarea>
+                            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                         </div>
                         <input class="w3-btn w3-green w3-margin-top" type="submit" id="add" value="Dodaj">
                     </form>
@@ -44,18 +45,6 @@ $('#rodoDescription').summernote({
       ['insert', ['link']]
     ]
   });
-  
-  
-var markupStr = 'hello world';
-$('#rodoDescription').summernote('code', markupStr);
-
-
-$(document).ready(function(){
-	  $("#add").click(function(){
-		  var markupStr = $($('#rodoDescription').summernote('code')).text();
-		  console.log(markupStr);
-	  });
-	});
 </script>
      <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
     

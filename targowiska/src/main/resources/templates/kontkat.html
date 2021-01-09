@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+   <head th:replace ="fragment_repository2.html :: head-data-fragment">
+      <meta charset="utf-8">
+   </head>
+   <body>
+      <!-- Navbar (sit on top) -->
+      <div th:replace="fragment_repository2.html :: normal-screen-navbar-fragment"> </div>
+      <!-- First Parallax Image with Logo Text -->
+      <div th:replace="fragment_repository2.html :: subpage-parallax(bgimg-contractors, KONTAKT, home)"> </div>
+
+
+
+
+<!-- Container (About Section) -->
+     <div class="w3-container w3-padding-64" id="contact">
+         <h2 class="w3-center section-title">KONTAKT Z NAMI</h2>
+         <p class="w3-center w3-large">Zadzwoń lub zostaw nam wiadomość</p>
+         <!-- Add Google Maps -->
+         <div id="googleMap" class="w3-round-large w3-padding-64" style="width:100%;height:450px;"></div>
+         <div th:switch="${address}">
+            <h3 th:case="null"><b>Skecja kontakt</b></h3>
+            <div th:case="*">
+               <div class="w3-center w3-padding-64">
+                  <h3 th:text = "${address.companyName}"></h3>
+                  <p th:if= "${address.bankAccount != null and !address.bankAccount.isEmpty()}" th:text = "'Konto bankowe: ' + ${address.bankAccount}">Konto</p>
+                  <p th:if= "${address.nip != null and !address.nip.isEmpty()}" th:text = "'NIP: ' + ${address.nip}"></p>
+                  <p th:if= "${address.regon != null and !address.regon.isEmpty()}" th:text = "'REGON: ' + ${address.regon}"></p>
+               </div>
+               <div class="w3-row w3-center">
+                  <div class="w3-third w3-containe">
+                     <div class="w3-container">
+                        <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> <b>ADRES</b></p>
+                        <p th:if= "${address.line1 != null and !address.line1.isEmpty()}" th:text = "${address.line1}"></p>
+                        <p th:if= "${address.line2 != null and !address.line2.isEmpty()}" th:text = "${address.line2}"></p>
+                        <p th:if= "${address.line3 != null and !address.line3.isEmpty()}" th:text = "${address.line3}"></p>
+                        <p th:if= "${address.line4 != null and !address.line4.isEmpty()}" th:text = "${address.line4}"></p>
+                     </div>
+                  </div>
+                  <div class="w3-third w3-container">
+                     <div class="w3-container">
+                        <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> <b>TELEFON</b></p>
+                        <p th:if= "${address.phone1name != null and !address.phone1name.isEmpty() and address.phone1 != null and !address.phone1.isEmpty()}" th:text = "${address.phone1name + ' ' + address.phone1}"></p>
+                        <p th:if= "${address.phone2name != null and !address.phone2name.isEmpty() and address.phone2 != null and !address.phone2.isEmpty()}" th:text = "${address.phone2name + ' ' + address.phone2}"></p>
+                        <p th:if= "${address.phone3name != null and !address.phone3name.isEmpty() and address.phone3 != null and !address.phone3.isEmpty()}" th:text = "${address.phone3name + ' ' + address.phone3}"></p>
+                        <p th:if= "${address.phone4name != null and !address.phone4name.isEmpty() and address.phone4 != null and !address.phone4.isEmpty()}" th:text = "${address.phone4name + ' ' + address.phone4}"></p>
+                     </div>
+                  </div>
+                  <div class="w3-third w3-container">
+                     <div class="w3-container">
+                        <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> <b>EMAIL</b></p>
+                        <p th:if= "${address.email1 != null and !address.email1.isEmpty()}" th:text = "${address.email1}"></p>
+                        <p th:if= "${address.email2 != null and !address.email2.isEmpty()}" th:text = "${address.email2}"></p>
+                        <p th:if= "${address.email3 != null and !address.email3.isEmpty()}" th:text = "${address.email3}"></p>
+                        <p th:if= "${address.email4 != null and !address.email4.isEmpty()}" th:text = "${address.email4}"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Image of location/map -->
+      </div>
+  <!-- Footer -->
+      <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+         <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+         <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+         </div>
+         <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+      </footer>
+      <script>
+         
+         // Used to toggle the menu on small screens when clicking on the menu button
+         function toggleFunction() {
+             var x = document.getElementById("navDemo");
+             if (x.className.indexOf("w3-show") == -1) {
+                 x.className += " w3-show";
+             } else {
+                 x.className = x.className.replace(" w3-show", "");
+             }
+         }
+         function myMap() {
+             myCenter = new google.maps.LatLng(50.681061, 21.758024);
+             var mapOptions = {
+               center: myCenter,
+               zoom: 17, scrollwheel: false, draggable: false,
+               mapTypeId: google.maps.MapTypeId.ROADMAP
+             };
+             var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+         
+             var marker = new google.maps.Marker({
+               position: myCenter,
+             });
+             marker.setMap(map);
+           }
+   </script>
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyLaLusBXDDuYncjgZMOapl9WNbjtmkMc&callback=myMap"></script>
+   </body>
+</html>

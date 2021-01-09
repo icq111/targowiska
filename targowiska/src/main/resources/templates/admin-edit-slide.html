@@ -18,7 +18,8 @@
             <h5><b><i class="fa fa-dashboard"></i> GUI > Slider > Edycja</b></h5>
         </header>
                 <div class="w3-padding">
-                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{'/admin/gui-content/edit-slide/{slideNo}'(slideNo = ${slider.id})}" th:object="${slider}" method="post">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" 
+                    th:action="@{'/admin/gui-content/edit-slide/{slideNo}'(slideNo = ${slider.id})}" th:object="${slider}" method="post">
                        
                         <label for="name">Big text</label>
                         <input class="w3-input w3-border" type="text"th:field="*{bigText}" id="bigText" >

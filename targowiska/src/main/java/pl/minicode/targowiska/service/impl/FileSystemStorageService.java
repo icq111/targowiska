@@ -144,8 +144,10 @@ public class FileSystemStorageService implements IFileSystemStorageService {
 			break;
 		case CONTRACTOR:
 			result = "contractor";
+			break;
 		case MAIN_GUI:
 			result = "main_gui";
+			break;
 		default:
 			break;
 		}

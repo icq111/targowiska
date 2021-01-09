@@ -22,6 +22,18 @@ public class AddressController {
 	@Autowired
 	private NIPValidator nipValidator;
 	
+	@GetMapping("/kontakt")
+	public String showContactForm(Model model) {
+		Address address = null;
+		List<Address> list = addressService.findAll();
+		if(list.size() > 0) {
+			address = list.get(0);
+		}
+		model.addAttribute("address", address);
+		return "kontkat"; // view
+	}
+	
+	
 	@GetMapping("/admin/address")
 	public String showAddressList(Model model) {
 		Address address = null;

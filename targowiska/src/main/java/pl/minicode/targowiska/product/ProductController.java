@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.common.INotificationService;
 import pl.minicode.targowiska.common.PaginationUtils;
-import pl.minicode.targowiska.fileupload.CustomUtils;
 import pl.minicode.targowiska.productcategory.ProductCategory;
 import pl.minicode.targowiska.unit.IUnitService;
 import pl.minicode.targowiska.unit.Unit;
@@ -75,23 +73,13 @@ public class ProductController {
 	}
 
 	@PostMapping("/admin/productlist/addproduct")
-	public String addProduct(@Valid Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
-		boolean doSaveFile = file.getSize() != 0;
-		
+	public String addProduct(@Valid Product product, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "admin-add-product";
 		}
-		
-		if(doSaveFile) {
-			String generatedFileName = CustomUtils.getGeneratedFileName(file);
-			product.setImageName(generatedFileName);			
-			//fileSystemStorageService.storeImage(file, generatedFileName, ImageType.PRODUCT);			
-		}
-
 		productService.save(product);
 		return "redirect:/admin/productlist";
 	}
-	
 	
 	@GetMapping("/admin/productlist/productdetails/{id}")
 	public String getProductDetails(@PathVariable("id") Long id, Model model) {

@@ -23,7 +23,7 @@ public class KeyValuesImagePeroperies implements ImageProperties {
 	}
 	
 	@Override
-	public int getSizeInKB() {
+	public int getSizeInBytes() {
 		return this.sizeInKb;
 	}
 }

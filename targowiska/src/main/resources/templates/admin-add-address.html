@@ -27,23 +27,23 @@
                     
                     <div class="w3-row">
   <div class="w3-half w3-container">
-  						<label for="name">Nazwa</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{companyName}" id="companyName" placeholder="Name">
+  						<label for="name">Nazwa organizacji</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{companyName}" id="companyName" placeholder="Nazwa organizacji">
                         <span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
                                                 <br>
-                        <label for="bankAccount">Konto</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{bankAccount}" id="bankAccount" placeholder="Name">
+                        <label for="bankAccount">Nr. konta bankowego</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{bankAccount}" id="bankAccount" placeholder="Nr. konta bankowego">
                         <span th:if="${#fields.hasErrors('bankAccount')}" th:errors="*{bankAccount}"></span> 
 <br>
 <br>
 
 
-                        <label for="line1">Linia 1</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{line1}" id="line1" placeholder="Name">
+                        <label for="line1">Linia 1 adresu</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{line1}" id="line1" placeholder="Linia 1">
                         <span th:if="${#fields.hasErrors('line1')}" th:errors="*{line1}"></span> 
                         
-                       <label for="line2">Linia 2</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{line2}" id="line2" placeholder="Name">
+                       <label for="line2">Linia 2 adresu</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{line2}" id="line2" placeholder="Linia 2">
                         <span th:if="${#fields.hasErrors('line2')}" th:errors="*{line2}"></span> 
 
 <br>
@@ -53,43 +53,43 @@
 
 
 <label for="phone1name">Etykieta telefon 1</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{phone1name}" id="phone1name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{phone1name}" id="phone1name" placeholder="Etykieta 1">
                         <span th:if="${#fields.hasErrors('phone1name')}" th:errors="*{phone1name}"></span>
                                                 <br>
                                                 
                                                 <label for="phone2name">Etykieta telefon 2</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{phone2name}" id="phone2name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{phone2name}" id="phone2name" placeholder="Etykieta 2">
                         <span th:if="${#fields.hasErrors('phone2name')}" th:errors="*{phone2name}"></span>
                                                 <br>
                                                 
                                                 <label for="phone3name">Etykieta telefon 3</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{phone3name}" id="phone3name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{phone3name}" id="phone3name" placeholder="Etykieta 3">
                         <span th:if="${#fields.hasErrors('phone3name')}" th:errors="*{phone3name}"></span>
                                                 <br>
                                                 
                                                 <label for="phone4name">Etykieta telefon 4</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{phone4name}" id="phone4name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{phone4name}" id="phone4name" placeholder="Etykieta 4">
                         <span th:if="${#fields.hasErrors('phone4name')}" th:errors="*{phone4name}"></span>
                                                 <br>
 
 <br>
 <label for="email1name">Etykieta email 1</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email1name}" id="email1name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email1name}" id="email1name" placeholder="Etykieta 1">
                         <span th:if="${#fields.hasErrors('email1name')}" th:errors="*{email1name}"></span>
                                                 <br>
                                                 
                                                 <label for="email2name">Etykieta email 2</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email2name}" id="email2name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email2name}" id="email2name" placeholder="Etykieta 2">
                         <span th:if="${#fields.hasErrors('email2name')}" th:errors="*{email2name}"></span>
                                                 <br>
                                                 
                                                 <label for="email3name">Etykieta email 3</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email3name}" id="email3name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email3name}" id="email3name" placeholder="Etykieta 3">
                         <span th:if="${#fields.hasErrors('email3name')}" th:errors="*{email3name}"></span>
                                                 <br>
                                                 
                                                 <label for="email4name">Etykieta email 4</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email4name}" id="email4name" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email4name}" id="email4name" placeholder="Etykieta 4">
                         <span th:if="${#fields.hasErrors('email4name')}" th:errors="*{email4name}"></span>
                                                 <br>
 
@@ -108,12 +108,12 @@
  <br>
  
  
-                         <label for="line3">Linia 3</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{line3}" id="line3" placeholder="Name">
+                         <label for="line3">Linia 3 adresu</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{line3}" id="line3" placeholder="Linia 3">
                         <span th:if="${#fields.hasErrors('line3')}" th:errors="*{line3}"></span> 
                         
-                       <label for="line4">Linia 4</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{line4}" id="line4" placeholder="Name">
+                       <label for="line4">Linia 4 adresu</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{line4}" id="line4" placeholder="Linia 4">
                         <span th:if="${#fields.hasErrors('line4')}" th:errors="*{line4}"></span> 
 
 <br>
@@ -143,22 +143,22 @@
                                                 <br>
 <br>
 <label for="email1">Email 1</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email1}" id="email1" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email1}" id="email1" placeholder="Email 1">
                         <span th:if="${#fields.hasErrors('email1')}" th:errors="*{email1}"></span>
                                                 <br>
                                                 
                                                 <label for="email2">Email 2</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email2}" id="email2" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email2}" id="email2" placeholder="Email 2">
                         <span th:if="${#fields.hasErrors('email2')}" th:errors="*{email2}"></span>
                                                 <br>
                                                 
                                                 <label for="email3">Email 3</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email3}" id="email3" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email3}" id="email3" placeholder="Email 3">
                         <span th:if="${#fields.hasErrors('email3')}" th:errors="*{email3}"></span>
                                                 <br>
                                                 
                                                 <label for="email4">Email 4</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{email4}" id="email4" placeholder="Name">
+                        <input class="w3-input w3-border" type="text"th:field="*{email4}" id="email4" placeholder="Email 4">
                         <span th:if="${#fields.hasErrors('email4')}" th:errors="*{email4}"></span>
                                                 <br>
   </div>

@@ -11,5 +11,7 @@ public interface INewsService extends IPageableCommonService<News> {
 
 	List<News> find4lastNews();
 	
+	List<News> find4LastImportantNews();
+	
 	Page<News> findActiveNews(Pageable pageable);
 }

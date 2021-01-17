@@ -21,9 +21,7 @@ public class Product extends BasicEntity {
 	
 	@NotBlank(message = "Name is mandatory")
 	private String productName;
-    
-    private String imageName;
-    
+
 	@Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
@@ -37,14 +35,6 @@ public class Product extends BasicEntity {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
 	}
 
 	public ProductCategory getProductCategory() {

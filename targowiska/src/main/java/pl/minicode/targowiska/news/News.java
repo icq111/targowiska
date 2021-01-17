@@ -9,6 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,19 +20,22 @@ import pl.minicode.targowiska.entity.BasicEntity;
 public class News extends BasicEntity {
      
     @NotBlank(message = "Title is mandatory")
+    @Length(max = 255, min = 10, message = "Tekst musi mieć długość od 10 do 255 znaków")  
     private String title;
-     
-    @NotBlank(message = "Short Description is mandatory")
-    private String shortDescription;
     
-    @NotBlank(message = "Long Description is mandatory")
+    @NotBlank(message = "Opis jest wymagany")
     @Column(columnDefinition="TEXT NOT NULL") 
     //@Lob 
     private String longDescription;
     
+    @Column(columnDefinition="TEXT NOT NULL") 
+    private String longDescriptionPlainText;
+    
     private String imageName;
     
     private String minImageName;
+    
+    private boolean important;
     
     @Transient
     private MultipartFile file;
@@ -42,14 +46,6 @@ public class News extends BasicEntity {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
 	}
 
 	public String getLongDescription() {
@@ -89,12 +85,32 @@ public class News extends BasicEntity {
 		this.file = file;
 	}
 
+	public boolean isImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
+	}
+	
+
+	public String getLongDescriptionPlainText() {
+		return longDescriptionPlainText;
+	}
+
+	public void setLongDescriptionPlainText(String longDescriptionPlainText) {
+		this.longDescriptionPlainText = longDescriptionPlainText;
+	}
+
 	@Override
 	public String toString() {
 		String s = super.toString();
-		return s + " News [title=" + title + ", shortDescription=" + shortDescription + ", longDescription="
-				+ longDescription + ", imageName=" + imageName + "]";
+		return s + " News [title=" + title + ", longDescription=" + longDescription + ", longDescriptionPlainText="
+				+ longDescriptionPlainText + ", imageName=" + imageName + ", minImageName=" + minImageName
+				+ ", important=" + important + ", file=" + file + "]";
 	}
+
+
 
 	
 }

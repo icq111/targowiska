@@ -66,7 +66,7 @@
 
 </div>
 </div>  
-<hr>
+
         
         
         
@@ -76,28 +76,28 @@
 <h2>Sekcja opisowa 1</h2>
   </div>
   <div class="w3-half">
-  <button class="w3-btn w3-white w3-border w3-border-orange w3-right">EDYTUJ</button>
+
   </div>
 </div>
 </div>        
 <div class="w3-container w3-padding-64" id="offer-main">
   <div class="w3-row">
     <div class="w3-half w3-container">
-      <h2><b>The Largest Crop Ever</b></h2>
-      <p><b>Smells racy free announcing than durable zesty smart exotic far feel. Screamin' affordable secret way absolutely.
-      </b></p>
-      <p>
-        Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime.
-
-        Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Evulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Odor to yummy high racy bonus soaking mouthwatering. First superior
-
-      </p>
+ 	<span th:utext="${textPicture} != null ? ${textPicture.text} : '' ">txt </span>     
     </div>
-    <div class="w3-half">
-      <img src="/image/1.jpg" alt="Italian Trulli" class="w3-image">
+    <div th:if ="${textPicture != null and textPicture.imageName != null}" class="w3-half">
+      <img th:src="${textPicture} != null ? @{${'../tmpFiles/main_gui/'+ textPicture.imageName}}" src="/image/1.jpg" alt="Italian Trulli" class="w3-image">
+    </div>
+        <div th:if ="${textPicture == null or textPicture.imageName == null}" class="w3-half">
+     <p class="w3-center">MIEJSCE NA ZDJĘCIE</p>
     </div>
   </div>
-
+  <a th:if="${textPicture == null}"  th:href="@{'/admin/gui-content/edit-section'}">
+    <button class="w3-btn w3-white w3-border w3-borde0r-orange">DODAJ</button>
+    </a>
+      <a th:if="${textPicture != null and textPicture.id > 0}" th:href="@{'/admin/gui-content/edit-section/{id}'(id = ${textPicture.id})}">
+    <button class="w3-btn w3-white w3-border w3-borde0r-orange">EDYTUJ</button>
+    </a>
 </div>
 <hr>
             </div>

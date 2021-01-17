@@ -36,7 +36,7 @@ public class NewsService implements INewsService {
 
 	@Override
 	public News delete(News entity) {
-	//entity.setStatus(Status.DELETED);
+		entity.setStatus(Status.DELETED);
 		return save(entity);
 	}
 
@@ -68,6 +68,11 @@ public class NewsService implements INewsService {
 
 		Page<News> pagedResult = newsRepository.findByStatusNotIn(Arrays.asList(Status.DELETED), paging);
 		return pagedResult;
+	}
+
+	@Override
+	public List<News> find4LastImportantNews() {
+		return newsRepository.find4LastImportantNews();
 	}
 
 }

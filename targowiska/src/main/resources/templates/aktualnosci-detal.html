@@ -22,8 +22,7 @@
                   <span class="w3-large" th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getMonthShortcut(news.insertStamp)}">2017</span>
                   <span class="w3-large" th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news.insertStamp)}">2017</span>
                </div>
-               <br>
-               <b><span class="w3-padding-16" th:text="${news.shortDescription}">shortDescription</span></b>
+
             </div>
             <div class="w3-container">
                <span th:utext="${news.longDescription}">longDescription </span>

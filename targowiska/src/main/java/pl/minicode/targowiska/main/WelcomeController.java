@@ -27,6 +27,8 @@ import pl.minicode.targowiska.news.News;
 import pl.minicode.targowiska.service.impl.FileSystemStorageService;
 import pl.minicode.targowiska.slider.ISliderService;
 import pl.minicode.targowiska.slider.Slider;
+import pl.minicode.targowiska.textpicture.ITextPictureService;
+import pl.minicode.targowiska.textpicture.TextPicture;
 
 @Controller
 public class WelcomeController {
@@ -36,6 +38,9 @@ public class WelcomeController {
 
 	@Autowired
 	private ISliderService sliderService;
+	
+	@Autowired
+	private ITextPictureService textPictureService;
 	
 	@Autowired
 	private IAddressService addresservice;
@@ -50,6 +55,12 @@ public class WelcomeController {
 	private IImageGalleryService imageGalleryService;
 	
 	private List<News> news;
+	
+	  // Login form
+	@GetMapping("/login")
+	  public String login() {
+	    return "login";
+	  }
 
 	@GetMapping("/")
 	public String showWelcomeSite(Model model) {
@@ -68,6 +79,16 @@ public class WelcomeController {
 		
 		Page<ImageGallery> imageGaleries = imageGalleryService.findAll(PageRequest.of(0, 7));
 		ImagesGalleryDto galleryDto = ImagesGalleryDto.createImageGalleryDtoForMainPage(imageGaleries);
+		
+		
+		List<TextPicture> textPictureEntities = textPictureService.findByOwnerControllerClass(this.getClass().getSimpleName());
+
+		TextPicture textPicture = null;
+		if(!textPictureEntities.isEmpty()) {
+			textPicture = textPictureEntities.get(0);
+		}
+		model.addAttribute("textPicture", textPicture);
+		
 		model.addAttribute("news", news);
 		model.addAttribute("address", address);
 		model.addAttribute("sliders", sliders);
@@ -78,6 +99,17 @@ public class WelcomeController {
 	@GetMapping("/admin/gui-content")
 	public String showMainPageContent(Model model) {
 		List<Slider> sliders = sliderService.findAll(Sort.by("id"));
+		
+		
+		List<TextPicture> textPictureEntities = textPictureService.findByOwnerControllerClass(this.getClass().getSimpleName());
+
+		TextPicture textPicture = null;
+		if(!textPictureEntities.isEmpty()) {
+			textPicture = textPictureEntities.get(0);
+		}
+		model.addAttribute("textPicture", textPicture);
+		
+		
 		model.addAttribute("sliders", sliders);
 		return "admin-main-page-content"; // view
 	}
@@ -113,4 +145,64 @@ public class WelcomeController {
 		return "redirect:/admin/gui-content";
 	}
 
+	@GetMapping("/admin/gui-content/edit-section/{id}")
+	public String editMainSection(@PathVariable("id") Long id, Model model) {
+
+		TextPicture textPicture = textPictureService.findById(id);
+
+		model.addAttribute("textPicture", textPicture);
+		return "admin-edit-main-section";
+	}
+
+	@PostMapping("/admin/gui-content/edit-section/{id}")
+	public String saveMainSectionForm(@PathVariable("id") Long id, @ModelAttribute TextPicture textPicture, BindingResult result,
+			Model model) {
+		boolean doSaveFile = textPicture.getFile().getSize() != 0;
+		if (result.hasErrors()) {
+			return "admin-edit-main-section";
+		}
+		if (doSaveFile) {
+			validator.validate(textPicture, result);
+			if (result.hasErrors()) {
+				return "admin-edit-main-section";
+			}
+			StoredFileInfo info = fileSystemStorageService.storeImage(textPicture.getFile(), ImageType.MAIN_GUI);
+			textPicture.setImageName(info.getFileName());
+
+		}
+		textPicture.setId(id);
+		textPicture.setOwnerControllerClass(this.getClass().getSimpleName());
+		textPictureService.update(textPicture);
+
+		return "redirect:/admin/gui-content";
+	}
+	
+	@GetMapping("/admin/gui-content/edit-section")
+	public String editMainSectionNew(TextPicture textPicture) {
+
+
+		return "admin-edit-main-section";
+	}
+	
+	@PostMapping("/admin/gui-content/add-section")
+	public String saveMainSectionNewForm(@ModelAttribute TextPicture textPicture, BindingResult result,
+			Model model) {
+		boolean doSaveFile = textPicture.getFile() != null && textPicture.getFile().getSize() != 0;
+		if (result.hasErrors()) {
+			return "admin-edit-main-section";
+		}
+		if (doSaveFile) {
+			validator.validate(textPicture, result);
+			if (result.hasErrors()) {
+				return "admin-edit-main-section";
+			}
+			StoredFileInfo info = fileSystemStorageService.storeImage(textPicture.getFile(), ImageType.MAIN_GUI);
+			textPicture.setImageName(info.getFileName());
+		}
+
+		textPicture.setOwnerControllerClass(this.getClass().getSimpleName());
+		textPictureService.save(textPicture);
+
+		return "redirect:/admin/gui-content";
+	}
 }

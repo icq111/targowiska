@@ -10,12 +10,16 @@
       <div th:replace="fragment_repository2.html :: subpage-parallax(bgimg-news, AKTUALNOŚCI, home)"> </div>
       <!-- Container (About Section) -->
       <div class="w3-content w3-padding-64" id="news">
-         <h3><b>Aktualności</b></h3>
-         <div th:each="row, iterStat : ${newsDto.getNewsRows()}" class="w3-row w3-padding-16">
-            <div th:each="news, itemStat : *{row}" th:id="${news.id}" class="w3-third w3-container w3-border w3-border-white w3-hover-border-green">
+      
+      				<div th:switch="${importantNews}" class="w3-container">
+					<h2 th:case="null"></h2>
+					<div th:case="*">
+						<h3>Ogłoszenia</h3>
+            <div th:each="news, itemStat : *{importantNews}" th:id="${news.id}" class="w3-third w3-container w3-border w3-border-white w3-hover-border-green">
                <a th:href="@{/aktualnosci-detale(id=${news.id})}">
-                  <div>
-                     <img src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news.minImageName}}">
+                  <div class="w3-center">
+                     <img th:if="${news.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news.minImageName}}">
+                 <img th:unless="${news.minImageName}" src=""  class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">
                   </div>
                   <div>
                      <div>
@@ -25,7 +29,38 @@
                      </div>
                      <div>
                         <span class="w3-large" th:text="${news.title}">Tittle</span>
-                        <p th:text="${news.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                        <p th:text="${#strings.abbreviate(news.longDescriptionPlainText,100)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                     </div>
+                  </div>
+               </a>
+            </div>
+
+
+					</div>
+					
+				</div>
+      <br>
+      
+      
+      
+      
+         <h3><b>Aktualności</b></h3>
+         <div th:each="row, iterStat : ${newsDto.getNewsRows()}" class="w3-row w3-padding-16">
+            <div th:each="news, itemStat : *{row}" th:id="${news.id}" class="w3-third w3-container w3-border w3-border-white w3-hover-border-green">
+               <a th:href="@{/aktualnosci-detale/{id} (id=${news.id})}">
+                  <div class="w3-center">
+                     <img th:if="${news.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news.minImageName}}">
+                 <img th:unless="${news.minImageName}" src=""  class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">
+                  </div>
+                  <div>
+                     <div>
+                        <span class="w3-xxlarge"><b th:text="${news.getInsertStamp().getDate()}">16</b></span>
+                        <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getMonthShortcut(news.insertStamp)}">2017</span>
+                        <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news.insertStamp)}">2017</span>
+                     </div>
+                     <div>
+                        <span class="w3-large"  th:text="${#strings.abbreviate(news.title,70)}">Tittle</span>
+                        <p th:text="${#strings.abbreviate(news.longDescriptionPlainText,120)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                      </div>
                   </div>
                </a>

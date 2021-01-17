@@ -30,9 +30,11 @@
             <div th:case="*">
                <h3><b>Aktualności</b></h3>
                <div class="w3-row">
+                <a th:href="@{/aktualnosci-detale/{id}(id=${news1.id})}">
                   <div class="w3-half w3-border w3-border-white w3-hover-border-green">
                      <div class="w3-half">
-                        <img src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news1.minImageName}}">
+                        <img th:if="${news1.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news1.minImageName}}">
+                     	<img th:unless="${news1.minImageName}" src="" class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">
                      </div>
                      <div class="w3-half  w3-container">
                         <div>
@@ -41,14 +43,17 @@
                            <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news1.insertStamp)}">2017</span>
                         </div>
                         <div>
-                           <span class="w3-large" th:text="${news1.title}" >Tittle</span>
-                           <p th:text="${news1.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                           <span class="w3-large" th:text="${#strings.abbreviate(news1.title,50)}" >Tittle</span>
+                           <p th:text="${#strings.abbreviate(news1.longDescriptionPlainText,80)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                      </div>
                   </div>
+                  </a>
+                   <a th:href="@{/aktualnosci-detale/{id}(id=${news2.id})}">
                   <div class="w3-half w3-border w3-border-white w3-hover-border-green">
                      <div class="w3-half">
-                        <img src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news2.minImageName}}">
+                        <img th:if="${news2.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news2.minImageName}}">
+						<img th:unless="${news2.minImageName}" src="" class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">                    
                      </div>
                      <div class="w3-half  w3-container">
                         <div>
@@ -57,13 +62,16 @@
                            <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news2.insertStamp)}">2017</span>
                         </div>
                         <div>
-                           <span class="w3-large" th:text="${news2.title}" >Tittle</span>
-                           <p th:text="${news2.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                           <span class="w3-large" th:text="${#strings.abbreviate(news2.title,50)}" >Tittle</span>
+                           <p th:text="${#strings.abbreviate(news2.longDescriptionPlainText,80)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                      </div>
                   </div>
+                  </a>
+                  
                </div>
                <div class="w3-row">
+                <a th:href="@{/aktualnosci-detale/{id}(id=${news3.id})}">
                   <div class="w3-half w3-border w3-border-white w3-hover-border-green">
                      <div class="w3-half  w3-container">
                         <div>
@@ -72,14 +80,17 @@
                            <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news3.insertStamp)}">2017</span>
                         </div>
                         <div>
-                           <span class="w3-large" th:text="${news3.title}" >Tittle</span>
-                           <p th:text="${news3.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                           <span class="w3-large" th:text="${#strings.abbreviate(news3.title,50)}" >Tittle</span>
+                           <p th:text="${#strings.abbreviate(news3.longDescriptionPlainText,80)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                      </div>
                      <div class="w3-half">
-                        <img src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news3.minImageName}}">
+                        <img th:if="${news3.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news3.minImageName}}">
+                     	<img th:unless="${news3.minImageName}" src="" class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">
                      </div>
                   </div>
+                  </a>
+                   <a th:href="@{/aktualnosci-detale/{id}(id=${news4.id})}">
                   <div class="w3-half w3-border w3-border-white w3-hover-border-green">
                      <div class="w3-half  w3-container">
                         <div>
@@ -88,17 +99,19 @@
                            <span th:text="${T(pl.minicode.targowiska.common.date.DateUtils).getYear(news4.insertStamp)}">2017</span>
                         </div>
                         <div>
-                           <span class="w3-large" th:text="${news4.title}" >Tittle</span>
-                           <p th:text="${news4.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                           <span class="w3-large" th:text="${#strings.abbreviate(news4.title,50)}" >Tittle</span>
+                           <p th:text="${#strings.abbreviate(news4.longDescriptionPlainText,80)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                      </div>
                      <div class="w3-half">
-                        <img src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news3.minImageName}}">
+                        <img th:if="${news4.minImageName} != null" src="image/3-370x265.jpg" alt="Italian Trulli" class="w3-image" th:src="@{${'tmpFiles/news/'+ news3.minImageName}}">
+                     	<img th:unless="${news4.minImageName}" src="" class="w3-image" th:src="@{${'tmpFiles/main_gui/no_image.jpg'}}">
                      </div>
                   </div>
+                  </a>
                </div>
                <div class="w3-center w3-padding-24">
-                  <a href="aktualnosci.html">
+                  <a href="aktualnosci">
                   <button class="w3-btn w3-white w3-border w3-border-orange"> 
                   WIĘCEJ
                   </button>
@@ -116,16 +129,9 @@
       <div class="w3-content w3-container w3-padding-64" id="offer-main">
          <div class="w3-row">
             <div class="w3-half w3-container">
-               <h2><b>The Largest Crop Ever</b></h2>
-               <p><b>Smells racy free announcing than durable zesty smart exotic far feel. Screamin' affordable secret way absolutely.
-                  </b>
-               </p>
-               <p>
-                  Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime.
-                  Stimulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Evulates vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes newer recommended lifetime. Odor to yummy high racy bonus soaking mouthwatering. First superior
-               </p>
+			<span th:utext="${textPicture} != null ? ${textPicture.text} : '' ">txt </span>     
                <div class="w3-padding-24">
-                  <a href="oferta.html">
+                  <a href="/oferta">
                   <button class="w3-btn w3-white w3-border w3-border-orange">OFERTA</button>
                   </a>
                </div>

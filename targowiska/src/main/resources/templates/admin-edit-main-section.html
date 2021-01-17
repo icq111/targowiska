@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+    </th:block>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        <link th:rel="stylesheet" th:href="@{/summernote/summernote-lite.min.css}"/>
+        <script th:src="@{/summernote/summernote-lite.min.css}"></script>
+        <script th:src="@{/summernote/summernote-lite.min.js}"></script>
+</head>
+
+<body>    
+     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+     
+     	<!-- !PAGE CONTENT! -->
+	<div class="content-main-div w3-main">
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> RODO > Nowy wpis</b></h5>
+        </header>
+                <div class="w3-padding">
+                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" action="#"  enctype="multipart/form-data"
+                    th:action="${textPicture.id} == 0 ? @{/admin/gui-content/add-section} : @{/admin/gui-content/edit-section/{id}(id = ${textPicture.id})}" th:object="${textPicture}" method="post">
+                        <div  class="w3-white">
+                            <textarea class="w3-input w3-border w3-white" th:field="*{text}" id="rodoDescription" rows="6" placeholder="Text"></textarea>
+                            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+                            
+                        </div>
+                        
+                                                    <br>
+						<label for="image">Image</label>
+ 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
+ 						<p th:text="${file_upload_error}"></p>
+ 						           <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" th:class="error-text">Name Error</span>
+                        <input class="w3-btn w3-green w3-margin-top" type="submit" id="add" value="Dodaj">
+                    </form>
+                </div>
+            </div>
+<script>
+$('#rodoDescription').summernote({
+    height: 320,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['paragraph']],
+      ['table', ['table']],
+      ['insert', ['link']]
+    ]
+  });
+</script>
+     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+    
+</body>
+
+</html>

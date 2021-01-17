@@ -1,80 +1,84 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="utf-8">
-
-    <th:block th:include="admin_fragment_repository.html :: admin-head-data">
-    </th:block>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-        <link th:rel="stylesheet" th:href="@{/summernote/summernote-lite.min.css}"/>
-        <script th:src="@{/summernote/summernote-lite.min.css}"></script>
-        <script th:src="@{/summernote/summernote-lite.min.js}"></script>
-        
-</head>
-
-<body>    
-     <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
-     <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
-     <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
-         <div th:replace="admin_fragment_repository.html :: notification-fragment"></div>
-     
-     	<!-- !PAGE CONTENT! -->
-	<div class="content-main-div w3-main">
-        <header class="w3-container" style="padding-top:22px">
+   <head>
+      <meta charset="utf-8">
+      <th:block th:include="admin_fragment_repository.html :: admin-head-data">
+      </th:block>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+      <link th:rel="stylesheet" th:href="@{/summernote/summernote-lite.min.css}"/>
+   
+      <script th:src="@{/summernote/summernote-lite.min.js}"></script>
+   </head>
+   <body>
+      <div th:replace="admin_fragment_repository.html :: top-container-fragment"> </div>
+      <nav th:replace="admin_fragment_repository.html :: side-menu(menuItemToActivate='Ogłoszenia wewnętrzne')"></nav>
+      <div th:replace="admin_fragment_repository.html :: overlay-menu-effect-fragment"></div>
+      <div th:replace="admin_fragment_repository.html :: notification-fragment"></div>
+      <!-- !PAGE CONTENT! -->
+      <div class="content-main-div w3-main">
+         <header class="w3-container" style="padding-top:22px">
             <h5><b><i class="fa fa-dashboard"></i> Aktualności > Nowy news</b></h5>
-        </header>
-                <div class="w3-padding">
-                    <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/newslist/save}" th:object="${news}" method="post">
-                        <label for="name">Title</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{title}" id="title" placeholder="Title">
-                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  th:class="error-text"></span>
-                        <br>
-                        <label for="email">Short desc</label>
-                        <input class="w3-input w3-border" type="text" th:field="*{shortDescription}" id="shortDescription" placeholder="Short description">
-                        <span th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}" th:class="error-text"></span>
-                        <br>
-                            <label for="longDescription">Description</label>
-                        <div class="w3-white">
+         </header>
+         <div class="w3-padding">
+            <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" 
+            action="#" th:action="${news.id} == 0 ? @{/admin/news/save} : @{/admin/news/save/{id}(id = ${news.id})}" th:object="${news}" method="post">
+               <label for="name">Tytuł</label>
+               <input class="w3-input w3-border" type="text"th:field="*{title}" id="title" placeholder="Tytuł">
+               <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  th:class="error-text"></span>
+               <br>
+               <label for="longDescription">Opis</label>
+               <div class="w3-white">
+                  <textarea class="w3-input w3-border w3-white" th:field="*{longDescription}" id="longDescription" rows="6" placeholder="Opis" autocomplete="off"></textarea>
+                 
+               </div>
+                <input type="hidden" th:field="*{longDescriptionPlainText}" id="longDescriptionPlainText" autocomplete="off"></input>
+               <span th:if="${#fields.hasErrors('longDescription')}" th:errors="*{longDescription}" th:class="error-text"></span>
+               <br>
+               <label for="image">Zdjęcie</label>
+               <input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
+               <p th:text="${file_upload_error}"></p>
+               <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" th:class="error-text">Name Error</span>
+               <div>
+               		<label for="important">Przypnij na górze</label>
+               		<select id="important" class="w3-input w3-border" th:field="*{important}">
+                  		<option th:value="1" >TAK</option>
+                  		<option th:value="0" >NIE</option>
+               		</select>
+               </div>
+               <br>
+               <div>
+                  <label for="status">Status</label>
+                  <select class="w3-input w3-border" th:field="*{status}" id="status">
+                     <option th:each="status : ${T(pl.minicode.targowiska.common.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
+                  </select>
+               </div>
+               <input id="btn_save" class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">
+            </form>
+         </div>
+      </div>
+      <script >
+         $('#longDescription').summernote({
+             height: 320,
+             toolbar: [
+               ['style', ['style']],
+               ['font', ['bold', 'underline', 'clear']],
+               ['color', ['color']],
+               ['para', ['paragraph']],
+               ['table', ['table']],
+               ['insert', ['link']]
+             ]
+           });        
+        
+         
+         
+        	 document.getElementById("btn_save").addEventListener('click', function () {
+        	 var plainTxt = $($("#longDescription").summernote("code")).text();
+        		    var text = document.getElementById('longDescriptionPlainText');
+        		    text.value += plainTxt;
+        		});
 
-                            <textarea class="w3-input w3-border w3-white" th:field="*{longDescription}" id="longDescription" rows="6" placeholder="Description" autocomplete="off"></textarea>
-                        </div>
-                            <span th:if="${#fields.hasErrors('longDescription')}" th:errors="*{longDescription}" th:class="error-text"></span>
-                            <br>
-						<label for="image">Image</label>
- 						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
- 						<p th:text="${file_upload_error}"></p>
- 						           <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" th:class="error-text">Name Error</span>
-		<div>
-            <label for="status">Status</label>
-            <select class="w3-input w3-border" th:field="*{status}" id="status">
-                <option th:each="status : ${T(pl.minicode.targowiska.common.Status).getGuiValues()}" th:value="${status}" th:text="${status.toDisplay()}"></option>
-            </select>
-            </div>
-                        <input class="w3-btn w3-green w3-margin-top" type="submit" value="Dodaj">
-                    </form>
-                </div>
-            </div>
-
-
-
-
-<script>
-$('#longDescription').summernote({
-    height: 320,
-    toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['color', ['color']],
-      ['para', ['paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture']]
-    ]
-  });
-</script>
-     <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
-    
-</body>
-
+      </script>
+      <script type="text/javascript" th:replace="admin_fragment_repository.html :: js-script-fragment"></script>
+   </body>
 </html>

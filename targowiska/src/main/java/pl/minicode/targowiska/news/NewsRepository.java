@@ -16,6 +16,9 @@ public interface NewsRepository extends PagingAndSortingRepository<News, Long>{
 	@Query(nativeQuery= true, value ="select * from news n order by n.insert_stamp limit 4 ")
 	public List<News> find4LastNews();
 	
+	@Query(nativeQuery= true, value ="select * from news n where n.important = true order by n.insert_stamp limit 4 ")
+	public List<News> find4LastImportantNews();
+	
 	Page<News> findByStatus(Pageable pageable, Status status);
 	
 	Page<News> findByStatusNotIn(List<Status> statuses, Pageable pageable);

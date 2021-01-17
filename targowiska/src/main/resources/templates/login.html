@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head th:replace ="fragment_repository2.html :: head-data-fragment">
+      <meta charset="utf-8">
+   </head>
+   <body>
+         <form th:action="@{/login}" method="post"> 
+     <div class="w3-display-container">
+  <img src="image/logo.jpg" alt="Lights" style="width:100%">
+  <div class="w3-padding w3-display-middle">
+   
+    <div class="w3-container w3-light-blue">
+            <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+         
+        <div th:if="${param.logout}">
+            <p class="text-warning">You have been logged out.</p>
+        </div>
+         
+
+            <p>Zaloguj się do CMS:</p>
+            <p>
+                <input type="login" name="login" class="w3-input" placeholder="Login" required autofocus/>
+            </p>
+            <p>
+                <input type="password" name="password" class="w3-input" placeholder="Hasło" required />
+            </p>
+           
+            <p class="w3-center">
+                <input type="submit" value="Logowanie" class="w3-button w3-black w3-center" />
+            </p>
+    </div>
+  
+  
+
+
+</div>
+
+</div>
+   </body>
+</html>

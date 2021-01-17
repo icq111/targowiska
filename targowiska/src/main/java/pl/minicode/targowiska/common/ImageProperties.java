@@ -2,7 +2,7 @@ package pl.minicode.targowiska.common;
 
 public interface ImageProperties {
 
-	public default int getSizeInKB() {
+	public default int getSizeInBytes() {
 		return 200000;
 	}
 

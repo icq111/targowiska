@@ -279,3 +279,7 @@ color: white;
   font-weight: bold;
 
 }
+
+a:link {
+	text-decoration:none;
+	}

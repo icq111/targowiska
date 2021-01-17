@@ -26,12 +26,12 @@
         </header>
                 <div class="w3-padding">
                     <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/cennik-oplat/zapisz}" th:object="${charges}" method="post">
-                        <label for="name">Name</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{name}" id="name" placeholder="name">
+                        <label for="name">Nazwa cennika</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{name}" id="name" placeholder="Nazwa">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                      
                         <br>
-                            <label for="longDescription">Description</label>
+                            <label for="longDescription">Opis</label>
                         <div class="w3-white">
 
                             <textarea class="w3-input w3-border w3-white" th:field="*{description}" id="description" rows="6" placeholder="Description" autocomplete="off"></textarea>

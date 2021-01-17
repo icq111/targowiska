@@ -1,20 +1,31 @@
 package pl.minicode.targowiska.common.validation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import pl.minicode.targowiska.ConfigProperties;
 import pl.minicode.targowiska.common.ImageProperties;
 
-public class NewsImageProperties implements ImageProperties {
+@Component
+public class NewsImageProperties implements ImageProperties  {
+	
+	@Autowired
+	private ConfigProperties applicationProperties;
 
-	public static NewsImageProperties createProperties() {
-		return new NewsImageProperties();
-	}
-	
-	@Override
 	public int getMinimumWidth() {
-		return 480;
+		String prop = applicationProperties.getConfigValue("image.news.width");
+		return prop != null && !prop.isEmpty() ? new Integer(prop) : ImageProperties.super.getMinimumWidth();
 	}
 	
-	@Override
+
 	public int getMinimumHeight() {
-		return 480;
+		String prop =  applicationProperties.getConfigValue("image.news.height");
+		return prop != null && !prop.isEmpty() ? new Integer(prop) : ImageProperties.super.getMinimumHeight();
+	}
+	
+
+	public int getSizeInBytes() {
+		String prop = applicationProperties.getConfigValue("image.news.size.kilobytes");
+		return  prop != null && !prop.isEmpty() ? new Integer(prop) * 1000 : ImageProperties.super.getSizeInBytes();
 	}
 }

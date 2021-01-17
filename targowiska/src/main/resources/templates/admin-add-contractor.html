@@ -21,11 +21,11 @@
         </header>
                 <div class="w3-padding">
                     <form class="w3-container w3-padding-32 w3-margin w3-card-4 w3-light-grey" enctype="multipart/form-data" action="#" th:action="@{/admin/contractorslist/save}" th:object="${contractor}" method="post">
-                        <label for="name">Name</label>
-                        <input class="w3-input w3-border" type="text"th:field="*{name}" id="name" placeholder="Name">
+                        <label for="name">Nazwa kontrahenta</label>
+                        <input class="w3-input w3-border" type="text"th:field="*{name}" id="name" placeholder="Nazwa">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                                 <br>
-                            <label for="description">Description</label>
+                            <label for="description">Opis</label>
                         <div class="w3-white">
 
                             <textarea class="w3-input w3-border w3-white" th:field="*{description}" id="description" rows="6" placeholder="Description" autocomplete="off"></textarea>
@@ -33,7 +33,7 @@
                             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
                             <br>
     
-						<label for="image">Image</label>
+						<label for="image">Zdjęcie/logo</label>
  						<input class="w3-input w3-border" type="file" name="file" accept=".jpg" id="image">
  						<p th:text="${file_upload_error}"></p>
 		<div>

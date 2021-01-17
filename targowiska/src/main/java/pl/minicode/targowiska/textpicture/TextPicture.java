@@ -2,7 +2,10 @@ package pl.minicode.targowiska.textpicture;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import pl.minicode.targowiska.entity.BasicEntity;
 
@@ -16,6 +19,9 @@ public class TextPicture extends BasicEntity {
 	private String imageName;
 	
 	private String ownerControllerClass;
+	
+    @Transient
+    private MultipartFile file;
 
 	public String getText() {
 		return text;
@@ -39,6 +45,14 @@ public class TextPicture extends BasicEntity {
 
 	public void setOwnerControllerClass(String ownerControllerClass) {
 		this.ownerControllerClass = ownerControllerClass;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
 	@Override
